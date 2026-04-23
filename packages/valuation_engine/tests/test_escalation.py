@@ -48,3 +48,30 @@ def test_zero_escalation_pct_yields_unchanged_rent_with_cycles_counted():
     # Cycles still increment, but multiplier is 1.
     assert cycles >= 1
     assert rent == Decimal("100")
+
+
+def test_mid_cycle_rent_is_step_function():
+    """Rent does not compound continuously; it's a step function on anniversaries."""
+    t = _t(rent="100", esc="0.10", next_date=date(2025, 4, 1))
+    on_anniv = resolve_rent(t, valuation_date=date(2025, 4, 1))
+    midway = resolve_rent(t, valuation_date=date(2025, 10, 15))
+    just_before_next = resolve_rent(t, valuation_date=date(2026, 3, 31))
+    assert on_anniv == midway == just_before_next
+    assert on_anniv[1] == 1
+
+
+def test_leap_day_anniversary_rolls_on_mar_1_in_non_leap_year():
+    """Feb 28 in a non-leap year is 'before' a Feb 29 anniversary; Mar 1 triggers."""
+    t = _t(rent="100", esc="0.10", next_date=date(2024, 2, 29))
+    assert resolve_rent(t, date(2025, 2, 28))[1] == 1
+    assert resolve_rent(t, date(2025, 3, 1))[1] == 2
+
+
+def test_multi_cycle_compounding_uses_exponentiation_not_simple_interest():
+    """Rent compounds via (1+esc)^cycles, not 1 + esc*cycles."""
+    t = _t(rent="100", esc="0.10", next_date=date(2020, 1, 1))
+    rent, cycles = resolve_rent(t, valuation_date=date(2024, 1, 1))
+    assert cycles == 5
+    assert rent == Decimal("100") * (Decimal("1") + Decimal("0.10")) ** 5
+    # Sanity: distinct from simple interest.
+    assert rent != Decimal("100") * (Decimal("1") + Decimal("0.10") * 5)
