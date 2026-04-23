@@ -63,7 +63,9 @@ def render_workbook(
     ws.cell(row=parking_label_row, column=6, value="No. bays")
     ws.cell(row=parking_label_row, column=7, value="R/bay")
 
-    parking_start = parking_label_row + 1
+    # Parser starts reading data rows at parking_label_row + 2 (canonical sheets
+    # have a blank row between the label and the first data row). Match that.
+    parking_start = parking_label_row + 2
     for i, p in enumerate(inputs.parking):
         r = parking_start + i
         ws.cell(row=r, column=5, value=p.bay_type)
