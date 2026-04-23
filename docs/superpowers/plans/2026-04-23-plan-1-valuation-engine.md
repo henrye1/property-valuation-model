@@ -616,29 +616,36 @@ from __future__ import annotations
 
 from datetime import date
 from decimal import Decimal
-from math import floor
 
 from valuation_engine.models import TenantLine
 
 ONE = Decimal("1")
-DAYS_PER_YEAR = Decimal("365.25")
 
 
 def resolve_rent(tenant: TenantLine, valuation_date: date) -> tuple[Decimal, int]:
     """Return (effective_rent_per_m2_pm, cycles_applied) at `valuation_date`.
 
-    Rule (per spec §6.4): if valuation_date is on or after `next_escalation_date`,
-    rent compounds on each anniversary. cycles = floor((days_since)/365.25) + 1.
-    Before next_escalation_date, rent is unchanged.
+    Rule (per spec §6.4): rent stays at `rent_per_m2_pm` until `next_escalation_date`.
+    On or after that date, rent compounds on each *anniversary* of the next-escalation
+    date. Anniversaries are calendar-based (not 365.25-day averages), so leap years
+    do not shift the cycle count.
+
+    cycles = years_elapsed_since(next_escalation_date, valuation_date) + 1
     """
-    if tenant.next_escalation_date is None or valuation_date < tenant.next_escalation_date:
+    nxt = tenant.next_escalation_date
+    if nxt is None or valuation_date < nxt:
         return tenant.rent_per_m2_pm, 0
 
-    delta_days = (valuation_date - tenant.next_escalation_date).days
-    cycles = floor(Decimal(delta_days) / DAYS_PER_YEAR) + 1
+    years_elapsed = valuation_date.year - nxt.year
+    if (valuation_date.month, valuation_date.day) < (nxt.month, nxt.day):
+        years_elapsed -= 1
+    cycles = years_elapsed + 1
+
     multiplier = (ONE + tenant.annual_escalation_pct) ** cycles
     return tenant.rent_per_m2_pm * multiplier, cycles
 ```
+
+> **Note (correction during execution):** an earlier draft of this plan used `floor(days_since / 365.25) + 1`, but that formula underflows by one cycle exactly on an anniversary (e.g. 365 / 365.25 → 0). The calendar-year formulation above matches the spec's intent ("rent compounds on each anniversary") and is leap-year-safe.
 
 - [ ] **Step 4: Run tests — should pass**
 
