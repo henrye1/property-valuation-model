@@ -31,7 +31,7 @@
   "warnings": [
     {
       "code": "rent_unusual",
-      "message": "Rent 12 R/m²/pm is outside [20, 1000].",
+      "message": "Rent 12 R/mÂ²/pm is outside [20, 1000].",
       "field_path": "tenants[1].rent_per_m2_pm"
     }
   ]

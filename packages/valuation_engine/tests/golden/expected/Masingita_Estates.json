@@ -31,7 +31,7 @@
   "warnings": [
     {
       "code": "opex_unusual_pct",
-      "message": "Operating expenses are 2.99% of GAI (band: 5%–60%).",
+      "message": "Operating expenses are 2.99% of GAI (band: 5%â€“60%).",
       "field_path": "monthly_operating_expenses"
     }
   ]

@@ -31,17 +31,17 @@
   "warnings": [
     {
       "code": "escalation_missing",
-      "message": "Escalation rate is set but no next escalation date — escalation will not be applied.",
+      "message": "Escalation rate is set but no next escalation date â€” escalation will not be applied.",
       "field_path": "tenants[0].next_escalation_date"
     },
     {
       "code": "escalation_missing",
-      "message": "Escalation rate is set but no next escalation date — escalation will not be applied.",
+      "message": "Escalation rate is set but no next escalation date â€” escalation will not be applied.",
       "field_path": "tenants[1].next_escalation_date"
     },
     {
       "code": "vacancy_zero",
-      "message": "Vacancy allowance is 0% — no vacancy buffer applied.",
+      "message": "Vacancy allowance is 0% â€” no vacancy buffer applied.",
       "field_path": "vacancy_allowance_pct"
     }
   ]

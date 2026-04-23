@@ -31,7 +31,7 @@
   "warnings": [
     {
       "code": "vacancy_zero",
-      "message": "Vacancy allowance is 0% — no vacancy buffer applied.",
+      "message": "Vacancy allowance is 0% â€” no vacancy buffer applied.",
       "field_path": "vacancy_allowance_pct"
     }
   ]

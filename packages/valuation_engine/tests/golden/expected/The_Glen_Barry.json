@@ -31,12 +31,12 @@
   "warnings": [
     {
       "code": "escalation_missing",
-      "message": "Escalation rate is set but no next escalation date — escalation will not be applied.",
+      "message": "Escalation rate is set but no next escalation date â€” escalation will not be applied.",
       "field_path": "tenants[0].next_escalation_date"
     },
     {
       "code": "rent_unusual",
-      "message": "Rent 12.5 R/m²/pm is outside [20, 1000].",
+      "message": "Rent 12.5 R/mÂ²/pm is outside [20, 1000].",
       "field_path": "tenants[1].rent_per_m2_pm"
     }
   ]

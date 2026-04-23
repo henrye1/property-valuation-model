@@ -80,27 +80,27 @@
   "warnings": [
     {
       "code": "rent_unusual",
-      "message": "Rent 10 R/m²/pm is outside [20, 1000].",
+      "message": "Rent 10 R/mÂ²/pm is outside [20, 1000].",
       "field_path": "tenants[2].rent_per_m2_pm"
     },
     {
       "code": "rent_unusual",
-      "message": "Rent 10 R/m²/pm is outside [20, 1000].",
+      "message": "Rent 10 R/mÂ²/pm is outside [20, 1000].",
       "field_path": "tenants[3].rent_per_m2_pm"
     },
     {
       "code": "rent_unusual",
-      "message": "Rent 10 R/m²/pm is outside [20, 1000].",
+      "message": "Rent 10 R/mÂ²/pm is outside [20, 1000].",
       "field_path": "tenants[6].rent_per_m2_pm"
     },
     {
       "code": "rent_unusual",
-      "message": "Rent 10 R/m²/pm is outside [20, 1000].",
+      "message": "Rent 10 R/mÂ²/pm is outside [20, 1000].",
       "field_path": "tenants[7].rent_per_m2_pm"
     },
     {
       "code": "rent_unusual",
-      "message": "Rent 10 R/m²/pm is outside [20, 1000].",
+      "message": "Rent 10 R/mÂ²/pm is outside [20, 1000].",
       "field_path": "tenants[8].rent_per_m2_pm"
     }
   ]

@@ -12,6 +12,8 @@ import json
 import sys
 from pathlib import Path
 
+from pydantic import ValidationError
+
 from valuation_engine import calculate
 from valuation_engine.excel.parse import (
     RECOMPUTE_TOLERANCE_PCT,
@@ -50,7 +52,7 @@ def main() -> int:
             continue
         try:
             parsed = parse_workbook(src)
-        except (ValueError, KeyError, TypeError, OSError) as exc:
+        except (ValidationError, ValueError, KeyError, TypeError, OSError) as exc:
             skipped.append({"file": src.name, "reason": f"parser raised: {exc}"})
             continue
 
@@ -79,19 +81,35 @@ def main() -> int:
                     }
                 )
                 continue
+        else:
+            skipped.append(
+                {
+                    "file": src.name,
+                    "reason": "no sheet market value to compare against",
+                }
+            )
+            continue
 
         slug = _slug(src)
         if not args.dry_run:
             (INPUTS_DIR / f"{slug}.json").write_text(
-                parsed.inputs.model_dump_json(indent=2)
+                parsed.inputs.model_dump_json(indent=2),
+                encoding="utf-8",
+                newline="\n",
             )
             (EXPECTED_DIR / f"{slug}.json").write_text(
-                result.model_dump_json(indent=2)
+                result.model_dump_json(indent=2),
+                encoding="utf-8",
+                newline="\n",
             )
         written += 1
 
     if not args.dry_run:
-        SKIPPED_LOG.write_text(json.dumps(skipped, indent=2))
+        SKIPPED_LOG.write_text(
+            json.dumps(skipped, indent=2),
+            encoding="utf-8",
+            newline="\n",
+        )
     else:
         # In dry-run, dump the skip list to stdout so reviewers can categorise.
         print(json.dumps(skipped, indent=2))

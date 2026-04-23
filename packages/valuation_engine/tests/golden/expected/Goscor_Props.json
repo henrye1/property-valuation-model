@@ -31,12 +31,12 @@
   "warnings": [
     {
       "code": "rent_unusual",
-      "message": "Rent 15 R/m²/pm is outside [20, 1000].",
+      "message": "Rent 15 R/mÂ²/pm is outside [20, 1000].",
       "field_path": "tenants[1].rent_per_m2_pm"
     },
     {
       "code": "vacancy_zero",
-      "message": "Vacancy allowance is 0% — no vacancy buffer applied.",
+      "message": "Vacancy allowance is 0% â€” no vacancy buffer applied.",
       "field_path": "vacancy_allowance_pct"
     }
   ]
