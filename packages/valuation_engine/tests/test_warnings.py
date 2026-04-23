@@ -106,3 +106,40 @@ def test_parking_does_not_trigger_rent_unusual():
     )
     # Parking rates are not subject to the rent_unusual band.
     assert "rent_unusual" not in _codes(detect_warnings(inputs))
+
+
+def test_opex_unusual_pct_warning_low():
+    # GAI = 102_000; opex annual = 4000 -> 3.92% (< 5%)
+    inputs = _input(monthly_operating_expenses=Decimal("333.33"))
+    assert "opex_unusual_pct" in _codes(detect_warnings(inputs))
+
+
+def test_cap_rate_unusual_warning_high():
+    inputs = _input(cap_rate=Decimal("0.25"))
+    assert "cap_rate_unusual" in _codes(detect_warnings(inputs))
+
+
+def test_rent_unusual_warning_high():
+    inputs = _input(
+        tenants=[
+            TenantLine(
+                description="Penthouse",
+                rentable_area_m2=Decimal("100"),
+                rent_per_m2_pm=Decimal("1500"),
+                annual_escalation_pct=Decimal("0"),
+            )
+        ]
+    )
+    assert "rent_unusual" in _codes(detect_warnings(inputs))
+
+
+def test_opex_pct_denominator_excludes_parking():
+    """Opex band check uses tenant GAI only — adding parking does not move opex_pct."""
+    # Tenant GAI = 85*100*12 = 102_000; annual opex = 80_000 -> 78% (above band).
+    # If the denominator wrongly included parking (100 * 500 * 12 = 600_000),
+    # opex_pct would drop to ~11.4% (inside band) and the warning would NOT fire.
+    inputs = _input(
+        monthly_operating_expenses=Decimal("6666.67"),
+        parking=[ParkingLine(bay_type="open", bays=100, rate_per_bay_pm=Decimal("500"))],
+    )
+    assert "opex_unusual_pct" in _codes(detect_warnings(inputs))
