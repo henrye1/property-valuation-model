@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from decimal import Decimal
 
-from valuation_engine.models import ValuationInput, Warning
+from valuation_engine.models import ValuationInput, ValuationWarning
 
 OPEX_LOW_PCT = Decimal("0.05")
 OPEX_HIGH_PCT = Decimal("0.60")
@@ -13,15 +13,15 @@ RENT_LOW = Decimal("20")
 RENT_HIGH = Decimal("1000")
 
 
-def detect_warnings(inputs: ValuationInput) -> list[Warning]:
-    warnings: list[Warning] = []
+def detect_warnings(inputs: ValuationInput) -> list[ValuationWarning]:
+    warnings: list[ValuationWarning] = []
 
     # Per-tenant warnings
     for i, t in enumerate(inputs.tenants):
         path = f"tenants[{i}]"
         if t.lease_expiry_date is not None and t.lease_expiry_date < inputs.valuation_date:
             warnings.append(
-                Warning(
+                ValuationWarning(
                     code="lease_expired",
                     message=(
                         f"Lease expired on {t.lease_expiry_date.isoformat()} "
@@ -32,7 +32,7 @@ def detect_warnings(inputs: ValuationInput) -> list[Warning]:
             )
         if t.annual_escalation_pct > 0 and t.next_escalation_date is None:
             warnings.append(
-                Warning(
+                ValuationWarning(
                     code="escalation_missing",
                     message=(
                         "Escalation rate is set but no next escalation date — "
@@ -43,7 +43,7 @@ def detect_warnings(inputs: ValuationInput) -> list[Warning]:
             )
         if t.rent_per_m2_pm < RENT_LOW or t.rent_per_m2_pm > RENT_HIGH:
             warnings.append(
-                Warning(
+                ValuationWarning(
                     code="rent_unusual",
                     message=(
                         f"Rent {t.rent_per_m2_pm} R/m²/pm is outside "
@@ -56,7 +56,7 @@ def detect_warnings(inputs: ValuationInput) -> list[Warning]:
     # Vacancy
     if inputs.vacancy_allowance_pct == 0:
         warnings.append(
-            Warning(
+            ValuationWarning(
                 code="vacancy_zero",
                 message="Vacancy allowance is 0% — no vacancy buffer applied.",
                 field_path="vacancy_allowance_pct",
@@ -66,7 +66,7 @@ def detect_warnings(inputs: ValuationInput) -> list[Warning]:
     # Cap rate band
     if inputs.cap_rate < CAP_RATE_LOW or inputs.cap_rate > CAP_RATE_HIGH:
         warnings.append(
-            Warning(
+            ValuationWarning(
                 code="cap_rate_unusual",
                 message=(
                     f"Capitalisation rate {inputs.cap_rate} outside "
@@ -80,7 +80,7 @@ def detect_warnings(inputs: ValuationInput) -> list[Warning]:
     annual_opex = inputs.monthly_operating_expenses * 12
     if annual_opex == 0:
         warnings.append(
-            Warning(
+            ValuationWarning(
                 code="opex_zero",
                 message="Operating expenses are 0 — verify this is correct.",
                 field_path="monthly_operating_expenses",
@@ -95,7 +95,7 @@ def detect_warnings(inputs: ValuationInput) -> list[Warning]:
             opex_pct = annual_opex / gai_tenants
             if opex_pct < OPEX_LOW_PCT or opex_pct > OPEX_HIGH_PCT:
                 warnings.append(
-                    Warning(
+                    ValuationWarning(
                         code="opex_unusual_pct",
                         message=(
                             f"Operating expenses are {opex_pct:.2%} of GAI "

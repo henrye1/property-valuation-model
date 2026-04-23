@@ -10,7 +10,7 @@ from valuation_engine.models import (
     TenantLine,
     ValuationInput,
     ValuationResult,
-    Warning,
+    ValuationWarning,
 )
 
 
@@ -62,7 +62,7 @@ def test_valuation_input_default_rounding():
 
 
 def test_warning_construction():
-    w = Warning(code="vacancy_zero", message="vacancy is 0", field_path=None)
+    w = ValuationWarning(code="vacancy_zero", message="vacancy is 0", field_path=None)
     assert w.code == "vacancy_zero"
 
 

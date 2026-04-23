@@ -15,7 +15,7 @@ from openpyxl import load_workbook
 from openpyxl.worksheet.worksheet import Worksheet
 from pydantic import BaseModel, ConfigDict, ValidationError
 
-from valuation_engine.models import ValuationInput, Warning
+from valuation_engine.models import ValuationInput, ValuationWarning
 
 TENANT_HEADER_NEEDLES = ("rentable area",)
 SUBTOTAL_LABEL = "sub total"
@@ -65,8 +65,8 @@ class ParseResult(BaseModel):
     inputs: ValuationInput | None
     building_name: str | None
     sheet_market_value: Decimal | None
-    parse_warnings: list[Warning]
-    parse_errors: list[Warning]
+    parse_warnings: list[ValuationWarning]
+    parse_errors: list[ValuationWarning]
 
 
 def parse_workbook(path: Path) -> ParseResult:
@@ -78,12 +78,12 @@ def parse_workbook(path: Path) -> ParseResult:
     """
     wb = load_workbook(path, data_only=True, read_only=False)
     sheet_names = wb.sheetnames
-    parse_warnings: list[Warning] = []
-    parse_errors: list[Warning] = []
+    parse_warnings: list[ValuationWarning] = []
+    parse_errors: list[ValuationWarning] = []
 
     if len(sheet_names) > 1:
         parse_warnings.append(
-            Warning(
+            ValuationWarning(
                 code="multiple_sheets",
                 message=(
                     f"Workbook has {len(sheet_names)} sheets; "
@@ -135,13 +135,13 @@ def _read_building_name(cur: _SheetCursor) -> str | None:
 
 def _read_valuation_date(
     cur: _SheetCursor,
-    parse_warnings: list[Warning],
-    parse_errors: list[Warning],
+    parse_warnings: list[ValuationWarning],
+    parse_errors: list[ValuationWarning],
 ) -> date | None:
     row = cur.find_label_row("date")
     if row is None:
         parse_errors.append(
-            Warning(
+            ValuationWarning(
                 code="missing_required_section",
                 message="Could not find 'Date' label in column A.",
                 field_path="valuation_date",
@@ -156,7 +156,7 @@ def _read_valuation_date(
         if isinstance(v, date):
             return v
     parse_errors.append(
-        Warning(
+        ValuationWarning(
             code="missing_required_section",
             message="Date row found but no parseable date value in columns B-E.",
             field_path="valuation_date",
@@ -212,8 +212,8 @@ def _read_pct(value: Any) -> Decimal | None:
 
 def _read_tenants(
     cur: _SheetCursor,
-    parse_warnings: list[Warning],
-    parse_errors: list[Warning],
+    parse_warnings: list[ValuationWarning],
+    parse_errors: list[ValuationWarning],
 ) -> tuple[list[dict[str, Any]], int]:
     """Returns (tenant_dicts, last_row_consumed).
 
@@ -223,7 +223,7 @@ def _read_tenants(
     header_row = _find_tenant_header_row(cur)
     if header_row is None:
         parse_errors.append(
-            Warning(
+            ValuationWarning(
                 code="missing_required_section",
                 message="Could not find tenant header row containing 'Rentable area'.",
                 field_path="tenants",
@@ -251,7 +251,7 @@ def _read_tenants(
         rent = _read_decimal(cur.ws.cell(row=r, column=7).value)
         if area is None or rent is None:
             parse_warnings.append(
-                Warning(
+                ValuationWarning(
                     code="unrecognised_row",
                     message=(
                         f"Row {r}: tenant row missing area or rent "
@@ -294,14 +294,14 @@ def _classify_bay_type(label: Any) -> str:
 def _read_parking(
     cur: _SheetCursor,
     start_row: int,
-    parse_warnings: list[Warning],
+    parse_warnings: list[ValuationWarning],
 ) -> tuple[list[dict[str, Any]], int]:
     """Returns (parking_dicts, last_row)."""
     parking_label_row = cur.find_label_row("parking", start=start_row)
     if parking_label_row is None:
         # Parking is optional.
         parse_warnings.append(
-            Warning(
+            ValuationWarning(
                 code="missing_optional_section",
                 message="No 'Parking' section found.",
                 field_path="parking",
@@ -345,8 +345,8 @@ def _read_parking(
 def _read_assumptions(
     cur: _SheetCursor,
     start_row: int,
-    parse_warnings: list[Warning],
-    parse_errors: list[Warning],
+    parse_warnings: list[ValuationWarning],
+    parse_errors: list[ValuationWarning],
 ) -> tuple[dict[str, Any], Decimal | None]:
     """Returns (assumptions_dict, sheet_market_value).
 
@@ -364,7 +364,7 @@ def _read_assumptions(
                 opex_monthly = _read_decimal(cur.ws.cell(row=r, column=5).value)
                 if opex_monthly is None:
                     parse_errors.append(
-                        Warning(
+                        ValuationWarning(
                             code="missing_required_section",
                             message="Operating expenses subtotal row has no value in column E.",
                             field_path="monthly_operating_expenses",
@@ -375,7 +375,7 @@ def _read_assumptions(
                 break
     else:
         parse_errors.append(
-            Warning(
+            ValuationWarning(
                 code="missing_required_section",
                 message="No 'Operating expenses' section found.",
                 field_path="monthly_operating_expenses",
@@ -387,7 +387,7 @@ def _read_assumptions(
         vac = _read_pct(cur.ws.cell(row=vacancy_row, column=8).value)
         if vac is None:
             parse_warnings.append(
-                Warning(
+                ValuationWarning(
                     code="non_canonical_label",
                     message="Vacancy allowance % missing in column H; defaulted to 0.",
                     field_path="vacancy_allowance_pct",
@@ -398,7 +398,7 @@ def _read_assumptions(
             out["vacancy_allowance_pct"] = vac
     else:
         parse_errors.append(
-            Warning(
+            ValuationWarning(
                 code="missing_required_section",
                 message="No 'Vacancy allowance' row found.",
                 field_path="vacancy_allowance_pct",
@@ -410,7 +410,7 @@ def _read_assumptions(
         cap = _read_pct(cur.ws.cell(row=cap_row, column=8).value)
         if cap is None:
             parse_errors.append(
-                Warning(
+                ValuationWarning(
                     code="missing_required_section",
                     message="Capitalisation rate missing in column H.",
                     field_path="cap_rate",
@@ -420,7 +420,7 @@ def _read_assumptions(
             out["cap_rate"] = cap
     else:
         parse_errors.append(
-            Warning(
+            ValuationWarning(
                 code="missing_required_section",
                 message="No 'Capitalised @' row found.",
                 field_path="cap_rate",
@@ -441,7 +441,7 @@ def _build_inputs_partial(
     tenant_dicts: list[dict[str, Any]],
     parking_dicts: list[dict[str, Any]],
     assumptions: dict[str, Any],
-    parse_errors: list[Warning],
+    parse_errors: list[ValuationWarning],
 ) -> ValuationInput | None:
     if valuation_date is None or not tenant_dicts:
         return None
@@ -461,7 +461,7 @@ def _build_inputs_partial(
         )
     except (ValueError, TypeError, ValidationError) as exc:
         parse_errors.append(
-            Warning(
+            ValuationWarning(
                 code="missing_required_section",
                 message=f"Could not assemble ValuationInput: {exc}",
                 field_path=None,

@@ -6,7 +6,7 @@ from valuation_engine.models import (
     TenantLine,
     ValuationInput,
     ValuationResult,
-    Warning,
+    ValuationWarning,
 )
 
 __all__ = [
@@ -17,5 +17,5 @@ __all__ = [
     "ValuationInput",
     "ValuationResult",
     "ResolvedTenant",
-    "Warning",
+    "ValuationWarning",
 ]

@@ -64,7 +64,7 @@ class ResolvedTenant(_Frozen):
     escalation_cycles_applied: int
 
 
-class Warning(_Frozen):
+class ValuationWarning(_Frozen):
     code: str
     message: str
     field_path: str | None = None
@@ -85,4 +85,4 @@ class ValuationResult(_Frozen):
     annual_net_income: Decimal
     capitalised_value: Decimal
     market_value: Decimal
-    warnings: list[Warning]
+    warnings: list[ValuationWarning]
