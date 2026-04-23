@@ -43,6 +43,10 @@ strict = true
 plugins = ["pydantic.mypy"]
 files = ["src/valuation_engine"]
 
+[[tool.mypy.overrides]]
+module = ["openpyxl", "openpyxl.*"]
+ignore_missing_imports = true
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra --strict-markers"
