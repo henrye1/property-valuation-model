@@ -21,6 +21,14 @@ TENANT_HEADER_NEEDLES = ("rentable area",)
 SUBTOTAL_LABEL = "sub total"
 SECTION_END_BLANK_RUN = 2  # consecutive blank rows = end of section
 
+BAY_TYPE_MAP = {
+    "open": "open",
+    "covered": "covered",
+    "shade": "shade",
+    "shaded": "shade",
+    "basement": "basement",
+}
+
 
 @dataclass
 class _SheetCursor:
@@ -80,20 +88,26 @@ def parse_workbook(path: Path) -> ParseResult:
 
     building_name = _read_building_name(cur)
     valuation_date = _read_valuation_date(cur, parse_warnings, parse_errors)
-    tenant_dicts, _last = _read_tenants(cur, parse_warnings, parse_errors)
+    tenant_dicts, last_tenant_row = _read_tenants(cur, parse_warnings, parse_errors)
+    parking_dicts, last_parking_row = _read_parking(
+        cur, last_tenant_row, parse_warnings
+    )
+    assumptions, sheet_market_value = _read_assumptions(
+        cur, last_parking_row, parse_warnings, parse_errors
+    )
 
     inputs = _build_inputs_partial(
         valuation_date=valuation_date,
         tenant_dicts=tenant_dicts,
-        parking_dicts=[],
-        assumptions={},
+        parking_dicts=parking_dicts,
+        assumptions=assumptions,
         parse_errors=parse_errors,
     )
 
     return ParseResult(
         inputs=inputs,
         building_name=building_name,
-        sheet_market_value=None,
+        sheet_market_value=sheet_market_value,
         parse_warnings=parse_warnings,
         parse_errors=parse_errors,
     )
@@ -260,6 +274,157 @@ def _read_tenants(
     return tenants, last_row
 
 
+def _classify_bay_type(label: Any) -> str:
+    if isinstance(label, str):
+        key = label.strip().lower()
+        return BAY_TYPE_MAP.get(key, "other")
+    return "other"
+
+
+def _read_parking(
+    cur: _SheetCursor,
+    start_row: int,
+    parse_warnings: list[Warning],
+) -> tuple[list[dict[str, Any]], int]:
+    """Returns (parking_dicts, last_row)."""
+    parking_label_row = cur.find_label_row("parking", start=start_row)
+    if parking_label_row is None:
+        # Parking is optional.
+        parse_warnings.append(
+            Warning(
+                code="missing_optional_section",
+                message="No 'Parking' section found.",
+                field_path="parking",
+            )
+        )
+        return [], start_row
+
+    parking: list[dict[str, Any]] = []
+    last_row = parking_label_row
+    blank_run = 0
+    # Parking rows start two below the label (label row, header row, then data).
+    for r in range(parking_label_row + 2, cur.max_row + 1):
+        a = cur.ws.cell(row=r, column=1).value
+        if isinstance(a, str) and SUBTOTAL_LABEL in a.lower():
+            return parking, r
+        row_values = [cur.ws.cell(row=r, column=c).value for c in range(1, 10)]
+        if all(v is None or v == "" for v in row_values):
+            blank_run += 1
+            if blank_run >= SECTION_END_BLANK_RUN:
+                return parking, r
+            continue
+        blank_run = 0
+
+        bays = _read_decimal(cur.ws.cell(row=r, column=6).value)
+        rate = _read_decimal(cur.ws.cell(row=r, column=7).value)
+        if bays is None or rate is None or bays == 0:
+            continue
+        bay_type = _classify_bay_type(cur.ws.cell(row=r, column=5).value)
+        parking.append(
+            dict(
+                bay_type=bay_type,
+                bays=int(bays),
+                rate_per_bay_pm=rate,
+            )
+        )
+        last_row = r
+
+    return parking, last_row
+
+
+def _read_assumptions(
+    cur: _SheetCursor,
+    start_row: int,
+    parse_warnings: list[Warning],
+    parse_errors: list[Warning],
+) -> tuple[dict[str, Any], Decimal | None]:
+    """Returns (assumptions_dict, sheet_market_value).
+
+    assumptions_dict may contain: monthly_operating_expenses,
+    vacancy_allowance_pct, cap_rate.
+    """
+    out: dict[str, Any] = {}
+
+    opex_label = cur.find_label_row("operating expenses", start=start_row)
+    if opex_label is not None:
+        # The next 'Sub total' row holds monthly opex in column E.
+        for r in range(opex_label + 1, cur.max_row + 1):
+            a = cur.ws.cell(row=r, column=1).value
+            if isinstance(a, str) and SUBTOTAL_LABEL in a.lower():
+                opex_monthly = _read_decimal(cur.ws.cell(row=r, column=5).value)
+                if opex_monthly is None:
+                    parse_errors.append(
+                        Warning(
+                            code="missing_required_section",
+                            message="Operating expenses subtotal row has no value in column E.",
+                            field_path="monthly_operating_expenses",
+                        )
+                    )
+                else:
+                    out["monthly_operating_expenses"] = opex_monthly
+                break
+    else:
+        parse_errors.append(
+            Warning(
+                code="missing_required_section",
+                message="No 'Operating expenses' section found.",
+                field_path="monthly_operating_expenses",
+            )
+        )
+
+    vacancy_row = cur.find_label_row("vacancy allowance", start=start_row)
+    if vacancy_row is not None:
+        vac = _read_pct(cur.ws.cell(row=vacancy_row, column=8).value)
+        if vac is None:
+            parse_warnings.append(
+                Warning(
+                    code="non_canonical_label",
+                    message="Vacancy allowance % missing in column H; defaulted to 0.",
+                    field_path="vacancy_allowance_pct",
+                )
+            )
+            out["vacancy_allowance_pct"] = Decimal("0")
+        else:
+            out["vacancy_allowance_pct"] = vac
+    else:
+        parse_errors.append(
+            Warning(
+                code="missing_required_section",
+                message="No 'Vacancy allowance' row found.",
+                field_path="vacancy_allowance_pct",
+            )
+        )
+
+    cap_row = cur.find_label_row("capitalised", start=start_row)
+    if cap_row is not None:
+        cap = _read_pct(cur.ws.cell(row=cap_row, column=8).value)
+        if cap is None:
+            parse_errors.append(
+                Warning(
+                    code="missing_required_section",
+                    message="Capitalisation rate missing in column H.",
+                    field_path="cap_rate",
+                )
+            )
+        else:
+            out["cap_rate"] = cap
+    else:
+        parse_errors.append(
+            Warning(
+                code="missing_required_section",
+                message="No 'Capitalised @' row found.",
+                field_path="cap_rate",
+            )
+        )
+
+    sheet_market_value: Decimal | None = None
+    omv_row = cur.find_label_row("open market assessment", start=start_row)
+    if omv_row is not None:
+        sheet_market_value = _read_decimal(cur.ws.cell(row=omv_row, column=9).value)
+
+    return out, sheet_market_value
+
+
 def _build_inputs_partial(
     *,
     valuation_date: date | None,
@@ -270,19 +435,19 @@ def _build_inputs_partial(
 ) -> ValuationInput | None:
     if valuation_date is None or not tenant_dicts:
         return None
+    if "cap_rate" not in assumptions or "monthly_operating_expenses" not in assumptions:
+        return None
     try:
         from valuation_engine.models import ParkingLine, TenantLine
         return ValuationInput(
             valuation_date=valuation_date,
             tenants=[TenantLine(**t) for t in tenant_dicts],
             parking=[ParkingLine(**p) for p in parking_dicts],
-            monthly_operating_expenses=assumptions.get(
-                "monthly_operating_expenses", Decimal("0")
-            ),
+            monthly_operating_expenses=assumptions["monthly_operating_expenses"],
             vacancy_allowance_pct=assumptions.get(
                 "vacancy_allowance_pct", Decimal("0")
             ),
-            cap_rate=assumptions.get("cap_rate", Decimal("0.10")),
+            cap_rate=assumptions["cap_rate"],
         )
     except (ValueError, TypeError, ValidationError) as exc:
         parse_errors.append(
