@@ -1,0 +1,36 @@
+{
+  "valuation_date": "2011-07-07",
+  "tenants": [
+    {
+      "description": "Offices/Factory",
+      "tenant_name": null,
+      "rentable_area_m2": "2000",
+      "rent_per_m2_pm": "30",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Storeroom/Ablutions",
+      "tenant_name": null,
+      "rentable_area_m2": "675",
+      "rent_per_m2_pm": "30",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [
+    {
+      "bay_type": "covered",
+      "bays": 12,
+      "rate_per_bay_pm": "220"
+    }
+  ],
+  "monthly_operating_expenses": "12438.849166666667",
+  "vacancy_allowance_pct": "0.02",
+  "cap_rate": "0.12",
+  "rounding": "nearest_10000"
+}

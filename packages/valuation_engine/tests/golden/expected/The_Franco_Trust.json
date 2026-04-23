@@ -1,0 +1,31 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-08-01",
+  "tenants_resolved": [
+    {
+      "description": "Duplex",
+      "rentable_area_m2": "24",
+      "effective_rent_per_m2_pm": "2500",
+      "monthly_rent": "60000",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "60000",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "60000",
+  "gross_annual_income": "720000",
+  "annual_operating_expenses": "105840",
+  "opex_per_m2_pm": "367.5",
+  "opex_pct_of_gai": "0.147",
+  "vacancy_allowance_amount": "14400.00",
+  "annual_net_income": "599760.00",
+  "capitalised_value": "5452363.636363636363636363636",
+  "market_value": "5450000",
+  "warnings": [
+    {
+      "code": "rent_unusual",
+      "message": "Rent 2500 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[0].rent_per_m2_pm"
+    }
+  ]
+}

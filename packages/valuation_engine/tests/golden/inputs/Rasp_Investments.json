@@ -1,0 +1,36 @@
+{
+  "valuation_date": "2011-08-24",
+  "tenants": [
+    {
+      "description": "Showroom",
+      "tenant_name": null,
+      "rentable_area_m2": "752",
+      "rent_per_m2_pm": "90",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "600",
+      "rent_per_m2_pm": "100",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [
+    {
+      "bay_type": "basement",
+      "bays": 55,
+      "rate_per_bay_pm": "350"
+    }
+  ],
+  "monthly_operating_expenses": "22000",
+  "vacancy_allowance_pct": "0.02",
+  "cap_rate": "0.1",
+  "rounding": "nearest_10000"
+}

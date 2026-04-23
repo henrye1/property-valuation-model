@@ -1,0 +1,25 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-08-24",
+  "tenants_resolved": [
+    {
+      "description": "Industrial Units",
+      "rentable_area_m2": "4448",
+      "effective_rent_per_m2_pm": "33.19",
+      "monthly_rent": "147629.12",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "147629.12",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "147629.12",
+  "gross_annual_income": "1771549.44",
+  "annual_operating_expenses": "300000",
+  "opex_per_m2_pm": "5.620503597122302158273381295",
+  "opex_pct_of_gai": "0.1693432840350196492399331514",
+  "vacancy_allowance_amount": "26573.24160",
+  "annual_net_income": "1444976.19840",
+  "capitalised_value": "13136147.25818181818181818182",
+  "market_value": "13140000",
+  "warnings": []
+}

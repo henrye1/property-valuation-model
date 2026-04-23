@@ -1,0 +1,25 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-07",
+  "tenants_resolved": [
+    {
+      "description": "Factory / shops and basement",
+      "rentable_area_m2": "896",
+      "effective_rent_per_m2_pm": "80",
+      "monthly_rent": "71680",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "71680",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "71680",
+  "gross_annual_income": "860160",
+  "annual_operating_expenses": "152132.749999999992",
+  "opex_per_m2_pm": "14.14925130208333258928571429",
+  "opex_pct_of_gai": "0.1768656412760416573660714286",
+  "vacancy_allowance_amount": "8601.60",
+  "annual_net_income": "699425.650000000008",
+  "capitalised_value": "6081962.173913043547826086957",
+  "market_value": "6080000",
+  "warnings": []
+}

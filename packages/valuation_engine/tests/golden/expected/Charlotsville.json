@@ -1,0 +1,55 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-19",
+  "tenants_resolved": [
+    {
+      "description": "Residential",
+      "rentable_area_m2": "10",
+      "effective_rent_per_m2_pm": "2400",
+      "monthly_rent": "24000",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Residential",
+      "rentable_area_m2": "8",
+      "effective_rent_per_m2_pm": "2800",
+      "monthly_rent": "22400",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Residential",
+      "rentable_area_m2": "1",
+      "effective_rent_per_m2_pm": "2850",
+      "monthly_rent": "2850",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "49250",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "49250",
+  "gross_annual_income": "591000",
+  "annual_operating_expenses": "120000",
+  "opex_per_m2_pm": "526.3157894736842105263157895",
+  "opex_pct_of_gai": "0.2030456852791878172588832487",
+  "vacancy_allowance_amount": "17730.00",
+  "annual_net_income": "453270.00",
+  "capitalised_value": "4120636.363636363636363636364",
+  "market_value": "4120000",
+  "warnings": [
+    {
+      "code": "rent_unusual",
+      "message": "Rent 2400 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[0].rent_per_m2_pm"
+    },
+    {
+      "code": "rent_unusual",
+      "message": "Rent 2800 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[1].rent_per_m2_pm"
+    },
+    {
+      "code": "rent_unusual",
+      "message": "Rent 2850 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[2].rent_per_m2_pm"
+    }
+  ]
+}

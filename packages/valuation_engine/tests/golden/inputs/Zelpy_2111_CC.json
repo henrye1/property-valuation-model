@@ -1,0 +1,76 @@
+{
+  "valuation_date": "2011-08-01",
+  "tenants": [
+    {
+      "description": "Retail",
+      "tenant_name": null,
+      "rentable_area_m2": "2638",
+      "rent_per_m2_pm": "60",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Retail",
+      "tenant_name": null,
+      "rentable_area_m2": "100",
+      "rent_per_m2_pm": "160",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Retail",
+      "tenant_name": null,
+      "rentable_area_m2": "150",
+      "rent_per_m2_pm": "160",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Retail",
+      "tenant_name": null,
+      "rentable_area_m2": "207",
+      "rent_per_m2_pm": "160",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Retail",
+      "tenant_name": null,
+      "rentable_area_m2": "120",
+      "rent_per_m2_pm": "130",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Retail",
+      "tenant_name": null,
+      "rentable_area_m2": "1725",
+      "rent_per_m2_pm": "160",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [
+    {
+      "bay_type": "basement",
+      "bays": 218,
+      "rate_per_bay_pm": "150"
+    }
+  ],
+  "monthly_operating_expenses": "100000",
+  "vacancy_allowance_pct": "0.01",
+  "cap_rate": "0.1",
+  "rounding": "nearest_10000"
+}

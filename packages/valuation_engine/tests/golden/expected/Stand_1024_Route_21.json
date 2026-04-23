@@ -1,0 +1,32 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-08-24",
+  "tenants_resolved": [
+    {
+      "description": "Offices",
+      "rentable_area_m2": "284",
+      "effective_rent_per_m2_pm": "83.75",
+      "monthly_rent": "23785.00",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Warehouse and Storage",
+      "rentable_area_m2": "316",
+      "effective_rent_per_m2_pm": "50.5",
+      "monthly_rent": "15958.0",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "39743.00",
+  "gross_monthly_rent_parking": "7656",
+  "gross_monthly_income": "47399.00",
+  "gross_annual_income": "568788.00",
+  "annual_operating_expenses": "88800",
+  "opex_per_m2_pm": "12.33333333333333333333333333",
+  "opex_pct_of_gai": "0.1561214371611215426485790839",
+  "vacancy_allowance_amount": "5687.8800",
+  "annual_net_income": "474300.1200",
+  "capitalised_value": "4311819.272727272727272727273",
+  "market_value": "4310000",
+  "warnings": []
+}

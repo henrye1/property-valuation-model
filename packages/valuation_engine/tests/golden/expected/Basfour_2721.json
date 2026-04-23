@@ -1,0 +1,48 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-07",
+  "tenants_resolved": [
+    {
+      "description": "Offices",
+      "rentable_area_m2": "1231",
+      "effective_rent_per_m2_pm": "138.31",
+      "monthly_rent": "170259.61",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Offices",
+      "rentable_area_m2": "1231",
+      "effective_rent_per_m2_pm": "138.31",
+      "monthly_rent": "170259.61",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "340519.22",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "340519.22",
+  "gross_annual_income": "4086230.64",
+  "annual_operating_expenses": "1021557.99999999996",
+  "opex_per_m2_pm": "34.57751150825886677497969131",
+  "opex_pct_of_gai": "0.2500000832062675639865497166",
+  "vacancy_allowance_amount": "0.00",
+  "annual_net_income": "3064672.64000000004",
+  "capitalised_value": "27860660.363636364",
+  "market_value": "27860000",
+  "warnings": [
+    {
+      "code": "escalation_missing",
+      "message": "Escalation rate is set but no next escalation date — escalation will not be applied.",
+      "field_path": "tenants[0].next_escalation_date"
+    },
+    {
+      "code": "escalation_missing",
+      "message": "Escalation rate is set but no next escalation date — escalation will not be applied.",
+      "field_path": "tenants[1].next_escalation_date"
+    },
+    {
+      "code": "vacancy_zero",
+      "message": "Vacancy allowance is 0% — no vacancy buffer applied.",
+      "field_path": "vacancy_allowance_pct"
+    }
+  ]
+}

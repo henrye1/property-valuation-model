@@ -1,0 +1,38 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-19",
+  "tenants_resolved": [
+    {
+      "description": "Office",
+      "rentable_area_m2": "1565",
+      "effective_rent_per_m2_pm": "46",
+      "monthly_rent": "71990",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Cell tower",
+      "rentable_area_m2": "1",
+      "effective_rent_per_m2_pm": "5000",
+      "monthly_rent": "5000",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "76990",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "76990",
+  "gross_annual_income": "923880",
+  "annual_operating_expenses": "162196.999999999992",
+  "opex_per_m2_pm": "8.631172839506172413793103448",
+  "opex_pct_of_gai": "0.1755606788760444992856215093",
+  "vacancy_allowance_amount": "27716.40",
+  "annual_net_income": "733966.600000000008",
+  "capitalised_value": "6116388.3333333334",
+  "market_value": "6120000",
+  "warnings": [
+    {
+      "code": "rent_unusual",
+      "message": "Rent 5000 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[1].rent_per_m2_pm"
+    }
+  ]
+}

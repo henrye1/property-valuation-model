@@ -1,0 +1,46 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-20",
+  "tenants_resolved": [
+    {
+      "description": "Main Building",
+      "rentable_area_m2": "613",
+      "effective_rent_per_m2_pm": "55",
+      "monthly_rent": "33715",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Mezz Offices",
+      "rentable_area_m2": "120",
+      "effective_rent_per_m2_pm": "55",
+      "monthly_rent": "6600",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Mezz Storage",
+      "rentable_area_m2": "35",
+      "effective_rent_per_m2_pm": "20",
+      "monthly_rent": "700",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Lean to",
+      "rentable_area_m2": "225",
+      "effective_rent_per_m2_pm": "20",
+      "monthly_rent": "4500",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "45515",
+  "gross_monthly_rent_parking": "600",
+  "gross_monthly_income": "46115",
+  "gross_annual_income": "553380",
+  "annual_operating_expenses": "113065.000000000008",
+  "opex_per_m2_pm": "9.488502853306479355488418933",
+  "opex_pct_of_gai": "0.2043171057862590046622574000",
+  "vacancy_allowance_amount": "22135.20",
+  "annual_net_income": "418179.799999999992",
+  "capitalised_value": "3097628.148148148088888888889",
+  "market_value": "3100000",
+  "warnings": []
+}

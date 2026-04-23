@@ -1,0 +1,74 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-19",
+  "tenants_resolved": [
+    {
+      "description": "Offices",
+      "rentable_area_m2": "179",
+      "effective_rent_per_m2_pm": "95.34",
+      "monthly_rent": "17065.86",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Offices",
+      "rentable_area_m2": "124",
+      "effective_rent_per_m2_pm": "96",
+      "monthly_rent": "11904",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Offices",
+      "rentable_area_m2": "123",
+      "effective_rent_per_m2_pm": "95",
+      "monthly_rent": "11685",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Offices",
+      "rentable_area_m2": "123",
+      "effective_rent_per_m2_pm": "97.08",
+      "monthly_rent": "11940.84",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Offices",
+      "rentable_area_m2": "176",
+      "effective_rent_per_m2_pm": "98.61",
+      "monthly_rent": "17355.36",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Offices",
+      "rentable_area_m2": "129",
+      "effective_rent_per_m2_pm": "96",
+      "monthly_rent": "12384",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Offices",
+      "rentable_area_m2": "130",
+      "effective_rent_per_m2_pm": "96",
+      "monthly_rent": "12480",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Offices",
+      "rentable_area_m2": "221",
+      "effective_rent_per_m2_pm": "96",
+      "monthly_rent": "21216",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "116031.06",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "116031.06",
+  "gross_annual_income": "1392372.72",
+  "annual_operating_expenses": "207123.999999999984",
+  "opex_per_m2_pm": "14.32392807745504730290456432",
+  "opex_pct_of_gai": "0.1487561462709496233163775286",
+  "vacancy_allowance_amount": "41771.1816",
+  "annual_net_income": "1143477.538400000016",
+  "capitalised_value": "10890262.27047619062857142857",
+  "market_value": "10890000",
+  "warnings": []
+}

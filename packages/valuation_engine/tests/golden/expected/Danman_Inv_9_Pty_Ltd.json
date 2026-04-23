@@ -1,0 +1,52 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-19",
+  "tenants_resolved": [
+    {
+      "description": "Warehouse",
+      "rentable_area_m2": "330",
+      "effective_rent_per_m2_pm": "45",
+      "monthly_rent": "14850",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Offices",
+      "rentable_area_m2": "196",
+      "effective_rent_per_m2_pm": "45",
+      "monthly_rent": "8820",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Factory",
+      "rentable_area_m2": "297",
+      "effective_rent_per_m2_pm": "45",
+      "monthly_rent": "13365",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Mezzanine",
+      "rentable_area_m2": "83",
+      "effective_rent_per_m2_pm": "15",
+      "monthly_rent": "1245",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "38280",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "38280",
+  "gross_annual_income": "459360",
+  "annual_operating_expenses": "74147.000000000004",
+  "opex_per_m2_pm": "6.819996320824135761589403974",
+  "opex_pct_of_gai": "0.161413706025775",
+  "vacancy_allowance_amount": "13780.80",
+  "annual_net_income": "371432.199999999996",
+  "capitalised_value": "2971457.599999999968",
+  "market_value": "2970000",
+  "warnings": [
+    {
+      "code": "rent_unusual",
+      "message": "Rent 15 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[3].rent_per_m2_pm"
+    }
+  ]
+}

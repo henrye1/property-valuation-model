@@ -1,0 +1,36 @@
+{
+  "valuation_date": "2011-07-28",
+  "tenants": [
+    {
+      "description": "Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "182",
+      "rent_per_m2_pm": "85",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [
+    {
+      "bay_type": "open",
+      "bays": 2,
+      "rate_per_bay_pm": "200"
+    },
+    {
+      "bay_type": "covered",
+      "bays": 3,
+      "rate_per_bay_pm": "380"
+    },
+    {
+      "bay_type": "shade",
+      "bays": 4,
+      "rate_per_bay_pm": "280"
+    }
+  ],
+  "monthly_operating_expenses": "2910.1666666666665",
+  "vacancy_allowance_pct": "0",
+  "cap_rate": "0.11",
+  "rounding": "nearest_10000"
+}

@@ -1,0 +1,60 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-08-01",
+  "tenants_resolved": [
+    {
+      "description": "Offices",
+      "rentable_area_m2": "113",
+      "effective_rent_per_m2_pm": "36",
+      "monthly_rent": "4068",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Warehouse",
+      "rentable_area_m2": "343",
+      "effective_rent_per_m2_pm": "36",
+      "monthly_rent": "12348",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Offices",
+      "rentable_area_m2": "52",
+      "effective_rent_per_m2_pm": "36",
+      "monthly_rent": "1872",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Warehouse",
+      "rentable_area_m2": "404",
+      "effective_rent_per_m2_pm": "36",
+      "monthly_rent": "14544",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Offices",
+      "rentable_area_m2": "80",
+      "effective_rent_per_m2_pm": "36",
+      "monthly_rent": "2880",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Warehouse",
+      "rentable_area_m2": "377",
+      "effective_rent_per_m2_pm": "36",
+      "monthly_rent": "13572",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "49284",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "49284",
+  "gross_annual_income": "591408",
+  "annual_operating_expenses": "118309.999999999992",
+  "opex_per_m2_pm": "7.201728755782809349890430972",
+  "opex_pct_of_gai": "0.2000480209939669263858453048",
+  "vacancy_allowance_amount": "17742.24",
+  "annual_net_income": "455355.760000000008",
+  "capitalised_value": "3794631.3333333334",
+  "market_value": "3790000",
+  "warnings": []
+}

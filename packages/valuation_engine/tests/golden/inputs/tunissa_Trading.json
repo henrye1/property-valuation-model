@@ -1,0 +1,30 @@
+{
+  "valuation_date": "2011-08-01",
+  "tenants": [
+    {
+      "description": "Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "177",
+      "rent_per_m2_pm": "40",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Warehouse",
+      "tenant_name": null,
+      "rentable_area_m2": "956",
+      "rent_per_m2_pm": "35",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "6250",
+  "vacancy_allowance_pct": "0.03",
+  "cap_rate": "0.115",
+  "rounding": "nearest_10000"
+}

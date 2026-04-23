@@ -1,0 +1,40 @@
+{
+  "valuation_date": "2011-08-24",
+  "tenants": [
+    {
+      "description": "Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "519",
+      "rent_per_m2_pm": "20",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Residential",
+      "tenant_name": null,
+      "rentable_area_m2": "15",
+      "rent_per_m2_pm": "1500",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Basement",
+      "tenant_name": null,
+      "rentable_area_m2": "369",
+      "rent_per_m2_pm": "5",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "6105.083333333333",
+  "vacancy_allowance_pct": "0.05",
+  "cap_rate": "0.14",
+  "rounding": "nearest_10000"
+}

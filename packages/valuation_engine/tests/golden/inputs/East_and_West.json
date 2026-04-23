@@ -1,0 +1,20 @@
+{
+  "valuation_date": "2011-07-20",
+  "tenants": [
+    {
+      "description": "Retail shop",
+      "tenant_name": null,
+      "rentable_area_m2": "469",
+      "rent_per_m2_pm": "88.28",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "4219.916666666667",
+  "vacancy_allowance_pct": "0",
+  "cap_rate": "0.13",
+  "rounding": "nearest_10000"
+}

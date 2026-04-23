@@ -1,0 +1,40 @@
+{
+  "valuation_date": "2011-08-01",
+  "tenants": [
+    {
+      "description": "Offices G/Floor",
+      "tenant_name": null,
+      "rentable_area_m2": "1531",
+      "rent_per_m2_pm": "75",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Offices  1st floor",
+      "tenant_name": null,
+      "rentable_area_m2": "1531",
+      "rent_per_m2_pm": "75",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Foyer",
+      "tenant_name": null,
+      "rentable_area_m2": "213",
+      "rent_per_m2_pm": "25",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "37473.583333333336",
+  "vacancy_allowance_pct": "0.02",
+  "cap_rate": "0.12",
+  "rounding": "nearest_10000"
+}

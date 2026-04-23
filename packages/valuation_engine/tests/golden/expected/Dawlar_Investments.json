@@ -1,0 +1,39 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-19",
+  "tenants_resolved": [
+    {
+      "description": "Unit 5",
+      "rentable_area_m2": "166",
+      "effective_rent_per_m2_pm": "95",
+      "monthly_rent": "15770",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Unit 7",
+      "rentable_area_m2": "176",
+      "effective_rent_per_m2_pm": "95",
+      "monthly_rent": "16720",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Unit 8",
+      "rentable_area_m2": "140",
+      "effective_rent_per_m2_pm": "95",
+      "monthly_rent": "13300",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "45790",
+  "gross_monthly_rent_parking": "5250",
+  "gross_monthly_income": "51040",
+  "gross_annual_income": "612480",
+  "annual_operating_expenses": "109911.00",
+  "opex_per_m2_pm": "19.00259336099585062240663900",
+  "opex_pct_of_gai": "0.1794523902821316614420062696",
+  "vacancy_allowance_amount": "18374.40",
+  "annual_net_income": "484194.60",
+  "capitalised_value": "4401769.090909090909090909091",
+  "market_value": "4400000",
+  "warnings": []
+}

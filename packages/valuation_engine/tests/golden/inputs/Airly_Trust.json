@@ -1,0 +1,20 @@
+{
+  "valuation_date": "2011-07-19",
+  "tenants": [
+    {
+      "description": "Residential",
+      "tenant_name": null,
+      "rentable_area_m2": "12",
+      "rent_per_m2_pm": "2426",
+      "annual_escalation_pct": "8",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "5900",
+  "vacancy_allowance_pct": "0",
+  "cap_rate": "0.135",
+  "rounding": "nearest_10000"
+}

@@ -1,0 +1,118 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-19",
+  "tenants_resolved": [
+    {
+      "description": "7 A -B",
+      "rentable_area_m2": "384",
+      "effective_rent_per_m2_pm": "27.6",
+      "monthly_rent": "10598.4",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "7 C",
+      "rentable_area_m2": "270",
+      "effective_rent_per_m2_pm": "24.76",
+      "monthly_rent": "6685.20",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "7 D",
+      "rentable_area_m2": "50",
+      "effective_rent_per_m2_pm": "60",
+      "monthly_rent": "3000",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "7 E",
+      "rentable_area_m2": "150",
+      "effective_rent_per_m2_pm": "23.33",
+      "monthly_rent": "3499.50",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "7 F",
+      "rentable_area_m2": "67",
+      "effective_rent_per_m2_pm": "24.63",
+      "monthly_rent": "1650.21",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "7 G",
+      "rentable_area_m2": "210",
+      "effective_rent_per_m2_pm": "18.1",
+      "monthly_rent": "3801.0",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "7 H",
+      "rentable_area_m2": "154",
+      "effective_rent_per_m2_pm": "18.18",
+      "monthly_rent": "2799.72",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "7 I",
+      "rentable_area_m2": "70",
+      "effective_rent_per_m2_pm": "21.43",
+      "monthly_rent": "1500.10",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "7 J",
+      "rentable_area_m2": "50",
+      "effective_rent_per_m2_pm": "10",
+      "monthly_rent": "500",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "7 K",
+      "rentable_area_m2": "36",
+      "effective_rent_per_m2_pm": "41.67",
+      "monthly_rent": "1500.12",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "7 L",
+      "rentable_area_m2": "36",
+      "effective_rent_per_m2_pm": "41.67",
+      "monthly_rent": "1500.12",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "7 M",
+      "rentable_area_m2": "36",
+      "effective_rent_per_m2_pm": "41.67",
+      "monthly_rent": "1500.12",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "38534.49",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "38534.49",
+  "gross_annual_income": "462413.88",
+  "annual_operating_expenses": "93881.2500",
+  "opex_per_m2_pm": "5.170811302048909451421017845",
+  "opex_pct_of_gai": "0.2030242907068446993848887062",
+  "vacancy_allowance_amount": "4624.1388",
+  "annual_net_income": "363908.4912",
+  "capitalised_value": "3032570.76",
+  "market_value": "3030000",
+  "warnings": [
+    {
+      "code": "rent_unusual",
+      "message": "Rent 18.1 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[5].rent_per_m2_pm"
+    },
+    {
+      "code": "rent_unusual",
+      "message": "Rent 18.18 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[6].rent_per_m2_pm"
+    },
+    {
+      "code": "rent_unusual",
+      "message": "Rent 10 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[8].rent_per_m2_pm"
+    }
+  ]
+}

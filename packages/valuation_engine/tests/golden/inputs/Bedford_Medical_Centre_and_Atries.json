@@ -1,0 +1,41 @@
+{
+  "valuation_date": "2011-08-24",
+  "tenants": [
+    {
+      "description": "Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "670",
+      "rent_per_m2_pm": "75",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Staff Quarters",
+      "tenant_name": null,
+      "rentable_area_m2": "41",
+      "rent_per_m2_pm": "40",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [
+    {
+      "bay_type": "covered",
+      "bays": 22,
+      "rate_per_bay_pm": "220"
+    },
+    {
+      "bay_type": "open",
+      "bays": 6,
+      "rate_per_bay_pm": "150"
+    }
+  ],
+  "monthly_operating_expenses": "16649.416666666668",
+  "vacancy_allowance_pct": "0.02",
+  "cap_rate": "0.115",
+  "rounding": "nearest_10000"
+}

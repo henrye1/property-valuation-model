@@ -1,0 +1,32 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-19",
+  "tenants_resolved": [
+    {
+      "description": "Motor dealership",
+      "rentable_area_m2": "5230",
+      "effective_rent_per_m2_pm": "43.59",
+      "monthly_rent": "227975.70",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Retail shops",
+      "rentable_area_m2": "595",
+      "effective_rent_per_m2_pm": "160.87",
+      "monthly_rent": "95717.65",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "323693.35",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "323693.35",
+  "gross_annual_income": "3884320.20",
+  "annual_operating_expenses": "496074.0",
+  "opex_per_m2_pm": "7.096909871244635193133047210",
+  "opex_pct_of_gai": "0.1277119224105160022595459561",
+  "vacancy_allowance_amount": "116529.6060",
+  "annual_net_income": "3271716.5940",
+  "capitalised_value": "28449709.51304347826086956522",
+  "market_value": "28450000",
+  "warnings": []
+}

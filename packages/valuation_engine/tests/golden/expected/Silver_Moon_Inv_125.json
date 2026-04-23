@@ -1,0 +1,53 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-08-24",
+  "tenants_resolved": [
+    {
+      "description": "Workshop and Offices",
+      "rentable_area_m2": "511",
+      "effective_rent_per_m2_pm": "49.48",
+      "monthly_rent": "25284.28",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Motor Showroom",
+      "rentable_area_m2": "600",
+      "effective_rent_per_m2_pm": "41.9",
+      "monthly_rent": "25140.0",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Workshop",
+      "rentable_area_m2": "1165",
+      "effective_rent_per_m2_pm": "25.95",
+      "monthly_rent": "30231.75",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Offices and Workshop",
+      "rentable_area_m2": "351",
+      "effective_rent_per_m2_pm": "55.26",
+      "monthly_rent": "19396.26",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Mez  Storage",
+      "rentable_area_m2": "180",
+      "effective_rent_per_m2_pm": "40",
+      "monthly_rent": "7200",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "107252.29",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "107252.29",
+  "gross_annual_income": "1287027.48",
+  "annual_operating_expenses": "208197.00",
+  "opex_per_m2_pm": "6.180887068044175276095475597",
+  "opex_pct_of_gai": "0.1617657767493822276428783012",
+  "vacancy_allowance_amount": "12870.2748",
+  "annual_net_income": "1065960.2052",
+  "capitalised_value": "9269219.175652173913043478261",
+  "market_value": "9270000",
+  "warnings": []
+}

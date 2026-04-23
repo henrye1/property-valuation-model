@@ -1,0 +1,61 @@
+{
+  "valuation_date": "2011-07-20",
+  "tenants": [
+    {
+      "description": "Main Building",
+      "tenant_name": null,
+      "rentable_area_m2": "613",
+      "rent_per_m2_pm": "55",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Mezz Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "120",
+      "rent_per_m2_pm": "55",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Mezz Storage",
+      "tenant_name": null,
+      "rentable_area_m2": "35",
+      "rent_per_m2_pm": "20",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Lean to",
+      "tenant_name": null,
+      "rentable_area_m2": "225",
+      "rent_per_m2_pm": "20",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [
+    {
+      "bay_type": "open",
+      "bays": 20,
+      "rate_per_bay_pm": "0"
+    },
+    {
+      "bay_type": "shade",
+      "bays": 3,
+      "rate_per_bay_pm": "200"
+    }
+  ],
+  "monthly_operating_expenses": "9422.083333333334",
+  "vacancy_allowance_pct": "0.04",
+  "cap_rate": "0.135",
+  "rounding": "nearest_10000"
+}

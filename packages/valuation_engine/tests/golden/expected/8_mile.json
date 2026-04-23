@@ -1,0 +1,32 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-06-27",
+  "tenants_resolved": [
+    {
+      "description": "Showroom Offices",
+      "rentable_area_m2": "1600",
+      "effective_rent_per_m2_pm": "35",
+      "monthly_rent": "56000",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Warehouse / Workshop",
+      "rentable_area_m2": "1492",
+      "effective_rent_per_m2_pm": "25",
+      "monthly_rent": "37300",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "93300",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "93300",
+  "gross_annual_income": "1119600",
+  "annual_operating_expenses": "180000",
+  "opex_per_m2_pm": "4.851228978007761966364812419",
+  "opex_pct_of_gai": "0.1607717041800643086816720257",
+  "vacancy_allowance_amount": "33588.00",
+  "annual_net_income": "906012.00",
+  "capitalised_value": "6969323.076923076923076923077",
+  "market_value": "6970000",
+  "warnings": []
+}

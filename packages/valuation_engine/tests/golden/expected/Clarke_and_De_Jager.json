@@ -1,0 +1,25 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-19",
+  "tenants_resolved": [
+    {
+      "description": "Workshops and Offices",
+      "rentable_area_m2": "2762",
+      "effective_rent_per_m2_pm": "23.5",
+      "monthly_rent": "64907.0",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "64907.0",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "64907.0",
+  "gross_annual_income": "778884.0",
+  "annual_operating_expenses": "117358.999999999992",
+  "opex_per_m2_pm": "3.540882210958242577842143374",
+  "opex_pct_of_gai": "0.1506758387641805352273252500",
+  "vacancy_allowance_amount": "15577.680",
+  "annual_net_income": "645947.320000000008",
+  "capitalised_value": "4968825.538461538523076923077",
+  "market_value": "4970000",
+  "warnings": []
+}

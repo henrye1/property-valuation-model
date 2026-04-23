@@ -1,0 +1,20 @@
+{
+  "valuation_date": "2011-08-24",
+  "tenants": [
+    {
+      "description": "Warehousing and storage",
+      "tenant_name": null,
+      "rentable_area_m2": "1682",
+      "rent_per_m2_pm": "30",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "9000",
+  "vacancy_allowance_pct": "0",
+  "cap_rate": "0.115",
+  "rounding": "nearest_10000"
+}

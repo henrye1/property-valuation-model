@@ -1,0 +1,38 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-08-24",
+  "tenants_resolved": [
+    {
+      "description": "CTI Head lease",
+      "rentable_area_m2": "350",
+      "effective_rent_per_m2_pm": "825.15",
+      "monthly_rent": "288802.50",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "CTI Head lease",
+      "rentable_area_m2": "256",
+      "effective_rent_per_m2_pm": "825.15",
+      "monthly_rent": "211238.40",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "500040.90",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "500040.90",
+  "gross_annual_income": "6000490.80",
+  "annual_operating_expenses": "179401.999999999992",
+  "opex_per_m2_pm": "24.67024202420241914191419142",
+  "opex_pct_of_gai": "0.02989788768612060733432005262",
+  "vacancy_allowance_amount": "180014.7240",
+  "annual_net_income": "5641074.076000000008",
+  "capitalised_value": "51282491.60000000007272727273",
+  "market_value": "51280000",
+  "warnings": [
+    {
+      "code": "opex_unusual_pct",
+      "message": "Operating expenses are 2.99% of GAI (band: 5%–60%).",
+      "field_path": "monthly_operating_expenses"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-06-27",
+  "tenants_resolved": [
+    {
+      "description": "Showroom Offices",
+      "rentable_area_m2": "3444",
+      "effective_rent_per_m2_pm": "115",
+      "monthly_rent": "396060",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "396060",
+  "gross_monthly_rent_parking": "15750",
+  "gross_monthly_income": "411810",
+  "gross_annual_income": "4941720",
+  "annual_operating_expenses": "780000",
+  "opex_per_m2_pm": "18.87340301974448315911730546",
+  "opex_pct_of_gai": "0.1578397804812899152521794031",
+  "vacancy_allowance_amount": "49417.20",
+  "annual_net_income": "4112302.80",
+  "capitalised_value": "41123028.0",
+  "market_value": "41120000",
+  "warnings": []
+}

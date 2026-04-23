@@ -1,0 +1,80 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-28",
+  "tenants_resolved": [
+    {
+      "description": "Retail",
+      "rentable_area_m2": "1208",
+      "effective_rent_per_m2_pm": "33.25",
+      "monthly_rent": "40166.00",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Retail",
+      "rentable_area_m2": "218",
+      "effective_rent_per_m2_pm": "123.40",
+      "monthly_rent": "26901.20",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Retail",
+      "rentable_area_m2": "400",
+      "effective_rent_per_m2_pm": "88.18",
+      "monthly_rent": "35272.00",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Retail",
+      "rentable_area_m2": "139",
+      "effective_rent_per_m2_pm": "135.33",
+      "monthly_rent": "18810.87",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Retail",
+      "rentable_area_m2": "185",
+      "effective_rent_per_m2_pm": "129.36",
+      "monthly_rent": "23931.60",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Offices",
+      "rentable_area_m2": "1470",
+      "effective_rent_per_m2_pm": "55",
+      "monthly_rent": "80850",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Offices",
+      "rentable_area_m2": "1410",
+      "effective_rent_per_m2_pm": "35",
+      "monthly_rent": "49350",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Parking",
+      "rentable_area_m2": "3136",
+      "effective_rent_per_m2_pm": "2.14",
+      "monthly_rent": "6711.04",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "281992.71",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "281992.71",
+  "gross_annual_income": "3383912.52",
+  "annual_operating_expenses": "570871.000000000032",
+  "opex_per_m2_pm": "5.825689852232835660053881950",
+  "opex_pct_of_gai": "0.1687014651312558257268423712",
+  "vacancy_allowance_amount": "50758.68780",
+  "annual_net_income": "2762282.832199999968",
+  "capitalised_value": "23019023.6016666664",
+  "market_value": "23020000",
+  "warnings": [
+    {
+      "code": "rent_unusual",
+      "message": "Rent 2.14 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[7].rent_per_m2_pm"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-20",
+  "tenants_resolved": [
+    {
+      "description": "Retail",
+      "rentable_area_m2": "1688",
+      "effective_rent_per_m2_pm": "44.15",
+      "monthly_rent": "74525.20",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "ABSA",
+      "rentable_area_m2": "9",
+      "effective_rent_per_m2_pm": "156.93",
+      "monthly_rent": "1412.37",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "75937.57",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "75937.57",
+  "gross_annual_income": "911250.84",
+  "annual_operating_expenses": "160893.00",
+  "opex_per_m2_pm": "7.900854449027695934001178550",
+  "opex_pct_of_gai": "0.1765628002054845842446630831",
+  "vacancy_allowance_amount": "9112.5084",
+  "annual_net_income": "741245.3316",
+  "capitalised_value": "6177044.43",
+  "market_value": "6180000",
+  "warnings": []
+}

@@ -1,0 +1,131 @@
+{
+  "valuation_date": "2011-07-28",
+  "tenants": [
+    {
+      "description": "Various",
+      "tenant_name": null,
+      "rentable_area_m2": "261.29",
+      "rent_per_m2_pm": "83.84",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Various",
+      "tenant_name": null,
+      "rentable_area_m2": "280.41",
+      "rent_per_m2_pm": "115.74",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Various",
+      "tenant_name": null,
+      "rentable_area_m2": "280.08",
+      "rent_per_m2_pm": "82.5",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Various",
+      "tenant_name": null,
+      "rentable_area_m2": "422.58",
+      "rent_per_m2_pm": "82.97",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Various",
+      "tenant_name": null,
+      "rentable_area_m2": "280.41",
+      "rent_per_m2_pm": "82.38",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Various",
+      "tenant_name": null,
+      "rentable_area_m2": "368.26",
+      "rent_per_m2_pm": "83.08",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Various",
+      "tenant_name": null,
+      "rentable_area_m2": "280.41",
+      "rent_per_m2_pm": "81.75",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Various",
+      "tenant_name": null,
+      "rentable_area_m2": "280.41",
+      "rent_per_m2_pm": "75",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Various",
+      "tenant_name": null,
+      "rentable_area_m2": "320.6",
+      "rent_per_m2_pm": "75.05",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Various",
+      "tenant_name": null,
+      "rentable_area_m2": "280.41",
+      "rent_per_m2_pm": "75",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Various",
+      "tenant_name": null,
+      "rentable_area_m2": "384.58",
+      "rent_per_m2_pm": "83.41",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [
+    {
+      "bay_type": "open",
+      "bays": 33,
+      "rate_per_bay_pm": "350"
+    },
+    {
+      "bay_type": "covered",
+      "bays": 64,
+      "rate_per_bay_pm": "150"
+    }
+  ],
+  "monthly_operating_expenses": "48009.583333333336",
+  "vacancy_allowance_pct": "0.01",
+  "cap_rate": "0.11",
+  "rounding": "nearest_10000"
+}

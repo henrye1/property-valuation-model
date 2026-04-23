@@ -1,0 +1,46 @@
+{
+  "valuation_date": "2011-08-01",
+  "tenants": [
+    {
+      "description": "n/a",
+      "tenant_name": null,
+      "rentable_area_m2": "4",
+      "rent_per_m2_pm": "1850",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "n/a",
+      "tenant_name": null,
+      "rentable_area_m2": "6",
+      "rent_per_m2_pm": "2500",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "n/a",
+      "tenant_name": null,
+      "rentable_area_m2": "2",
+      "rent_per_m2_pm": "2800",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [
+    {
+      "bay_type": "open",
+      "bays": 11,
+      "rate_per_bay_pm": "100"
+    }
+  ],
+  "monthly_operating_expenses": "9254",
+  "vacancy_allowance_pct": "0.03",
+  "cap_rate": "0.14",
+  "rounding": "nearest_10000"
+}

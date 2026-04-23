@@ -1,0 +1,100 @@
+{
+  "valuation_date": "2011-08-01",
+  "tenants": [
+    {
+      "description": "Workshop 1",
+      "tenant_name": null,
+      "rentable_area_m2": "331",
+      "rent_per_m2_pm": "22",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "51",
+      "rent_per_m2_pm": "22",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Storeroom",
+      "tenant_name": null,
+      "rentable_area_m2": "15",
+      "rent_per_m2_pm": "10",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Mezz",
+      "tenant_name": null,
+      "rentable_area_m2": "131",
+      "rent_per_m2_pm": "10",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Workshop 2",
+      "tenant_name": null,
+      "rentable_area_m2": "347",
+      "rent_per_m2_pm": "22",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "36",
+      "rent_per_m2_pm": "22",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Storeroom",
+      "tenant_name": null,
+      "rentable_area_m2": "15",
+      "rent_per_m2_pm": "10",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Mezz",
+      "tenant_name": null,
+      "rentable_area_m2": "148",
+      "rent_per_m2_pm": "10",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Lean to",
+      "tenant_name": null,
+      "rentable_area_m2": "75",
+      "rent_per_m2_pm": "10",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "4252.996666666667",
+  "vacancy_allowance_pct": "0.03",
+  "cap_rate": "0.14",
+  "rounding": "nearest_10000"
+}

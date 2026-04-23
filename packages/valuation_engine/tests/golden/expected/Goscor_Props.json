@@ -1,0 +1,43 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-28",
+  "tenants_resolved": [
+    {
+      "description": "NA",
+      "rentable_area_m2": "1923",
+      "effective_rent_per_m2_pm": "25",
+      "monthly_rent": "48075",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "NA",
+      "rentable_area_m2": "70",
+      "effective_rent_per_m2_pm": "15",
+      "monthly_rent": "1050",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "49125",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "49125",
+  "gross_annual_income": "589500",
+  "annual_operating_expenses": "94836.999999999996",
+  "opex_per_m2_pm": "3.965420638902826392373306573",
+  "opex_pct_of_gai": "0.1608770144189991450381679389",
+  "vacancy_allowance_amount": "0",
+  "annual_net_income": "494663.000000000004",
+  "capitalised_value": "4122191.6666666667",
+  "market_value": "4120000",
+  "warnings": [
+    {
+      "code": "rent_unusual",
+      "message": "Rent 15 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[1].rent_per_m2_pm"
+    },
+    {
+      "code": "vacancy_zero",
+      "message": "Vacancy allowance is 0% — no vacancy buffer applied.",
+      "field_path": "vacancy_allowance_pct"
+    }
+  ]
+}

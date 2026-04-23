@@ -1,0 +1,30 @@
+{
+  "valuation_date": "2011-07-19",
+  "tenants": [
+    {
+      "description": "Motor dealership",
+      "tenant_name": null,
+      "rentable_area_m2": "5230",
+      "rent_per_m2_pm": "43.59",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Retail shops",
+      "tenant_name": null,
+      "rentable_area_m2": "595",
+      "rent_per_m2_pm": "160.87",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "41339.5",
+  "vacancy_allowance_pct": "0.03",
+  "cap_rate": "0.115",
+  "rounding": "nearest_10000"
+}

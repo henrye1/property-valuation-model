@@ -1,0 +1,53 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-07",
+  "tenants_resolved": [
+    {
+      "description": "Shops",
+      "rentable_area_m2": "125",
+      "effective_rent_per_m2_pm": "62.19",
+      "monthly_rent": "7773.75",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Shops",
+      "rentable_area_m2": "334",
+      "effective_rent_per_m2_pm": "66.72",
+      "monthly_rent": "22284.48",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Shops",
+      "rentable_area_m2": "140",
+      "effective_rent_per_m2_pm": "55.64",
+      "monthly_rent": "7789.60",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Shops",
+      "rentable_area_m2": "190",
+      "effective_rent_per_m2_pm": "76.32",
+      "monthly_rent": "14500.80",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Shops",
+      "rentable_area_m2": "177",
+      "effective_rent_per_m2_pm": "69.09",
+      "monthly_rent": "12228.93",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "64577.56",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "64577.56",
+  "gross_annual_income": "774930.72",
+  "annual_operating_expenses": "149484",
+  "opex_per_m2_pm": "12.89544513457556935817805383",
+  "opex_pct_of_gai": "0.1928998246449695528911281256",
+  "vacancy_allowance_amount": "23247.9216",
+  "annual_net_income": "602198.7984",
+  "capitalised_value": "5474534.530909090909090909091",
+  "market_value": "5470000",
+  "warnings": []
+}

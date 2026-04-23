@@ -1,0 +1,30 @@
+{
+  "valuation_date": "2011-07-19",
+  "tenants": [
+    {
+      "description": "Office",
+      "tenant_name": null,
+      "rentable_area_m2": "1565",
+      "rent_per_m2_pm": "46",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Cell tower",
+      "tenant_name": null,
+      "rentable_area_m2": "1",
+      "rent_per_m2_pm": "5000",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "13516.416666666666",
+  "vacancy_allowance_pct": "0.03",
+  "cap_rate": "0.12",
+  "rounding": "nearest_10000"
+}

@@ -1,0 +1,64 @@
+[
+  {
+    "file": "Aeterno Investment 197 Pty Ltd.xlsx",
+    "reason": "missing required sections",
+    "errors": [
+      {
+        "code": "missing_required_section",
+        "message": "No 'Capitalised @' row found.",
+        "field_path": "cap_rate"
+      }
+    ]
+  },
+  {
+    "file": "Contrier.xlsx",
+    "reason": "missing required sections",
+    "errors": [
+      {
+        "code": "missing_required_section",
+        "message": "No 'Capitalised @' row found.",
+        "field_path": "cap_rate"
+      }
+    ]
+  },
+  {
+    "file": "Klaprops 242 (Bedfordview) Martin Evans Unit.xls",
+    "reason": "non-xlsx (e.g. .xls); not supported in v1"
+  },
+  {
+    "file": "Meteora Centre.xlsx",
+    "reason": "recompute_mismatch beyond tolerance",
+    "sheet_value": "16130000",
+    "recomputed": "14410000",
+    "diff_pct": "0.1066336019838809671419714817"
+  },
+  {
+    "file": "Midnight Storm.xlsx",
+    "reason": "missing required sections",
+    "errors": [
+      {
+        "code": "missing_required_section",
+        "message": "Capitalisation rate missing in column H.",
+        "field_path": "cap_rate"
+      }
+    ]
+  },
+  {
+    "file": "Razorbill.xlsx",
+    "reason": "missing required sections",
+    "errors": [
+      {
+        "code": "missing_required_section",
+        "message": "Capitalisation rate missing in column H.",
+        "field_path": "cap_rate"
+      }
+    ]
+  },
+  {
+    "file": "The Tomas Family trust.xlsx",
+    "reason": "recompute_mismatch beyond tolerance",
+    "sheet_value": "7070000",
+    "recomputed": "7800000",
+    "diff_pct": "0.1032531824611032531824611033"
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-18",
+  "tenants_resolved": [
+    {
+      "description": "SS Offices",
+      "rentable_area_m2": "144",
+      "effective_rent_per_m2_pm": "85",
+      "monthly_rent": "12240",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "SS Offices",
+      "rentable_area_m2": "143",
+      "effective_rent_per_m2_pm": "85",
+      "monthly_rent": "12155",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "24395",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "24395",
+  "gross_annual_income": "292740",
+  "annual_operating_expenses": "54638.1300",
+  "opex_per_m2_pm": "15.86472996515679442508710801",
+  "opex_pct_of_gai": "0.1866438819430211108833777413",
+  "vacancy_allowance_amount": "5854.80",
+  "annual_net_income": "232247.0700",
+  "capitalised_value": "2111337.00",
+  "market_value": "2110000",
+  "warnings": []
+}

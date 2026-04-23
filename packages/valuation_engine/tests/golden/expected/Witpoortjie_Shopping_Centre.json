@@ -1,0 +1,25 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-08-01",
+  "tenants_resolved": [
+    {
+      "description": "Retail",
+      "rentable_area_m2": "5831",
+      "effective_rent_per_m2_pm": "55",
+      "monthly_rent": "320705",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "320705",
+  "gross_monthly_rent_parking": "32700",
+  "gross_monthly_income": "353405",
+  "gross_annual_income": "4240860",
+  "annual_operating_expenses": "768000",
+  "opex_per_m2_pm": "10.97581889898816669524952838",
+  "opex_pct_of_gai": "0.1810953438689322448748602878",
+  "vacancy_allowance_amount": "212043.00",
+  "annual_net_income": "3260817.00",
+  "capitalised_value": "28354930.43478260869565217391",
+  "market_value": "28350000",
+  "warnings": []
+}

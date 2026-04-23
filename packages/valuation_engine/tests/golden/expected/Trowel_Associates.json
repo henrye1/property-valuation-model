@@ -1,0 +1,98 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-08-01",
+  "tenants_resolved": [
+    {
+      "description": "Flats",
+      "rentable_area_m2": "24",
+      "effective_rent_per_m2_pm": "3975",
+      "monthly_rent": "95400",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Flats",
+      "rentable_area_m2": "12",
+      "effective_rent_per_m2_pm": "4085",
+      "monthly_rent": "49020",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Flats",
+      "rentable_area_m2": "4",
+      "effective_rent_per_m2_pm": "4575",
+      "monthly_rent": "18300",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Flats",
+      "rentable_area_m2": "2",
+      "effective_rent_per_m2_pm": "4685",
+      "monthly_rent": "9370",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Flats",
+      "rentable_area_m2": "24",
+      "effective_rent_per_m2_pm": "4775",
+      "monthly_rent": "114600",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Flats",
+      "rentable_area_m2": "12",
+      "effective_rent_per_m2_pm": "4885",
+      "monthly_rent": "58620",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Storage",
+      "rentable_area_m2": "13",
+      "effective_rent_per_m2_pm": "300",
+      "monthly_rent": "3900",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "349210",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "349210",
+  "gross_annual_income": "4190520",
+  "annual_operating_expenses": "864000",
+  "opex_per_m2_pm": "791.2087912087912087912087912",
+  "opex_pct_of_gai": "0.2061796626671630251138283554",
+  "vacancy_allowance_amount": "125715.60",
+  "annual_net_income": "3200804.40",
+  "capitalised_value": "29098221.81818181818181818182",
+  "market_value": "29100000",
+  "warnings": [
+    {
+      "code": "rent_unusual",
+      "message": "Rent 3975 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[0].rent_per_m2_pm"
+    },
+    {
+      "code": "rent_unusual",
+      "message": "Rent 4085 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[1].rent_per_m2_pm"
+    },
+    {
+      "code": "rent_unusual",
+      "message": "Rent 4575 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[2].rent_per_m2_pm"
+    },
+    {
+      "code": "rent_unusual",
+      "message": "Rent 4685 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[3].rent_per_m2_pm"
+    },
+    {
+      "code": "rent_unusual",
+      "message": "Rent 4775 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[4].rent_per_m2_pm"
+    },
+    {
+      "code": "rent_unusual",
+      "message": "Rent 4885 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[5].rent_per_m2_pm"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-08-24",
+  "tenants_resolved": [
+    {
+      "description": "Mini Units",
+      "rentable_area_m2": "1802",
+      "effective_rent_per_m2_pm": "35",
+      "monthly_rent": "63070",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "63070",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "63070",
+  "gross_annual_income": "756840",
+  "annual_operating_expenses": "120000",
+  "opex_per_m2_pm": "5.549389567147613762486126526",
+  "opex_pct_of_gai": "0.1585539876327889646424607579",
+  "vacancy_allowance_amount": "11352.600",
+  "annual_net_income": "625487.400",
+  "capitalised_value": "5686249.090909090909090909091",
+  "market_value": "5690000",
+  "warnings": []
+}

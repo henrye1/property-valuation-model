@@ -1,0 +1,20 @@
+{
+  "valuation_date": "2011-07-06",
+  "tenants": [
+    {
+      "description": "Workshops",
+      "tenant_name": null,
+      "rentable_area_m2": "2160",
+      "rent_per_m2_pm": "30.212962962962962",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "13464.666666666666",
+  "vacancy_allowance_pct": "0.01",
+  "cap_rate": "0.135",
+  "rounding": "nearest_10000"
+}

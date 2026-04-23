@@ -1,0 +1,70 @@
+{
+  "valuation_date": "2011-08-01",
+  "tenants": [
+    {
+      "description": "Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "113",
+      "rent_per_m2_pm": "36",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Warehouse",
+      "tenant_name": null,
+      "rentable_area_m2": "343",
+      "rent_per_m2_pm": "36",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "52",
+      "rent_per_m2_pm": "36",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Warehouse",
+      "tenant_name": null,
+      "rentable_area_m2": "404",
+      "rent_per_m2_pm": "36",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "80",
+      "rent_per_m2_pm": "36",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Warehouse",
+      "tenant_name": null,
+      "rentable_area_m2": "377",
+      "rent_per_m2_pm": "36",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "9859.166666666666",
+  "vacancy_allowance_pct": "0.03",
+  "cap_rate": "0.12",
+  "rounding": "nearest_10000"
+}

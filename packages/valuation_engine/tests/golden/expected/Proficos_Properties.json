@@ -1,0 +1,31 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-08-24",
+  "tenants_resolved": [
+    {
+      "description": "Warehousing and storage",
+      "rentable_area_m2": "1682",
+      "effective_rent_per_m2_pm": "30",
+      "monthly_rent": "50460",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "50460",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "50460",
+  "gross_annual_income": "605520",
+  "annual_operating_expenses": "108000",
+  "opex_per_m2_pm": "5.350772889417360285374554102",
+  "opex_pct_of_gai": "0.1783590963139120095124851367",
+  "vacancy_allowance_amount": "0",
+  "annual_net_income": "497520",
+  "capitalised_value": "4326260.869565217391304347826",
+  "market_value": "4330000",
+  "warnings": [
+    {
+      "code": "vacancy_zero",
+      "message": "Vacancy allowance is 0% — no vacancy buffer applied.",
+      "field_path": "vacancy_allowance_pct"
+    }
+  ]
+}

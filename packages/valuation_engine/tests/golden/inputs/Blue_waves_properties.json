@@ -1,0 +1,40 @@
+{
+  "valuation_date": "2011-07-06",
+  "tenants": [
+    {
+      "description": "Workshop",
+      "tenant_name": null,
+      "rentable_area_m2": "797",
+      "rent_per_m2_pm": "22",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Warehouse",
+      "tenant_name": null,
+      "rentable_area_m2": "334",
+      "rent_per_m2_pm": "23",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Warehouse & offices",
+      "tenant_name": null,
+      "rentable_area_m2": "175",
+      "rent_per_m2_pm": "25",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "9137.654166666667",
+  "vacancy_allowance_pct": "0",
+  "cap_rate": "0.125",
+  "rounding": "nearest_10000"
+}

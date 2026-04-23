@@ -1,0 +1,20 @@
+{
+  "valuation_date": "2011-08-01",
+  "tenants": [
+    {
+      "description": "Owner",
+      "tenant_name": null,
+      "rentable_area_m2": "2269",
+      "rent_per_m2_pm": "25",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "13511.666666666666",
+  "vacancy_allowance_pct": "0.02",
+  "cap_rate": "0.13",
+  "rounding": "nearest_10000"
+}

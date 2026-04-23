@@ -1,0 +1,32 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-07",
+  "tenants_resolved": [
+    {
+      "description": "Offices/Factory",
+      "rentable_area_m2": "2000",
+      "effective_rent_per_m2_pm": "30",
+      "monthly_rent": "60000",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Storeroom/Ablutions",
+      "rentable_area_m2": "675",
+      "effective_rent_per_m2_pm": "30",
+      "monthly_rent": "20250",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "80250",
+  "gross_monthly_rent_parking": "2640",
+  "gross_monthly_income": "82890",
+  "gross_annual_income": "994680",
+  "annual_operating_expenses": "149266.190000000004",
+  "opex_per_m2_pm": "4.650037071651090467289719626",
+  "opex_pct_of_gai": "0.1500645333172477620943418989",
+  "vacancy_allowance_amount": "19893.60",
+  "annual_net_income": "825520.209999999996",
+  "capitalised_value": "6879335.0833333333",
+  "market_value": "6880000",
+  "warnings": []
+}

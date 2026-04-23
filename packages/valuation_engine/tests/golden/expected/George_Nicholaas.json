@@ -1,0 +1,31 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-28",
+  "tenants_resolved": [
+    {
+      "description": "Wesbank",
+      "rentable_area_m2": "742",
+      "effective_rent_per_m2_pm": "80.79",
+      "monthly_rent": "59946.18",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "59946.18",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "59946.18",
+  "gross_annual_income": "719354.16",
+  "annual_operating_expenses": "93569.000000000004",
+  "opex_per_m2_pm": "10.50864779874213881401617251",
+  "opex_pct_of_gai": "0.1300736204820168190867207885",
+  "vacancy_allowance_amount": "0.00",
+  "annual_net_income": "625785.159999999996",
+  "capitalised_value": "4469893.999999999971428571429",
+  "market_value": "4470000",
+  "warnings": [
+    {
+      "code": "vacancy_zero",
+      "message": "Vacancy allowance is 0% — no vacancy buffer applied.",
+      "field_path": "vacancy_allowance_pct"
+    }
+  ]
+}

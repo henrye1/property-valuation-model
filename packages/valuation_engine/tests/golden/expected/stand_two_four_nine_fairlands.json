@@ -1,0 +1,43 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-08-01",
+  "tenants_resolved": [
+    {
+      "description": "n/a",
+      "rentable_area_m2": "120",
+      "effective_rent_per_m2_pm": "3757.366666666667",
+      "monthly_rent": "450884.000000000040",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "n/a",
+      "rentable_area_m2": "24",
+      "effective_rent_per_m2_pm": "4616.333333333333",
+      "monthly_rent": "110791.999999999992",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "561676.000000000032",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "561676.000000000032",
+  "gross_annual_income": "6740112.000000000384",
+  "annual_operating_expenses": "1713333.00",
+  "opex_per_m2_pm": "991.5121527777777777777777778",
+  "opex_pct_of_gai": "0.2541994851124135477848732657",
+  "vacancy_allowance_amount": "337005.60000000001920",
+  "annual_net_income": "4689773.40000000036480",
+  "capitalised_value": "39081445.000000003040",
+  "market_value": "39080000",
+  "warnings": [
+    {
+      "code": "rent_unusual",
+      "message": "Rent 3757.366666666667 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[0].rent_per_m2_pm"
+    },
+    {
+      "code": "rent_unusual",
+      "message": "Rent 4616.333333333333 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[1].rent_per_m2_pm"
+    }
+  ]
+}

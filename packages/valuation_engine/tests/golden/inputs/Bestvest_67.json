@@ -1,0 +1,60 @@
+{
+  "valuation_date": "2011-07-07",
+  "tenants": [
+    {
+      "description": "Shops",
+      "tenant_name": null,
+      "rentable_area_m2": "125",
+      "rent_per_m2_pm": "62.19",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Shops",
+      "tenant_name": null,
+      "rentable_area_m2": "334",
+      "rent_per_m2_pm": "66.72",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Shops",
+      "tenant_name": null,
+      "rentable_area_m2": "140",
+      "rent_per_m2_pm": "55.64",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Shops",
+      "tenant_name": null,
+      "rentable_area_m2": "190",
+      "rent_per_m2_pm": "76.32",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Shops",
+      "tenant_name": null,
+      "rentable_area_m2": "177",
+      "rent_per_m2_pm": "69.09",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "12457",
+  "vacancy_allowance_pct": "0.03",
+  "cap_rate": "0.11",
+  "rounding": "nearest_10000"
+}

@@ -1,0 +1,25 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-08-24",
+  "tenants_resolved": [
+    {
+      "description": "Offices",
+      "rentable_area_m2": "4843",
+      "effective_rent_per_m2_pm": "80",
+      "monthly_rent": "387440",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "387440",
+  "gross_monthly_rent_parking": "33300",
+  "gross_monthly_income": "420740",
+  "gross_annual_income": "5048880",
+  "annual_operating_expenses": "908796",
+  "opex_per_m2_pm": "15.63762130910592607887672930",
+  "opex_pct_of_gai": "0.1799995246470504349479488520",
+  "vacancy_allowance_amount": "252444.00",
+  "annual_net_income": "3887640.00",
+  "capitalised_value": "33805565.21739130434782608696",
+  "market_value": "33810000",
+  "warnings": []
+}

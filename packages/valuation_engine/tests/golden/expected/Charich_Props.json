@@ -1,0 +1,32 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-19",
+  "tenants_resolved": [
+    {
+      "description": "Offices and Warehouse",
+      "rentable_area_m2": "632",
+      "effective_rent_per_m2_pm": "45",
+      "monthly_rent": "28440",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Mezzanine",
+      "rentable_area_m2": "110",
+      "effective_rent_per_m2_pm": "20",
+      "monthly_rent": "2200",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "30640",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "30640",
+  "gross_annual_income": "367680",
+  "annual_operating_expenses": "68373.999999999996",
+  "opex_per_m2_pm": "7.679020664869721024258760108",
+  "opex_pct_of_gai": "0.1859606179286335835509138381",
+  "vacancy_allowance_amount": "11030.40",
+  "annual_net_income": "288275.600000000004",
+  "capitalised_value": "2745481.9047619048",
+  "market_value": "2750000",
+  "warnings": []
+}

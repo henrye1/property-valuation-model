@@ -1,0 +1,31 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-20",
+  "tenants_resolved": [
+    {
+      "description": "Retail shop",
+      "rentable_area_m2": "469",
+      "effective_rent_per_m2_pm": "88.28",
+      "monthly_rent": "41403.32",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "41403.32",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "41403.32",
+  "gross_annual_income": "496839.84",
+  "annual_operating_expenses": "50639.000000000004",
+  "opex_per_m2_pm": "8.997690120824449893390191898",
+  "opex_pct_of_gai": "0.1019221807977395774058698674",
+  "vacancy_allowance_amount": "0.00",
+  "annual_net_income": "446200.839999999996",
+  "capitalised_value": "3432314.153846153815384615385",
+  "market_value": "3430000",
+  "warnings": [
+    {
+      "code": "vacancy_zero",
+      "message": "Vacancy allowance is 0% — no vacancy buffer applied.",
+      "field_path": "vacancy_allowance_pct"
+    }
+  ]
+}

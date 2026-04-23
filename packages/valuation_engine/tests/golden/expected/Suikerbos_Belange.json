@@ -1,0 +1,107 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-08-01",
+  "tenants_resolved": [
+    {
+      "description": "Workshop 1",
+      "rentable_area_m2": "331",
+      "effective_rent_per_m2_pm": "22",
+      "monthly_rent": "7282",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Offices",
+      "rentable_area_m2": "51",
+      "effective_rent_per_m2_pm": "22",
+      "monthly_rent": "1122",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Storeroom",
+      "rentable_area_m2": "15",
+      "effective_rent_per_m2_pm": "10",
+      "monthly_rent": "150",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Mezz",
+      "rentable_area_m2": "131",
+      "effective_rent_per_m2_pm": "10",
+      "monthly_rent": "1310",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Workshop 2",
+      "rentable_area_m2": "347",
+      "effective_rent_per_m2_pm": "22",
+      "monthly_rent": "7634",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Offices",
+      "rentable_area_m2": "36",
+      "effective_rent_per_m2_pm": "22",
+      "monthly_rent": "792",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Storeroom",
+      "rentable_area_m2": "15",
+      "effective_rent_per_m2_pm": "10",
+      "monthly_rent": "150",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Mezz",
+      "rentable_area_m2": "148",
+      "effective_rent_per_m2_pm": "10",
+      "monthly_rent": "1480",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Lean to",
+      "rentable_area_m2": "75",
+      "effective_rent_per_m2_pm": "10",
+      "monthly_rent": "750",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "20670",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "20670",
+  "gross_annual_income": "248040",
+  "annual_operating_expenses": "51035.960000000004",
+  "opex_per_m2_pm": "3.701476646359153176675369887",
+  "opex_pct_of_gai": "0.2057569746815029995162070634",
+  "vacancy_allowance_amount": "7441.20",
+  "annual_net_income": "189562.839999999996",
+  "capitalised_value": "1354020.285714285685714285714",
+  "market_value": "1350000",
+  "warnings": [
+    {
+      "code": "rent_unusual",
+      "message": "Rent 10 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[2].rent_per_m2_pm"
+    },
+    {
+      "code": "rent_unusual",
+      "message": "Rent 10 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[3].rent_per_m2_pm"
+    },
+    {
+      "code": "rent_unusual",
+      "message": "Rent 10 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[6].rent_per_m2_pm"
+    },
+    {
+      "code": "rent_unusual",
+      "message": "Rent 10 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[7].rent_per_m2_pm"
+    },
+    {
+      "code": "rent_unusual",
+      "message": "Rent 10 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[8].rent_per_m2_pm"
+    }
+  ]
+}

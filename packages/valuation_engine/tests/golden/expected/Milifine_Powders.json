@@ -1,0 +1,31 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-08-24",
+  "tenants_resolved": [
+    {
+      "description": "Offices",
+      "rentable_area_m2": "3852",
+      "effective_rent_per_m2_pm": "18",
+      "monthly_rent": "69336",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "69336",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "69336",
+  "gross_annual_income": "832032",
+  "annual_operating_expenses": "261099.999999999984",
+  "opex_per_m2_pm": "5.648580823814468328141225337",
+  "opex_pct_of_gai": "0.3138100457674704626745125187",
+  "vacancy_allowance_amount": "16640.64",
+  "annual_net_income": "554291.360000000016",
+  "capitalised_value": "3959224.000000000114285714286",
+  "market_value": "3960000",
+  "warnings": [
+    {
+      "code": "rent_unusual",
+      "message": "Rent 18 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[0].rent_per_m2_pm"
+    }
+  ]
+}

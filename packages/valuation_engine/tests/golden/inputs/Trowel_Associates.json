@@ -1,0 +1,80 @@
+{
+  "valuation_date": "2011-08-01",
+  "tenants": [
+    {
+      "description": "Flats",
+      "tenant_name": null,
+      "rentable_area_m2": "24",
+      "rent_per_m2_pm": "3975",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Flats",
+      "tenant_name": null,
+      "rentable_area_m2": "12",
+      "rent_per_m2_pm": "4085",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Flats",
+      "tenant_name": null,
+      "rentable_area_m2": "4",
+      "rent_per_m2_pm": "4575",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Flats",
+      "tenant_name": null,
+      "rentable_area_m2": "2",
+      "rent_per_m2_pm": "4685",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Flats",
+      "tenant_name": null,
+      "rentable_area_m2": "24",
+      "rent_per_m2_pm": "4775",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Flats",
+      "tenant_name": null,
+      "rentable_area_m2": "12",
+      "rent_per_m2_pm": "4885",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Storage",
+      "tenant_name": null,
+      "rentable_area_m2": "13",
+      "rent_per_m2_pm": "300",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "72000",
+  "vacancy_allowance_pct": "0.03",
+  "cap_rate": "0.11",
+  "rounding": "nearest_10000"
+}

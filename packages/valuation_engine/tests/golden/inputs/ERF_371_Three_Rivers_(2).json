@@ -1,0 +1,56 @@
+{
+  "valuation_date": "2011-08-10",
+  "tenants": [
+    {
+      "description": "Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "191",
+      "rent_per_m2_pm": "63.57",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "187",
+      "rent_per_m2_pm": "68",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "203",
+      "rent_per_m2_pm": "83.17",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "190",
+      "rent_per_m2_pm": "72.18",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [
+    {
+      "bay_type": "covered",
+      "bays": 24,
+      "rate_per_bay_pm": "150"
+    }
+  ],
+  "monthly_operating_expenses": "10633",
+  "vacancy_allowance_pct": "0",
+  "cap_rate": "0.13",
+  "rounding": "nearest_10000"
+}

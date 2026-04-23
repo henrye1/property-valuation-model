@@ -1,0 +1,90 @@
+{
+  "valuation_date": "2011-07-28",
+  "tenants": [
+    {
+      "description": "Retail",
+      "tenant_name": null,
+      "rentable_area_m2": "1208",
+      "rent_per_m2_pm": "33.25",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Retail",
+      "tenant_name": null,
+      "rentable_area_m2": "218",
+      "rent_per_m2_pm": "123.40",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Retail",
+      "tenant_name": null,
+      "rentable_area_m2": "400",
+      "rent_per_m2_pm": "88.18",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Retail",
+      "tenant_name": null,
+      "rentable_area_m2": "139",
+      "rent_per_m2_pm": "135.33",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Retail",
+      "tenant_name": null,
+      "rentable_area_m2": "185",
+      "rent_per_m2_pm": "129.36",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "1470",
+      "rent_per_m2_pm": "55",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "1410",
+      "rent_per_m2_pm": "35",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Parking",
+      "tenant_name": null,
+      "rentable_area_m2": "3136",
+      "rent_per_m2_pm": "2.14",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "47572.583333333336",
+  "vacancy_allowance_pct": "0.015",
+  "cap_rate": "0.12",
+  "rounding": "nearest_10000"
+}

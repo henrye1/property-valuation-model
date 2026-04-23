@@ -1,0 +1,25 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-19",
+  "tenants_resolved": [
+    {
+      "description": "Restaurant / hall / Chapel",
+      "rentable_area_m2": "1927",
+      "effective_rent_per_m2_pm": "85",
+      "monthly_rent": "163795",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "163795",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "163795",
+  "gross_annual_income": "1965540",
+  "annual_operating_expenses": "354000",
+  "opex_per_m2_pm": "15.30877010897768552153606642",
+  "opex_pct_of_gai": "0.1801031777526786531945419579",
+  "vacancy_allowance_amount": "58966.20",
+  "annual_net_income": "1552573.80",
+  "capitalised_value": "14114307.27272727272727272727",
+  "market_value": "14110000",
+  "warnings": []
+}

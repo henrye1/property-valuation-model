@@ -1,0 +1,30 @@
+{
+  "valuation_date": "2011-08-24",
+  "tenants": [
+    {
+      "description": "Retail",
+      "tenant_name": null,
+      "rentable_area_m2": "368",
+      "rent_per_m2_pm": "300.04",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "100",
+      "rent_per_m2_pm": "58.78",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "24000",
+  "vacancy_allowance_pct": "0.01",
+  "cap_rate": "0.105",
+  "rounding": "nearest_10000"
+}

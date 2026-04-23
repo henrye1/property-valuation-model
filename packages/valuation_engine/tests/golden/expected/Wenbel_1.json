@@ -1,0 +1,38 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-08-01",
+  "tenants_resolved": [
+    {
+      "description": "Offices",
+      "rentable_area_m2": "326",
+      "effective_rent_per_m2_pm": "110",
+      "monthly_rent": "35860",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Offices",
+      "rentable_area_m2": "326",
+      "effective_rent_per_m2_pm": "110",
+      "monthly_rent": "35860",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "71720",
+  "gross_monthly_rent_parking": "6900",
+  "gross_monthly_income": "78620",
+  "gross_annual_income": "943440",
+  "annual_operating_expenses": "162000",
+  "opex_per_m2_pm": "20.70552147239263803680981595",
+  "opex_pct_of_gai": "0.1717120325616891376240142457",
+  "vacancy_allowance_amount": "0",
+  "annual_net_income": "781440",
+  "capitalised_value": "8225684.210526315789473684211",
+  "market_value": "8230000",
+  "warnings": [
+    {
+      "code": "vacancy_zero",
+      "message": "Vacancy allowance is 0% — no vacancy buffer applied.",
+      "field_path": "vacancy_allowance_pct"
+    }
+  ]
+}

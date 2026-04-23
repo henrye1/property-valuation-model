@@ -1,0 +1,31 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-08-10",
+  "tenants_resolved": [
+    {
+      "description": "Warehouse",
+      "rentable_area_m2": "3710",
+      "effective_rent_per_m2_pm": "25",
+      "monthly_rent": "92750",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "92750",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "92750",
+  "gross_annual_income": "1113000",
+  "annual_operating_expenses": "192000",
+  "opex_per_m2_pm": "4.312668463611859838274932615",
+  "opex_pct_of_gai": "0.1725067385444743935309973046",
+  "vacancy_allowance_amount": "0",
+  "annual_net_income": "921000",
+  "capitalised_value": "7.6750E+6",
+  "market_value": "7680000",
+  "warnings": [
+    {
+      "code": "vacancy_zero",
+      "message": "Vacancy allowance is 0% — no vacancy buffer applied.",
+      "field_path": "vacancy_allowance_pct"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-08-01",
+  "tenants_resolved": [
+    {
+      "description": "Office",
+      "rentable_area_m2": "167",
+      "effective_rent_per_m2_pm": "23",
+      "monthly_rent": "3841",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Factory and Ablusions",
+      "rentable_area_m2": "839",
+      "effective_rent_per_m2_pm": "23",
+      "monthly_rent": "19297",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "23138",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "23138",
+  "gross_annual_income": "277656",
+  "annual_operating_expenses": "38973.00",
+  "opex_per_m2_pm": "3.228379721669980119284294235",
+  "opex_pct_of_gai": "0.1403643357247817443167084450",
+  "vacancy_allowance_amount": "8329.68",
+  "annual_net_income": "230353.32",
+  "capitalised_value": "1771948.615384615384615384615",
+  "market_value": "1770000",
+  "warnings": []
+}

@@ -1,0 +1,80 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-19",
+  "tenants_resolved": [
+    {
+      "description": "Owner Occupied",
+      "rentable_area_m2": "125",
+      "effective_rent_per_m2_pm": "5200",
+      "monthly_rent": "650000",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Owner Occupied",
+      "rentable_area_m2": "100",
+      "effective_rent_per_m2_pm": "85",
+      "monthly_rent": "8500",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Owner Occupied",
+      "rentable_area_m2": "243",
+      "effective_rent_per_m2_pm": "120",
+      "monthly_rent": "29160",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Owner Occupied",
+      "rentable_area_m2": "186",
+      "effective_rent_per_m2_pm": "85",
+      "monthly_rent": "15810",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Owner Occupied",
+      "rentable_area_m2": "186",
+      "effective_rent_per_m2_pm": "85",
+      "monthly_rent": "15810",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Owner Occupied",
+      "rentable_area_m2": "133",
+      "effective_rent_per_m2_pm": "85",
+      "monthly_rent": "11305",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Owner Occupied",
+      "rentable_area_m2": "312",
+      "effective_rent_per_m2_pm": "85",
+      "monthly_rent": "26520",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Owner Occupied",
+      "rentable_area_m2": "727",
+      "effective_rent_per_m2_pm": "85",
+      "monthly_rent": "61795",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "818900",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "818900",
+  "gross_annual_income": "9826800",
+  "annual_operating_expenses": "1055063.00000000004",
+  "opex_per_m2_pm": "43.69876573889993538767395626",
+  "opex_pct_of_gai": "0.1073658769894574062767126633",
+  "vacancy_allowance_amount": "245670.000",
+  "annual_net_income": "8526066.99999999996",
+  "capitalised_value": "71050558.333333333",
+  "market_value": "71050000",
+  "warnings": [
+    {
+      "code": "rent_unusual",
+      "message": "Rent 5200 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[0].rent_per_m2_pm"
+    }
+  ]
+}

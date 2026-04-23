@@ -1,0 +1,66 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-20",
+  "tenants_resolved": [
+    {
+      "description": "Shop",
+      "rentable_area_m2": "700",
+      "effective_rent_per_m2_pm": "40",
+      "monthly_rent": "28000",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "shop",
+      "rentable_area_m2": "31",
+      "effective_rent_per_m2_pm": "100",
+      "monthly_rent": "3100",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "shop",
+      "rentable_area_m2": "27",
+      "effective_rent_per_m2_pm": "100",
+      "monthly_rent": "2700",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Offices x 2",
+      "rentable_area_m2": "45",
+      "effective_rent_per_m2_pm": "100",
+      "monthly_rent": "4500",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Shop",
+      "rentable_area_m2": "200",
+      "effective_rent_per_m2_pm": "50",
+      "monthly_rent": "10000",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Fillibg station - forecourt",
+      "rentable_area_m2": "1",
+      "effective_rent_per_m2_pm": "20000",
+      "monthly_rent": "20000",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "68300",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "68300",
+  "gross_annual_income": "819600",
+  "annual_operating_expenses": "228855.999999999984",
+  "opex_per_m2_pm": "18.99535192563080876494023904",
+  "opex_pct_of_gai": "0.2792288921425085212298682284",
+  "vacancy_allowance_amount": "32784.00",
+  "annual_net_income": "557960.000000000016",
+  "capitalised_value": "4649666.6666666668",
+  "market_value": "4650000",
+  "warnings": [
+    {
+      "code": "rent_unusual",
+      "message": "Rent 20000 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[5].rent_per_m2_pm"
+    }
+  ]
+}

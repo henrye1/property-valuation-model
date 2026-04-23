@@ -1,0 +1,40 @@
+{
+  "valuation_date": "2011-07-20",
+  "tenants": [
+    {
+      "description": "Shops and Abblusion",
+      "tenant_name": null,
+      "rentable_area_m2": "758",
+      "rent_per_m2_pm": "37",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "2 flats",
+      "tenant_name": null,
+      "rentable_area_m2": "2",
+      "rent_per_m2_pm": "2500",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "3 Garages",
+      "tenant_name": null,
+      "rentable_area_m2": "5",
+      "rent_per_m2_pm": "150",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "16804.75",
+  "vacancy_allowance_pct": "0.05",
+  "cap_rate": "0.135",
+  "rounding": "nearest_10000"
+}

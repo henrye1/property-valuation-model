@@ -1,0 +1,60 @@
+{
+  "valuation_date": "2011-08-24",
+  "tenants": [
+    {
+      "description": "Workshop and Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "511",
+      "rent_per_m2_pm": "49.48",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Motor Showroom",
+      "tenant_name": null,
+      "rentable_area_m2": "600",
+      "rent_per_m2_pm": "41.9",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Workshop",
+      "tenant_name": null,
+      "rentable_area_m2": "1165",
+      "rent_per_m2_pm": "25.95",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Offices and Workshop",
+      "tenant_name": null,
+      "rentable_area_m2": "351",
+      "rent_per_m2_pm": "55.26",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "Mez  Storage",
+      "tenant_name": null,
+      "rentable_area_m2": "180",
+      "rent_per_m2_pm": "40",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "17349.75",
+  "vacancy_allowance_pct": "0.01",
+  "cap_rate": "0.115",
+  "rounding": "nearest_10000"
+}

@@ -1,0 +1,43 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-07-06",
+  "tenants_resolved": [
+    {
+      "description": "Factory / workshop",
+      "rentable_area_m2": "4753",
+      "effective_rent_per_m2_pm": "21.6",
+      "monthly_rent": "102664.8",
+      "escalation_cycles_applied": 0
+    },
+    {
+      "description": "Undecover storage",
+      "rentable_area_m2": "320",
+      "effective_rent_per_m2_pm": "12.5",
+      "monthly_rent": "4000.0",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "106664.8",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "106664.8",
+  "gross_annual_income": "1279977.6",
+  "annual_operating_expenses": "190000.000000000008",
+  "opex_per_m2_pm": "3.121098626716604376108811354",
+  "opex_pct_of_gai": "0.1484400977017097861712579970",
+  "vacancy_allowance_amount": "25599.552",
+  "annual_net_income": "1064378.047999999992",
+  "capitalised_value": "8869817.0666666666",
+  "market_value": "8870000",
+  "warnings": [
+    {
+      "code": "escalation_missing",
+      "message": "Escalation rate is set but no next escalation date — escalation will not be applied.",
+      "field_path": "tenants[0].next_escalation_date"
+    },
+    {
+      "code": "rent_unusual",
+      "message": "Rent 12.5 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[1].rent_per_m2_pm"
+    }
+  ]
+}

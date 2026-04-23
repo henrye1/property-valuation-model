@@ -1,0 +1,30 @@
+{
+  "valuation_date": "2011-07-18",
+  "tenants": [
+    {
+      "description": "SS Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "144",
+      "rent_per_m2_pm": "85",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    },
+    {
+      "description": "SS Offices",
+      "tenant_name": null,
+      "rentable_area_m2": "143",
+      "rent_per_m2_pm": "85",
+      "annual_escalation_pct": "0",
+      "next_escalation_date": null,
+      "lease_period_text": null,
+      "lease_expiry_date": null
+    }
+  ],
+  "parking": [],
+  "monthly_operating_expenses": "4553.1775",
+  "vacancy_allowance_pct": "0.02",
+  "cap_rate": "0.11",
+  "rounding": "nearest_10000"
+}

@@ -1,0 +1,41 @@
+{
+  "engine_version": "0.1.0",
+  "valuation_date": "2011-08-01",
+  "tenants_resolved": [
+    {
+      "description": "n/a",
+      "rentable_area_m2": "3550",
+      "effective_rent_per_m2_pm": "1200",
+      "monthly_rent": "4260000",
+      "escalation_cycles_applied": 0
+    }
+  ],
+  "gross_monthly_rent_tenants": "4260000",
+  "gross_monthly_rent_parking": "0",
+  "gross_monthly_income": "4260000",
+  "gross_annual_income": "51120000",
+  "annual_operating_expenses": "0",
+  "opex_per_m2_pm": "0",
+  "opex_pct_of_gai": "0",
+  "vacancy_allowance_amount": "0",
+  "annual_net_income": "51120000",
+  "capitalised_value": "4.260000E+8",
+  "market_value": "426000000",
+  "warnings": [
+    {
+      "code": "rent_unusual",
+      "message": "Rent 1200 R/m²/pm is outside [20, 1000].",
+      "field_path": "tenants[0].rent_per_m2_pm"
+    },
+    {
+      "code": "vacancy_zero",
+      "message": "Vacancy allowance is 0% — no vacancy buffer applied.",
+      "field_path": "vacancy_allowance_pct"
+    },
+    {
+      "code": "opex_zero",
+      "message": "Operating expenses are 0 — verify this is correct.",
+      "field_path": "monthly_operating_expenses"
+    }
+  ]
+}
