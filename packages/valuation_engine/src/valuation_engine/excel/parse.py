@@ -30,6 +30,16 @@ BAY_TYPE_MAP = {
 }
 
 
+def compute_diff_pct(sheet_value: Decimal, recomputed_value: Decimal) -> Decimal | None:
+    """Returns abs(recomputed - sheet) / sheet, or None if sheet_value is 0/None."""
+    if not sheet_value:
+        return None
+    return abs(recomputed_value - sheet_value) / sheet_value
+
+
+RECOMPUTE_TOLERANCE_PCT = Decimal("0.001")
+
+
 @dataclass
 class _SheetCursor:
     ws: Worksheet

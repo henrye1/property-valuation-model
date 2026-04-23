@@ -52,3 +52,32 @@ def test_parse_sheet_market_value(four_sight):
     result = parse_workbook(four_sight)
     assert result.sheet_market_value is not None
     assert result.sheet_market_value == Decimal("1660000")
+
+
+def test_recompute_matches_sheet_within_tolerance(four_sight):
+    """Engine result must match sheet's stored market value within 0.1%."""
+    from valuation_engine import calculate
+    result = parse_workbook(four_sight)
+    assert result.inputs is not None
+    assert result.sheet_market_value is not None
+    engine_result = calculate(result.inputs)
+    diff_pct = (
+        abs(engine_result.market_value - result.sheet_market_value)
+        / result.sheet_market_value
+    )
+    assert diff_pct < Decimal("0.001"), (
+        f"Engine computed {engine_result.market_value}, sheet stored "
+        f"{result.sheet_market_value}, diff {diff_pct:.4%}"
+    )
+
+
+def test_parse_result_carries_recompute_diff():
+    """ParseResult exposes a helper that flags recompute_mismatch."""
+    from valuation_engine.excel.parse import compute_diff_pct
+    diff = compute_diff_pct(Decimal("1660000"), Decimal("1661000"))
+    assert diff is not None
+    assert diff > 0
+    assert diff < Decimal("0.001")  # 0.06%
+    diff2 = compute_diff_pct(Decimal("1660000"), Decimal("1700000"))
+    assert diff2 is not None
+    assert diff2 > Decimal("0.001")
