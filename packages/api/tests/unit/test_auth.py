@@ -67,3 +67,11 @@ def test_verify_jwt_missing_sub_rejected() -> None:
 def test_jwt_claims_is_dataclass() -> None:
     c = JWTClaims(sub="s", email="e@x.com", aud="authenticated", raw={})
     assert c.email == "e@x.com"
+
+
+def test_verify_jwt_accepts_small_clock_skew_past_expiry() -> None:
+    """A token expired ~5 seconds ago still verifies due to leeway."""
+    token = _mint(exp=int(time.time()) - 5)
+    # Within the 10-second leeway window — should succeed
+    c = verify_jwt(token, secret=SECRET)
+    assert c.sub == "11111111-1111-1111-1111-111111111111"

@@ -12,6 +12,8 @@ import jwt
 
 from api.errors import APIError
 
+_LEEWAY_SECONDS = 10  # clock-skew tolerance; not a security boundary
+
 
 @dataclass(frozen=True, slots=True)
 class JWTClaims:
@@ -32,6 +34,7 @@ def verify_jwt(token: str, *, secret: str) -> JWTClaims:
             key=secret,
             algorithms=["HS256"],
             audience="authenticated",
+            leeway=_LEEWAY_SECONDS,
             options={"require": ["sub", "exp"]},
         )
     except jwt.InvalidTokenError as exc:
