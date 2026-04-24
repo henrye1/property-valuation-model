@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: property-valuations-api
+    env: docker
+    plan: starter
+    region: frankfurt
+    dockerfilePath: ./packages/api/Dockerfile
+    dockerContext: .
+    healthCheckPath: /healthz
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_JWT_SECRET
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: LOG_LEVEL
+        value: INFO
+      - key: ENV
+        value: prod
