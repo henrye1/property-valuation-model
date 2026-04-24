@@ -18,7 +18,7 @@ def test_settings_loads_from_env(monkeypatch: pytest.MonkeyPatch) -> None:
 
     assert s.DATABASE_URL == "postgresql://u:p@h/d"
     assert s.SUPABASE_URL == "http://localhost:54321"
-    assert s.SUPABASE_JWT_SECRET == "a" * 40
+    assert s.SUPABASE_JWT_SECRET.get_secret_value() == "a" * 40
     assert s.allowed_origins_list == ["http://a.test", "http://b.test"]
     assert s.LOG_LEVEL == "DEBUG"
     assert s.ENV == "prod"
@@ -34,5 +34,17 @@ def test_settings_allowed_origins_empty_string_yields_empty_list(
 
 def test_settings_short_jwt_secret_rejected(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("SUPABASE_JWT_SECRET", "short")
+    with pytest.raises(ValueError):
+        Settings()
+
+
+def test_settings_invalid_log_level_rejected(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("LOG_LEVEL", "WARN")
+    with pytest.raises(ValueError):
+        Settings()
+
+
+def test_settings_invalid_env_rejected(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("ENV", "staging")
     with pytest.raises(ValueError):
         Settings()

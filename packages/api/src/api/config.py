@@ -4,7 +4,7 @@ from __future__ import annotations
 from functools import cached_property
 from typing import Literal
 
-from pydantic import Field, field_validator
+from pydantic import Field, SecretStr, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -17,7 +17,7 @@ class Settings(BaseSettings):
 
     DATABASE_URL: str
     SUPABASE_URL: str
-    SUPABASE_JWT_SECRET: str = Field(min_length=32)
+    SUPABASE_JWT_SECRET: SecretStr = Field(min_length=32)
     ALLOWED_ORIGINS: str = ""
     LOG_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = "INFO"
     ENV: Literal["dev", "ci", "prod"] = "dev"
