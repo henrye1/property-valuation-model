@@ -20,15 +20,14 @@ enabled = true
 site_url = "http://localhost:5173"
 additional_redirect_urls = []
 jwt_expiry = 3600
+# HS256 secret used for local dev. MUST match SUPABASE_JWT_SECRET in tests.
+# This is the Supabase CLI default — do not use in production.
+jwt_secret = "super-secret-jwt-token-with-at-least-32-characters-long"
 enable_signup = true
 
 [auth.email]
 enable_signup = true
 enable_confirmations = false
-
-# HS256 secret used for local dev. MUST match SUPABASE_JWT_SECRET in tests.
-# This is the Supabase CLI default — do not use in production.
-# Actual override done at runtime by `supabase start`.
 
 [storage]
 enabled = false
