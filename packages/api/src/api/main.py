@@ -16,6 +16,7 @@ from api.routers import calculate as calculate_router
 from api.routers import entities as entities_router
 from api.routers import health as health_router
 from api.routers import me as me_router
+from api.routers import portfolio as portfolio_router
 from api.routers import properties as properties_router
 from api.routers import snapshots as snapshots_router
 
@@ -54,6 +55,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(calculate_router.router)
     app.include_router(snapshots_router.snapshots_router)
     app.include_router(snapshots_router.properties_snapshots_router)
+    app.include_router(portfolio_router.router)
     return app
 
 
