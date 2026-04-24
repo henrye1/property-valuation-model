@@ -12,6 +12,7 @@ from api.config import Settings, get_settings
 from api.db import lifespan_pool
 from api.errors import install_exception_handlers
 from api.logging import configure_logging
+from api.routers import entities as entities_router
 from api.routers import health as health_router
 from api.routers import me as me_router
 
@@ -45,6 +46,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     app.include_router(health_router.router)
     app.include_router(me_router.router)
+    app.include_router(entities_router.router)
     return app
 
 
