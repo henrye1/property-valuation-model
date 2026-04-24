@@ -13,6 +13,9 @@ if TYPE_CHECKING:
 
 
 async def _create_pool(database_url: str) -> asyncpg.Pool:
+    # min_size=1 keeps the idle footprint low on Render + Supabase free tier
+    # (vs. asyncpg's default of 10). command_timeout covers statement execution,
+    # not connection-acquisition wait — see get_db for that gap.
     return await asyncpg.create_pool(
         dsn=database_url,
         min_size=1,
@@ -32,7 +35,12 @@ async def lifespan_pool(app: FastAPI, database_url: str) -> AsyncIterator[None]:
 
 
 async def get_db(request: Request) -> AsyncIterator[asyncpg.Connection]:
-    """FastAPI dependency: check out a connection for this request."""
+    """FastAPI dependency: check out a connection for this request.
+
+    TODO(pool-timeout): pool.acquire() blocks indefinitely when the pool is
+    exhausted. Before going to production with real concurrency, wrap with an
+    acquisition timeout and map asyncio.TimeoutError to HTTP 503 in errors.py.
+    """
     pool: asyncpg.Pool = request.app.state.pool
     async with pool.acquire() as conn:
         yield conn
