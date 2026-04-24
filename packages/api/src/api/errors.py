@@ -7,6 +7,7 @@ import logging
 from typing import Any
 
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
@@ -63,14 +64,18 @@ def install_exception_handlers(app: FastAPI) -> None:
     async def _request_validation(_request: Request, exc: RequestValidationError) -> JSONResponse:
         return JSONResponse(
             status_code=422,
-            content=_envelope("invalid_input", "Invalid input.", {"errors": exc.errors()}),
+            content=jsonable_encoder(
+                _envelope("invalid_input", "Invalid input.", {"errors": exc.errors()})
+            ),
         )
 
     @app.exception_handler(ValidationError)
     async def _pydantic_validation(_request: Request, exc: ValidationError) -> JSONResponse:
         return JSONResponse(
             status_code=422,
-            content=_envelope("invalid_input", "Invalid input.", {"errors": exc.errors()}),
+            content=jsonable_encoder(
+                _envelope("invalid_input", "Invalid input.", {"errors": exc.errors()})
+            ),
         )
 
     @app.exception_handler(ValueError)
