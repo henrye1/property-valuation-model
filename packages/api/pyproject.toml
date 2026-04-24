@@ -56,6 +56,10 @@ strict = true
 plugins = ["pydantic.mypy"]
 files = ["src/api"]
 
+[[tool.mypy.overrides]]
+module = ["asyncpg", "asyncpg.*"]
+ignore_missing_imports = true
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra --strict-markers"
