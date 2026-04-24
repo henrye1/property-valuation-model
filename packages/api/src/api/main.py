@@ -15,6 +15,7 @@ from api.logging import configure_logging
 from api.routers import entities as entities_router
 from api.routers import health as health_router
 from api.routers import me as me_router
+from api.routers import properties as properties_router
 
 
 def create_app(settings: Settings | None = None) -> FastAPI:
@@ -47,6 +48,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(health_router.router)
     app.include_router(me_router.router)
     app.include_router(entities_router.router)
+    app.include_router(properties_router.router)
     return app
 
 
