@@ -64,6 +64,10 @@ ignore_missing_imports = true
 module = ["valuation_engine", "valuation_engine.*"]
 ignore_missing_imports = true
 
+[[tool.mypy.overrides]]
+module = ["api", "api.*"]
+ignore_missing_imports = true
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra --strict-markers"
