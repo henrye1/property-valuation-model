@@ -21,7 +21,6 @@ import pytest
 import pytest_asyncio
 
 from api.config import Settings
-from api.main import create_app
 
 pytestmark = pytest.mark.integration
 
@@ -63,6 +62,9 @@ async def _truncate(pool: asyncpg.Pool) -> AsyncIterator[None]:
 
 @pytest_asyncio.fixture()
 async def app(settings: Settings) -> AsyncIterator[Any]:
+    # Delayed import: top-level import triggers module-level Settings() construction,
+    # which breaks unit test collection when env vars are absent.
+    from api.main import create_app
     application = create_app(settings=settings)
     # Trigger lifespan
     async with application.router.lifespan_context(application):
