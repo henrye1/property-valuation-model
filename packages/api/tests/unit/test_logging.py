@@ -7,7 +7,7 @@ import logging
 from api.logging import configure_logging
 
 
-def test_configure_logging_emits_json(caplog, capsys) -> None:
+def test_configure_logging_emits_json(capsys) -> None:
     configure_logging(level="INFO", env="prod")
     log = logging.getLogger("api.test")
     log.info("hello", extra={"request_id": "abc"})

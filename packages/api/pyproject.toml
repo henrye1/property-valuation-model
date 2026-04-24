@@ -18,6 +18,8 @@ dependencies = [
     "pydantic-settings>=2,<3",
     "pyjwt[crypto]>=2.8,<3",
     "httpx>=0.27,<1",
+    # v3+ changed import path to pythonjsonlogger.json.JsonFormatter; upgrade
+    # requires updating api/logging.py to match before bumping this cap.
     "python-json-logger>=2.0,<3",
     "valuation-engine>=0.1,<0.2",
 ]

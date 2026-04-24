@@ -11,6 +11,7 @@ from pythonjsonlogger import jsonlogger
 def configure_logging(*, level: str = "INFO", env: Literal["dev", "ci", "prod"] = "prod") -> None:
     root = logging.getLogger()
     for handler in list(root.handlers):
+        handler.close()
         root.removeHandler(handler)
 
     handler = logging.StreamHandler(stream=sys.stdout)
