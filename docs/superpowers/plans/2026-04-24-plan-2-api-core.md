@@ -2,6 +2,51 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
+## Status (as of 2026-04-24)
+
+**✅ COMPLETE — all 31 tasks delivered on branch `plan-2-api-core` (40 commits ahead of `main`).**
+
+- `cd packages/api && uv run pytest -m "not integration"` — 38 passed.
+- `uv run ruff check src tests` — clean.
+- `uv run mypy src` — clean (34 source files).
+- `uv run mypy tests/integration` — clean (10 files).
+- Integration tests (`@pytest.mark.integration`, 7 files) require `supabase start` from repo root; NOT run in the authoring sandbox. Verify locally before merging.
+
+### Tomorrow — resuming from here
+
+1. Optionally bring up the stack and run integration tests locally:
+   ```bash
+   supabase start                 # repo root, needs Docker
+   cd packages/api
+   export DATABASE_URL=postgresql://postgres:postgres@localhost:54322/postgres
+   export SUPABASE_URL=http://localhost:54321
+   export SUPABASE_JWT_SECRET=super-secret-jwt-token-with-at-least-32-characters-long
+   uv run pytest                  # runs both unit and integration
+   ```
+2. Review the 40-commit trail on `plan-2-api-core` (`git log --oneline main..plan-2-api-core`).
+3. Merge to `main` (regular merge or squash) and push.
+4. Optional: deploy to Render using `packages/api/Dockerfile` + `packages/api/render.yaml`, then `packages/api/scripts/smoke.sh <BASE_URL> <JWT>`.
+5. Start Plan 3 (imports + PDF/XLSX exports) via the brainstorming → writing-plans → subagent-driven flow.
+
+### Known follow-ups (flagged during review, not blocking)
+
+- `src/api/db.py` — `pool.acquire()` has no timeout; add before production traffic. TODO comment in place.
+- `src/api/errors.py` — `ValueError → 422 engine_validation_error` is a global catch; narrow to the `/calculate` call site once it's the only ValueError source.
+- Python 3.11 vs 3.12: CI workflow only targets 3.11; consider matrix if supporting 3.12.
+
+### Real bugs caught by the review loop during this plan
+
+1. Supabase CLI `jwt_secret` was unpinned — would silently desync from `.env.example` and 401 every integration test (fixed `f04b1c2`).
+2. `SUPABASE_JWT_SECRET: str` leaked in `repr()` and `model_dump()` — switched to `SecretStr` (`ceec971`).
+3. No JWT leeway → intermittent 401s under Docker/Windows clock skew — added 10s (`fddb644`).
+4. `HTTPException(500)` produced `code="error"` — added 500/429/503 to status-code map (`f1f6b3f`).
+5. `RequestValidationError` and `pydantic.ValidationError` were conflated in tests — renamed + added coverage for both.
+6. Pydantic `gt=Decimal("0")` validator context broke JSON serialization in 422 responses — wrapped with `jsonable_encoder` in `errors.py`.
+7. `tests/integration/conftest.py` imported `api.main` at module level, which forced `Settings()` construction at test-collection time — moved the import inside the `app` fixture (`08ae56c`).
+8. Plan's `_mint_token` passed `SecretStr` object to `jwt.encode` — implementer caught and unwrapped via `.get_secret_value()`.
+
+---
+
 **Goal:** Ship `packages/api/` — a FastAPI service backed by Supabase Postgres that exposes the full CRUD surface for entities, properties, valuation snapshots, portfolio summaries, audit log, and users, with HS256 JWT auth, a two-role (valuer/viewer) permission model, an audited mutation trail, unit + integration tests, GitHub Actions CI, and Render deploy artifacts.
 
 **Architecture:** `src/api/` is a FastAPI app factory pattern with narrow responsibilities per module: `schemas/` owns Pydantic request/response shapes, `queries/` owns async SQL via asyncpg (one file per table), `routers/` owns HTTP. `auth.py` is the only JWT verifier; `audit.py` is the only audit-row writer. Migrations are hand-written SQL in `supabase/migrations/`. Two test layers: fast unit tests (no DB) and `@pytest.mark.integration` tests against a live Supabase CLI local stack. No deploy is automated — Plan 2 produces Render deploy *artifacts* only.
