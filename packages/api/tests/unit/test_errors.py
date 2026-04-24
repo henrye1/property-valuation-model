@@ -38,13 +38,32 @@ def _app() -> FastAPI:
     return app
 
 
-def test_pydantic_validation_error_returns_422_envelope() -> None:
+def test_request_validation_error_returns_422_envelope() -> None:
     client = TestClient(_app(), raise_server_exceptions=False)
     r = client.post("/echo", json={"name": ""})
     assert r.status_code == 422
     body = r.json()
     assert body["error"]["code"] == "invalid_input"
     assert isinstance(body["error"]["details"]["errors"], list)
+
+
+def test_pydantic_validation_error_raised_in_route_returns_422() -> None:
+    """Route raises pydantic.ValidationError directly (not via body parsing)."""
+    from fastapi import FastAPI
+    from fastapi.testclient import TestClient
+
+    app = FastAPI()
+    install_exception_handlers(app)
+
+    @app.get("/revalidate")
+    def revalidate() -> None:
+        _Body.model_validate({"name": ""})  # raises pydantic.ValidationError
+
+    client = TestClient(app, raise_server_exceptions=False)
+    r = client.get("/revalidate")
+    assert r.status_code == 422
+    assert r.json()["error"]["code"] == "invalid_input"
+    assert isinstance(r.json()["error"]["details"]["errors"], list)
 
 
 def test_api_error_propagates_code_and_details() -> None:

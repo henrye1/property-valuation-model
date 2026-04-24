@@ -45,6 +45,9 @@ _STATUS_CODE_MAP: dict[int, tuple[str, str]] = {
     409: ("conflict", "Conflict."),
     410: ("gone", "Gone."),
     422: ("invalid_input", "Invalid input."),
+    429: ("rate_limited", "Too many requests."),
+    500: ("internal_error", "Internal server error."),
+    503: ("service_unavailable", "Service unavailable."),
 }
 
 
@@ -73,6 +76,9 @@ def install_exception_handlers(app: FastAPI) -> None:
     @app.exception_handler(ValueError)
     async def _value_error(_request: Request, exc: ValueError) -> JSONResponse:
         # Engine ValueErrors surface as 422.
+        # TODO: narrow this to the /calculate call site once that router ships
+        # (Task 25) — catching bare ValueError globally risks masking non-engine
+        # bugs with a misleading "engine_validation_error" code.
         return JSONResponse(
             status_code=422,
             content=_envelope("engine_validation_error", str(exc), {}),
@@ -80,7 +86,9 @@ def install_exception_handlers(app: FastAPI) -> None:
 
     @app.exception_handler(StarletteHTTPException)
     async def _http_exception(_request: Request, exc: StarletteHTTPException) -> JSONResponse:
-        code, default_msg = _STATUS_CODE_MAP.get(exc.status_code, ("error", "Error."))
+        code, default_msg = _STATUS_CODE_MAP.get(
+            exc.status_code, ("unexpected_error", "Unexpected error.")
+        )
         message = exc.detail if isinstance(exc.detail, str) else default_msg
         details: dict[str, Any] = {}
         if isinstance(exc.detail, dict):
@@ -96,6 +104,10 @@ def install_exception_handlers(app: FastAPI) -> None:
             content=_envelope(code, message, details),
         )
 
+    # FastAPI's HTTPException is a subclass of Starlette's. Both keys must
+    # be registered: Starlette internals raise the base type; FastAPI routers
+    # raise the subtype. The MRO lookup hits the subtype handler first and
+    # delegates to the Starlette-typed handler.
     @app.exception_handler(HTTPException)
     async def _fastapi_http_exception(request: Request, exc: HTTPException) -> JSONResponse:
         return await _http_exception(request, exc)
