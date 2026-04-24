@@ -12,6 +12,7 @@ from api.config import Settings, get_settings
 from api.db import lifespan_pool
 from api.errors import install_exception_handlers
 from api.logging import configure_logging
+from api.routers import audit as audit_router
 from api.routers import calculate as calculate_router
 from api.routers import entities as entities_router
 from api.routers import health as health_router
@@ -19,6 +20,7 @@ from api.routers import me as me_router
 from api.routers import portfolio as portfolio_router
 from api.routers import properties as properties_router
 from api.routers import snapshots as snapshots_router
+from api.routers import users as users_router
 
 
 def create_app(settings: Settings | None = None) -> FastAPI:
@@ -56,6 +58,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(snapshots_router.snapshots_router)
     app.include_router(snapshots_router.properties_snapshots_router)
     app.include_router(portfolio_router.router)
+    app.include_router(users_router.router)
+    app.include_router(audit_router.router)
     return app
 
 
