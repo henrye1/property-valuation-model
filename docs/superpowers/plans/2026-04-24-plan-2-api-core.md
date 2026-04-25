@@ -4,7 +4,7 @@
 
 ## Status (as of 2026-04-25)
 
-**✅ COMPLETE + LIVE-VERIFIED — all 31 tasks delivered + 4 post-plan fixes/features on branch `plan-2-api-core` (47 commits ahead of `main`).**
+**✅ COMPLETE + LIVE-VERIFIED — all 31 tasks delivered + 4 post-plan fixes/features on branch `plan-2-api-core` (46 commits ahead of `main`).**
 
 The branch was stood up against a real hosted Supabase project (`lftvhwprprlgclhbxjqf`, region `af-south-1`) and exercised end-to-end via Swagger UI. Two real bugs and two usability features landed during the live-test session — see the **Post-plan-completion log** below.
 

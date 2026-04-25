@@ -21,7 +21,7 @@ Income-capitalisation property valuation engine + web application.
 | Plan | Scope | Status |
 |---|---|---|
 | 1 | `valuation_engine` package + golden + excel parse/render | ✅ Merged to `main` |
-| 2 | API core: auth, entities, properties, snapshots, `/calculate`, portfolio, users, audit, tests, CI, Render artifacts | ✅ Complete + live-verified on branch `plan-2-api-core` (47 commits, awaiting merge). End-to-end test against hosted Supabase passed; see [`plan-2 file`](docs/superpowers/plans/2026-04-24-plan-2-api-core.md) "Post-plan-completion log" for the 4 follow-up commits. |
+| 2 | API core: auth, entities, properties, snapshots, `/calculate`, portfolio, users, audit, tests, CI, Render artifacts | ✅ Complete + live-verified on branch `plan-2-api-core` (46 commits, awaiting merge). End-to-end test against hosted Supabase passed; see [`plan-2 file`](docs/superpowers/plans/2026-04-24-plan-2-api-core.md) "Post-plan-completion log" for the 4 follow-up commits. |
 | 3 | Import batches (xlsx upload/review/commit) + PDF export + XLSX export endpoints | ⏳ Not started |
 | 4 | React web UI | ⏳ Not started |
 
