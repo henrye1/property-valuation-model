@@ -21,12 +21,13 @@ def test_datetime_isoformatted() -> None:
     assert out.startswith("2026-01-02T03:04:05")
 
 
-def test_uuid_isoformatted() -> None:
+def test_uuid_stringified() -> None:
     u = uuid4()
-    # UUID has .isoformat? No — hasattr isoformat is False for UUID.
-    # Our default raises TypeError on non-supported; ensure str(uuid) path via json.dumps.
-    # We accept a TypeError here — json.dumps UUIDs via `default=str` in callers.
+    assert _json_default(u) == str(u)
+
+
+def test_unsupported_type_raises_type_error() -> None:
     import pytest
 
     with pytest.raises(TypeError):
-        _json_default(u)
+        _json_default(object())

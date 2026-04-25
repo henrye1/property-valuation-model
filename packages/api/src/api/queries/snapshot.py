@@ -96,6 +96,8 @@ async def insert_snapshot(
 def _json_default(value: Any) -> Any:
     if isinstance(value, Decimal):
         return str(value)
+    if isinstance(value, UUID):
+        return str(value)
     if hasattr(value, "isoformat"):
         return value.isoformat()
     raise TypeError(f"Not JSON-serializable: {type(value).__name__}")
