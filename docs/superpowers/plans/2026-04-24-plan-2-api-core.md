@@ -2,9 +2,11 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-## Status (as of 2026-04-24)
+## Status (as of 2026-04-25)
 
-**✅ COMPLETE — all 31 tasks delivered on branch `plan-2-api-core` (40 commits ahead of `main`).**
+**✅ COMPLETE + LIVE-VERIFIED — all 31 tasks delivered + 4 post-plan fixes/features on branch `plan-2-api-core` (47 commits ahead of `main`).**
+
+The branch was stood up against a real hosted Supabase project (`lftvhwprprlgclhbxjqf`, region `af-south-1`) and exercised end-to-end via Swagger UI. Two real bugs and two usability features landed during the live-test session — see the **Post-plan-completion log** below.
 
 - `cd packages/api && uv run pytest -m "not integration"` — 38 passed.
 - `uv run ruff check src tests` — clean.
@@ -33,6 +35,30 @@
 - `src/api/db.py` — `pool.acquire()` has no timeout; add before production traffic. TODO comment in place.
 - `src/api/errors.py` — `ValueError → 422 engine_validation_error` is a global catch; narrow to the `/calculate` call site once it's the only ValueError source.
 - Python 3.11 vs 3.12: CI workflow only targets 3.11; consider matrix if supporting 3.12.
+
+### Post-plan-completion log (live-test session, 2026-04-25)
+
+After the plan was marked complete, the API was stood up against a hosted Supabase project. Live testing produced 4 additional commits.
+
+**Real bugs found during live testing**:
+
+1. `4cb8ca2` `_json_default` did not handle `UUID`. Audit-row serialisation crashed on every successful entity/property mutation. The unit test `test_uuid_isoformatted` had been *documenting* the gap (asserting `TypeError`); rewritten to assert `_json_default(uuid) == str(uuid)`.
+2. `ae58afa` asyncpg returns `jsonb` columns as JSON-encoded `str` by default. The `/audit` endpoint blew up validating `before_json` / `after_json` because the Pydantic model expected `dict[str, Any]`. Registered a pool-level codec via `init=_init_connection` (in `db.py`) so jsonb / json columns return as Python dicts everywhere. The defensive `json.loads` fallback in `routers/snapshots.py::_row_to_schema` is now redundant but kept as a belt-and-braces guard.
+
+**Usability features added during live testing**:
+
+3. `e5d253d` `GET /` redirects to `/docs` (307). Hitting the bare URL in a browser now lands on Swagger UI instead of a `not_found` envelope.
+4. `41b00d1` `bearerAuth` security scheme injected into the OpenAPI document via a custom `app.openapi` override. Swagger UI now renders the green "Authorize" button so a JWT can be pasted once and auto-attached to every "Try it out" call. `/` and `/healthz` declared explicitly public to keep the lock icons accurate.
+
+**Operational notes from live setup (these tripped me up — flag for tomorrow)**:
+
+- The hosted Supabase project (`lftvhwprprlgclhbxjqf`) uses the modern **JWT Signing Keys** + **Dedicated Pooler** stack. Two pitfalls:
+  - The dedicated pooler is **IPv6-only by default**. Most home networks are IPv4-only — DNS appears to NXDOMAIN until you click **"Enable IPv4 add-on"** in Project Settings → Database → Connection pooling (paid).
+  - The legacy `db.<ref>.supabase.co` host only resolves *after* the IPv4 add-on is enabled. We used that direct host successfully; the URL is `postgresql://postgres:<encoded-password>@db.lftvhwprprlgclhbxjqf.supabase.co:5432/postgres` (port 5432, asyncpg-compatible).
+  - Password contains `@` → URL-encode as `%40`.
+- Both auth modes work:
+  - HS256 with the legacy JWT secret → set `SUPABASE_JWT_SECRET` in `.env`. Fast, tested by 39 unit tests.
+  - JWKS (RS256/ES256) via `https://<SUPABASE_URL>/auth/v1/.well-known/jwks.json` → leave `SUPABASE_JWT_SECRET` unset; `verify_jwt` automatically uses the `PyJWKClient` initialised in lifespan. Live test ran on HS256; JWKS path was implemented but not exercised end-to-end.
 
 ### Real bugs caught by the review loop during this plan
 
