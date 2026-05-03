@@ -40,6 +40,9 @@ class Settings(BaseSettings):
     # TTL for signed URLs minted by services/storage.py for original-workbook downloads.
     STORAGE_SIGNED_URL_TTL_S: int = 300
 
+    # Per-file upload cap for POST /imports. Files exceeding this raise 413.
+    IMPORT_MAX_FILE_BYTES: int = 10 * 1024 * 1024   # 10 MB
+
     # Branding values consumed by services/branding.py at app startup and embedded
     # in PDF reports. Address/contact lines are pipe-separated to keep render.yaml simple.
     # Missing logo file gracefully degrades to firm-name-only header (see services/branding.py).

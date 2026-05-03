@@ -23,6 +23,8 @@ dependencies = [
     "python-json-logger>=2.0,<3",
     "valuation-engine>=0.1,<0.2",
     "supabase>=2.4",
+    # Required by FastAPI to parse multipart/form-data bodies (POST /imports).
+    "python-multipart>=0.0.9",
 ]
 
 [project.optional-dependencies]
@@ -33,6 +35,8 @@ dev = [
     "ruff>=0.5",
     "mypy>=1.10",
     "types-pyjwt",
+    # Used by integration tests to craft minimal valid .xlsx bytes for /imports.
+    "openpyxl>=3.1",
 ]
 
 [tool.uv.sources]

@@ -19,11 +19,13 @@ from api.routers import audit as audit_router
 from api.routers import calculate as calculate_router
 from api.routers import entities as entities_router
 from api.routers import health as health_router
+from api.routers import imports as imports_router
 from api.routers import me as me_router
 from api.routers import portfolio as portfolio_router
 from api.routers import properties as properties_router
 from api.routers import snapshots as snapshots_router
 from api.routers import users as users_router
+from api.services import storage as storage_module
 
 # Routes that should NOT show the lock icon in Swagger UI (no auth required).
 _PUBLIC_PATHS: frozenset[str] = frozenset({"/", "/healthz"})
@@ -67,6 +69,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         # get_db) can read tunables like DB_ACQUIRE_TIMEOUT_S without re-reading
         # env or going through the dependency-injection plumbing.
         app.state.settings = settings
+        # Initialise the Supabase Storage client (single shared instance).
+        # Used by /imports* endpoints and parse_worker / commit_worker.
+        app.state.storage = storage_module.build_client(settings)
         # Initialise the JWKS client when no static HS256 secret is configured.
         # PyJWKClient.__init__ is non-blocking — the actual JWKS document is
         # fetched lazily on the first verify_jwt() call and cached for 1h.
@@ -107,6 +112,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(portfolio_router.router)
     app.include_router(users_router.router)
     app.include_router(audit_router.router)
+    app.include_router(imports_router.router)
     return app
 
 

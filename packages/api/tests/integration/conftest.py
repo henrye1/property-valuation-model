@@ -30,6 +30,7 @@ def _int_settings() -> Settings:
         DATABASE_URL=os.environ["DATABASE_URL"],
         SUPABASE_URL=os.environ["SUPABASE_URL"],
         SUPABASE_JWT_SECRET=os.environ["SUPABASE_JWT_SECRET"],
+        SUPABASE_SERVICE_ROLE_KEY=os.environ["SUPABASE_SERVICE_ROLE_KEY"],
         ALLOWED_ORIGINS="",
         LOG_LEVEL="WARNING",
         ENV="ci",
@@ -53,9 +54,13 @@ async def pool(settings: Settings) -> AsyncIterator[asyncpg.Pool]:
 @pytest_asyncio.fixture(autouse=True)
 async def _truncate(pool: asyncpg.Pool) -> AsyncIterator[None]:
     async with pool.acquire() as conn:
+        # Plan-3 tables (import_item, import_batch) FK to property/snapshot/app_user,
+        # so they must precede the Plan-2 tables in the cascade list. Cascade itself
+        # would handle it either way, but explicit ordering documents the intent.
         await conn.execute(
-            "truncate public.audit_log, public.valuation_snapshot, "
-            "public.property, public.entity, public.app_user cascade"
+            "truncate public.audit_log, public.import_item, public.import_batch, "
+            "public.valuation_snapshot, public.property, public.entity, "
+            "public.app_user cascade"
         )
     yield
 
@@ -124,3 +129,39 @@ async def valuer(make_user: Any) -> tuple[UUID, dict[str, str]]:
 @pytest_asyncio.fixture()
 async def viewer(make_user: Any) -> tuple[UUID, dict[str, str]]:
     return await make_user("viewer@example.com", "viewer")  # type: ignore[no-any-return]
+
+
+# ── Plan-3 convenience aliases ──────────────────────────────────────────────
+# Plan-3 task code uses the names valuer_client / viewer_client / valuer_user /
+# db_pool. These wrap the existing client / valuer / viewer / pool fixtures so
+# the plan-3 tests can stay verbatim from the spec.
+@pytest_asyncio.fixture()
+async def valuer_client(
+    client: httpx.AsyncClient, valuer: tuple[UUID, dict[str, str]]
+) -> httpx.AsyncClient:
+    """httpx.AsyncClient with the valuer Authorization header set."""
+    client.headers.update(valuer[1])
+    return client
+
+
+@pytest_asyncio.fixture()
+async def viewer_client(
+    client: httpx.AsyncClient, viewer: tuple[UUID, dict[str, str]]
+) -> httpx.AsyncClient:
+    """httpx.AsyncClient with the viewer Authorization header set."""
+    client.headers.update(viewer[1])
+    return client
+
+
+@pytest_asyncio.fixture()
+async def valuer_user(valuer: tuple[UUID, dict[str, str]]) -> Any:
+    """Convenience wrapper around `valuer` exposing .id / .email attributes."""
+    from types import SimpleNamespace
+    uid, _ = valuer
+    return SimpleNamespace(id=uid, email="valuer@example.com")
+
+
+@pytest_asyncio.fixture()
+async def db_pool(pool: asyncpg.Pool) -> asyncpg.Pool:
+    """Alias for plan-3 tests that expect this name."""
+    return pool
