@@ -68,10 +68,16 @@ jobs:
       - uses: astral-sh/setup-uv@v3
         with:
           enable-cache: true
+      - name: Install WeasyPrint system deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libpango-1.0-0 libpangoft2-1.0-0 libharfbuzz0b \
+            libcairo2 libgdk-pixbuf-2.0-0 fonts-liberation
       - name: Sync deps
         run: uv sync --all-extras
-      - name: Integration tests
-        run: uv run pytest -m integration -v
+      - name: Integration + pdf tests
+        run: uv run pytest -m "integration or pdf" -v
       - name: Supabase stop
         if: always()
         working-directory: .
