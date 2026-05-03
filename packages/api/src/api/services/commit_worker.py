@@ -5,6 +5,7 @@ resolved_snapshot_id IS NOT NULL are counted as 'skipped' and not re-processed.
 """
 from __future__ import annotations
 
+import json as _json
 import logging
 from dataclasses import dataclass, field
 from typing import Any
@@ -58,6 +59,10 @@ async def _commit_one(
     actor: AppUser,
 ) -> None:
     inputs = item["resolved_inputs_json"] or item["parsed_inputs_json"]
+    # Defensive: asyncpg's jsonb codec returns table-sourced jsonb columns as
+    # strings in 0.31. Same pattern as routers/imports._decode_jsonb.
+    if isinstance(inputs, str):
+        inputs = _json.loads(inputs)
     if not inputs:
         raise CommitFailure(item["id"], item["filename"],
                             "no_inputs", "No inputs to commit.")

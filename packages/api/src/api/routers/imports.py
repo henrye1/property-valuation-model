@@ -31,6 +31,12 @@ from api.queries import import_batch as q_batch
 from api.queries import import_item as q_item
 from api.queries import property as q_property
 from api.schemas.imports import (
+    CommitFailure as CommitFailureSchema,
+)
+from api.schemas.imports import (
+    CommitSummary as CommitSummarySchema,
+)
+from api.schemas.imports import (
     ImportBatch,
     ImportBatchCounts,
     ImportBatchList,
@@ -42,7 +48,7 @@ from api.schemas.imports import (
     ImportItemWarning,
 )
 from api.schemas.user import AppUser
-from api.services import parse_worker
+from api.services import commit_worker, parse_worker
 from api.services.engine_call import run_engine
 from api.services.storage import safe_filename
 
@@ -391,3 +397,37 @@ async def cancel_import(
         after={"status": "cancelled"},
     )
     return _BatchStatusResponse(id=batch_id, status="cancelled")
+
+
+@router.post("/{batch_id}/commit", response_model=CommitSummarySchema)
+async def commit_import(
+    batch_id: UUID,
+    request: Request,
+    user: Annotated[AppUser, Depends(require_valuer)],
+    conn: Annotated[asyncpg.Connection, Depends(get_db)],
+) -> CommitSummarySchema:
+    batch = await q_batch.get_by_id(conn, batch_id)
+    if batch is None:
+        raise APIError(status_code=404, code="not_found",
+                       message="Import batch not found.")
+    if batch["status"] != "review":
+        raise APIError(status_code=409, code="batch_not_in_review",
+                       message=f"Batch status is {batch['status']!r}; "
+                               f"commit requires 'review'.")
+
+    pool: asyncpg.Pool = request.app.state.pool
+    storage = request.app.state.storage
+    summary = await commit_worker.commit_batch(
+        pool, batch_id, user, storage=storage,
+    )
+
+    return CommitSummarySchema(
+        batch_id=summary.batch_id,
+        summary={"committed": summary.committed,
+                 "failed": summary.failed,
+                 "skipped": summary.skipped},
+        failures=[CommitFailureSchema(item_id=f.item_id, filename=f.filename,
+                                      reason=f.reason, message=f.message)
+                  for f in summary.failures],
+        batch_status=summary.batch_status,
+    )
