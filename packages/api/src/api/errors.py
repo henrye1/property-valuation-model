@@ -79,17 +79,6 @@ def install_exception_handlers(app: FastAPI) -> None:
             ),
         )
 
-    @app.exception_handler(ValueError)
-    async def _value_error(_request: Request, exc: ValueError) -> JSONResponse:
-        # Engine ValueErrors surface as 422.
-        # TODO: narrow this to the /calculate call site once that router ships
-        # (Task 25) — catching bare ValueError globally risks masking non-engine
-        # bugs with a misleading "engine_validation_error" code.
-        return JSONResponse(
-            status_code=422,
-            content=_envelope("engine_validation_error", str(exc), {}),
-        )
-
     @app.exception_handler(StarletteHTTPException)
     async def _http_exception(_request: Request, exc: StarletteHTTPException) -> JSONResponse:
         code, default_msg = _STATUS_CODE_MAP.get(

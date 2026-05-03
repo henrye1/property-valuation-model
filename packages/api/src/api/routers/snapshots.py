@@ -70,7 +70,14 @@ async def create_snapshot(
     if prop is None:
         raise APIError(status_code=404, code="not_found", message="Property not found.")
 
-    result = calculate(body)
+    try:
+        result = calculate(body)
+    except ValueError as exc:
+        raise APIError(
+            status_code=422,
+            code="engine_validation_error",
+            message=str(exc),
+        ) from exc
     inputs_json = body.model_dump(mode="json")
     result_json = result.model_dump(mode="json")
 

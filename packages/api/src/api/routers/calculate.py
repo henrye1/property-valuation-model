@@ -9,6 +9,7 @@ from typing import Annotated, Any
 from fastapi import APIRouter, Depends
 
 from api.auth import require_valuer
+from api.errors import APIError
 from api.schemas.user import AppUser
 
 try:
@@ -26,6 +27,13 @@ async def preview_calculate(
     body: ValuationInput,
     _user: Annotated[AppUser, Depends(require_valuer)],
 ) -> dict[str, Any]:
-    result = calculate(body)
+    try:
+        result = calculate(body)
+    except ValueError as exc:
+        raise APIError(
+            status_code=422,
+            code="engine_validation_error",
+            message=str(exc),
+        ) from exc
     dumped: dict[str, Any] = result.model_dump(mode="json")
     return dumped
