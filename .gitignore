@@ -31,3 +31,18 @@ Thumbs.db
 # Local Excel scratch
 *.xlsx~
 ~$*.xlsx
+
+# API
+packages/api/.venv/
+packages/api/dist/
+packages/api/build/
+packages/api/*.egg-info/
+packages/api/.env
+packages/api/.ruff_cache/
+packages/api/.mypy_cache/
+packages/api/.pytest_cache/
+
+# Supabase CLI
+supabase/.branches/
+supabase/.temp/
+supabase/.env
