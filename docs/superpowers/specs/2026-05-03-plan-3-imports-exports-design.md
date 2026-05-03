@@ -86,13 +86,14 @@ packages/api/src/api/
 └── (everything else unchanged)
 
 supabase/migrations/
-├── 20260503000001_carryovers.sql        # NEW (no schema change; placeholder for any DDL the carry-overs need)
-├── 20260503000002_pg_trgm.sql           # NEW — CREATE EXTENSION + GIN index on property.name
-├── 20260503000003_import_batch.sql      # NEW
-├── 20260503000004_import_item.sql       # NEW
-├── 20260503000005_imports_rls.sql       # NEW
-└── 20260503000006_storage_bucket.sql    # NEW — private bucket + retention rules
+├── 20260503000001_pg_trgm.sql           # NEW — CREATE EXTENSION + GIN index on property.name
+├── 20260503000002_import_batch.sql      # NEW
+├── 20260503000003_import_item.sql       # NEW
+├── 20260503000004_imports_rls.sql       # NEW
+└── 20260503000005_storage_bucket.sql    # NEW — private bucket + retention rules
 ```
+
+The Plan 2 carry-overs (§11.5) are pure code changes with no DDL, so no migration is dedicated to them.
 
 ### 5.1 Module boundaries (the contract)
 
@@ -288,7 +289,7 @@ Same `audit()` helper from Plan 2; same envelope.
 |---|---|---|
 | `import_batch.create` | `import_batch.id` | `{file_count, filenames}` |
 | `import_batch.cancel` | `import_batch.id` | `{}` |
-| `import_item.update` | `import_item.id` | full new row state |
+| `import_item.update` | `import_item.id` | `before_json` / `after_json` of the changed columns only (resolution + resolved fields) |
 | `import_batch.commit` | `import_batch.id` | `{committed, failed, skipped, batch_status}` |
 | `valuation_snapshot.create` | `valuation_snapshot.id` | `{property_id, valuation_date, market_value, source: 'excel_import', source_file, import_item_id}` |
 
@@ -824,7 +825,7 @@ A batch reaches `committed` when **every** `import_item` row is in `committed` O
 
 ### 10.1 XLSX endpoint
 
-One screen of code:
+One screen of code. Note: uses `snapshot_q.get_with_property` — a **new** query helper added in this plan that joins `valuation_snapshot → property → entity` so the response carries entity name + property name + property address for the filename. Plan 2's `snapshot_q.get` returns only the snapshot row; the new helper does not replace it but coexists.
 
 ```python
 @router.get("/snapshots/{snapshot_id}/export.xlsx")
@@ -833,7 +834,7 @@ async def get_snapshot_xlsx(
     request: Request,
     user: AppUser = Depends(current_user),
 ) -> Response:
-    snapshot = await snapshot_q.get(request.app.state.pool, snapshot_id)
+    snapshot = await snapshot_q.get_with_property(request.app.state.pool, snapshot_id)
     if not snapshot:
         raise NotFound("snapshot")
 
@@ -952,7 +953,7 @@ async def get_snapshot_pdf(
     request: Request,
     user: AppUser = Depends(current_user),
 ) -> Response:
-    snapshot = await snapshot_q.get(request.app.state.pool, snapshot_id)
+    snapshot = await snapshot_q.get_with_property(request.app.state.pool, snapshot_id)
     if not snapshot:
         raise NotFound("snapshot")
 
@@ -1066,7 +1067,7 @@ Copied into the Render filesystem via the existing `pip install -e .` path.
 
 ### 11.5 Carry-overs from Plan 2 (folded in per Q2.1)
 
-These land as the **first three commits** on the branch, before any Plan 3 work, so the diff stays reviewable:
+The implementation plan will land these as the **first three commits** on the branch, before any Plan 3 work, so the diff stays reviewable:
 
 1. **`packages/api/src/api/db.py`** — add `acquisition_timeout=10` to every `pool.acquire()` call site (3 sites). Test: a unit test that mocks `asyncpg.Pool.acquire` and asserts the timeout kwarg.
 2. **`packages/api/src/api/errors.py`** — narrow the global `ValueError → 422` handler so it only fires inside scoped engine wrappers (`/calculate` and the new commit/parse paths). Implementation: replace global handler with a router-level dependency wrapping engine calls; remove the global. Update `tests/unit/test_errors.py`.
