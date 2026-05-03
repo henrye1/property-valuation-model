@@ -6,9 +6,15 @@ import pytest
 from api.config import Settings
 
 
-def test_settings_loads_from_env(monkeypatch: pytest.MonkeyPatch) -> None:
+def _set_required_env(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Minimum env vars required to construct Settings()."""
     monkeypatch.setenv("DATABASE_URL", "postgresql://u:p@h/d")
     monkeypatch.setenv("SUPABASE_URL", "http://localhost:54321")
+    monkeypatch.setenv("SUPABASE_SERVICE_ROLE_KEY", "service-role-key-test-value")
+
+
+def test_settings_loads_from_env(monkeypatch: pytest.MonkeyPatch) -> None:
+    _set_required_env(monkeypatch)
     monkeypatch.setenv("SUPABASE_JWT_SECRET", "a" * 40)
     monkeypatch.setenv("ALLOWED_ORIGINS", "http://a.test,http://b.test")
     monkeypatch.setenv("LOG_LEVEL", "DEBUG")
@@ -19,6 +25,7 @@ def test_settings_loads_from_env(monkeypatch: pytest.MonkeyPatch) -> None:
     assert s.DATABASE_URL == "postgresql://u:p@h/d"
     assert s.SUPABASE_URL == "http://localhost:54321"
     assert s.SUPABASE_JWT_SECRET.get_secret_value() == "a" * 40
+    assert s.SUPABASE_SERVICE_ROLE_KEY.get_secret_value() == "service-role-key-test-value"
     assert s.allowed_origins_list == ["http://a.test", "http://b.test"]
     assert s.LOG_LEVEL == "DEBUG"
     assert s.ENV == "prod"
@@ -27,6 +34,7 @@ def test_settings_loads_from_env(monkeypatch: pytest.MonkeyPatch) -> None:
 def test_settings_allowed_origins_empty_string_yields_empty_list(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    _set_required_env(monkeypatch)
     monkeypatch.setenv("ALLOWED_ORIGINS", "")
     s = Settings()
     assert s.allowed_origins_list == []

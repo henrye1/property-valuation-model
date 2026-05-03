@@ -25,6 +25,10 @@ class Settings(BaseSettings):
     #     {SUPABASE_URL}/auth/v1/.well-known/jwks.json.
     SUPABASE_JWT_SECRET: SecretStr | None = None
 
+    # Service-role key. Required for the Supabase Storage SDK in services/storage.py
+    # (uploads, signed URLs, deletes for the 'imports' bucket). Bypasses RLS.
+    SUPABASE_SERVICE_ROLE_KEY: SecretStr
+
     ALLOWED_ORIGINS: str = ""
     LOG_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = "INFO"
     ENV: Literal["dev", "ci", "prod"] = "dev"
