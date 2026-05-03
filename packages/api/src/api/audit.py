@@ -15,8 +15,11 @@ async def audit(
     *,
     actor_id: UUID,
     actor_email: str | None,
-    action: Literal["create", "update", "soft_delete"],
-    target_table: Literal["entity", "property", "valuation_snapshot", "app_user"],
+    action: Literal["create", "update", "soft_delete", "cancel", "commit"],
+    target_table: Literal[
+        "entity", "property", "valuation_snapshot", "app_user",
+        "import_batch", "import_item",
+    ],
     target_id: UUID,
     before: dict[str, Any] | None,
     after: dict[str, Any] | None,

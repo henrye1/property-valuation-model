@@ -114,16 +114,11 @@ async def _commit_one(
             conn, item["id"], snapshot_id=snap["id"], actor_id=actor.id,
         )
 
-        # NOTE: target_table="import_item" is not yet in the audit_target_table
-        # enum (Plan 2 only enumerated entity/property/valuation_snapshot/app_user).
-        # Plan 3 spec calls for this audit row; the enum extension is tracked
-        # separately. mypy ignore on the arg because api.audit.audit's Literal
-        # annotation restricts to the Plan 2 set.
         await audit(
             conn,
             actor_id=actor.id, actor_email=actor.email,
             action="update",
-            target_table="import_item",  # type: ignore[arg-type]
+            target_table="import_item",
             target_id=item["id"],
             before={"resolution": item["resolution"], "resolved_snapshot_id": None},
             after={"resolution": "committed",
@@ -167,15 +162,11 @@ async def commit_batch(
                 storage.delete_prefix(batch_id)
             summary.batch_status = "committed"
 
-        # NOTE: action="commit" + target_table="import_batch" are not yet in the
-        # audit_action / audit_target_table enums. Same provisional notes as the
-        # import_item audit above; mypy ignores match the action AND
-        # target_table mismatches.
         await audit(
             conn,
             actor_id=actor.id, actor_email=actor.email,
-            action="commit",  # type: ignore[arg-type]
-            target_table="import_batch",  # type: ignore[arg-type]
+            action="commit",
+            target_table="import_batch",
             target_id=batch_id,
             before=None,
             after={"committed": summary.committed,
