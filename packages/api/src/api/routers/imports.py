@@ -5,8 +5,9 @@ and services. No SQL, no Storage SDK, no parsing logic.
 """
 from __future__ import annotations
 
+import json
 from collections import defaultdict
-from typing import Annotated
+from typing import Annotated, Any
 from uuid import UUID
 
 import asyncpg
@@ -15,16 +16,28 @@ from fastapi import (
     BackgroundTasks,
     Depends,
     File,
+    Query,
     Request,
     UploadFile,
 )
 
-from api.auth import require_valuer
+from api.auth import current_user, require_valuer
 from api.db import get_db
 from api.errors import APIError
+from api.queries import entity as q_entity
 from api.queries import import_batch as q_batch
 from api.queries import import_item as q_item
-from api.schemas.imports import ImportCreated
+from api.queries import property as q_property
+from api.schemas.imports import (
+    ImportBatch,
+    ImportBatchCounts,
+    ImportBatchList,
+    ImportBatchListItem,
+    ImportCreated,
+    ImportItem,
+    ImportItemSuggestion,
+    ImportItemWarning,
+)
 from api.schemas.user import AppUser
 from api.services import parse_worker
 from api.services.storage import safe_filename
@@ -102,4 +115,146 @@ async def create_import(
         batch_id=batch_id,
         file_count=len(payloads),
         status="parsing",
+    )
+
+
+def _decode_jsonb(d: dict[str, Any], *fields: str) -> None:
+    """Defensive: asyncpg's jsonb codec doesn't decode table-sourced columns
+    in 0.31. Same pattern as routers/snapshots._row_to_schema and
+    routers/audit._row_to_entry."""
+    for k in fields:
+        v = d.get(k)
+        if isinstance(v, str):
+            d[k] = json.loads(v)
+
+
+def _row_to_warning_list(
+    json_field: list[dict[str, Any]] | None | str,
+) -> list[ImportItemWarning]:
+    """Accept jsonb-as-list, jsonb-as-str (asyncpg 0.31 quirk), or None."""
+    decoded: list[dict[str, Any]] | None = (
+        json.loads(json_field) if isinstance(json_field, str) else json_field
+    )
+    return [ImportItemWarning(**w) for w in (decoded or [])]
+
+
+async def _row_to_item(
+    conn: asyncpg.Connection, row: asyncpg.Record,
+) -> ImportItem:
+    suggestion: ImportItemSuggestion | None = None
+    if row["suggested_property_id"] is not None:
+        prop = await q_property.get_property(
+            conn, row["suggested_property_id"], include_deleted=True,
+        )
+        if prop is not None:
+            ent = await q_entity.get_entity(
+                conn, prop["entity_id"], include_deleted=True,
+            )
+            suggestion = ImportItemSuggestion(
+                property_id=prop["id"],
+                property_name=prop["name"],
+                entity_id=prop["entity_id"],
+                entity_name=ent["name"] if ent else "",
+                score=row["suggested_score"] or 0,
+                auto_linked=bool(row["auto_linked"]),
+            )
+    # Defensive jsonb decode for the fields we forward to ImportItem.
+    d: dict[str, Any] = {
+        "parsed_inputs_json": row["parsed_inputs_json"],
+        "computed_result_json": row["computed_result_json"],
+        "resolved_inputs_json": row["resolved_inputs_json"],
+    }
+    _decode_jsonb(
+        d,
+        "parsed_inputs_json",
+        "computed_result_json",
+        "resolved_inputs_json",
+    )
+    return ImportItem(
+        id=row["id"],
+        filename=row["filename"],
+        parse_status=row["parse_status"],
+        building_name=row["building_name"],
+        spreadsheet_market_value=row["spreadsheet_market_value"],
+        recomputed_market_value=row["recomputed_market_value"],
+        diff_pct=row["diff_pct"],
+        warnings=_row_to_warning_list(row["warnings_json"]),
+        errors=_row_to_warning_list(row["errors_json"]),
+        suggestion=suggestion,
+        resolution=row["resolution"],
+        resolved_property_id=row["resolved_property_id"],
+        parsed_inputs=d["parsed_inputs_json"],
+        computed_result=d["computed_result_json"],
+        resolved_inputs=d["resolved_inputs_json"],
+    )
+
+
+@router.get("", response_model=ImportBatchList)
+async def list_imports(
+    _user: Annotated[AppUser, Depends(current_user)],
+    conn: Annotated[asyncpg.Connection, Depends(get_db)],
+    status: Annotated[list[str] | None, Query()] = None,
+    limit: Annotated[int, Query(ge=1, le=200)] = 50,
+    offset: Annotated[int, Query(ge=0)] = 0,
+) -> ImportBatchList:
+    rows, total = await q_batch.list_with_counts(
+        conn, statuses=status, limit=limit, offset=offset,
+    )
+    items: list[ImportBatchListItem] = []
+    for r in rows:
+        # Look up uploader email for the response shape.
+        u = await conn.fetchrow(
+            "select id, email from public.app_user where id = $1",
+            r["uploaded_by"],
+        )
+        items.append(ImportBatchListItem(
+            id=r["id"],
+            uploaded_by={
+                "id": str(r["uploaded_by"]),
+                "email": (u["email"] if u else None),
+            },
+            uploaded_at=r["uploaded_at"].isoformat(),
+            file_count=r["file_count"],
+            status=r["status"],
+            counts=ImportBatchCounts(
+                pending=r["pending"],
+                accepted=r["accepted"],
+                rejected=r["rejected"],
+                edited=r["edited"],
+                committed=r["committed_count"],
+            ),
+        ))
+    return ImportBatchList(items=items, total=total)
+
+
+@router.get("/{batch_id}", response_model=ImportBatch)
+async def get_import(
+    batch_id: UUID,
+    _user: Annotated[AppUser, Depends(current_user)],
+    conn: Annotated[asyncpg.Connection, Depends(get_db)],
+) -> ImportBatch:
+    batch = await q_batch.get_by_id(conn, batch_id)
+    if batch is None:
+        raise APIError(
+            status_code=404,
+            code="not_found",
+            message="Import batch not found.",
+        )
+    rows = await q_item.list_for_batch(conn, batch_id)
+    items = [await _row_to_item(conn, r) for r in rows]
+    u = await conn.fetchrow(
+        "select id, email from public.app_user where id = $1",
+        batch["uploaded_by"],
+    )
+    return ImportBatch(
+        id=batch["id"],
+        uploaded_by={
+            "id": str(batch["uploaded_by"]),
+            "email": (u["email"] if u else None),
+        },
+        uploaded_at=batch["uploaded_at"].isoformat(),
+        file_count=batch["file_count"],
+        status=batch["status"],
+        notes=batch["notes"],
+        items=items,
     )
