@@ -53,10 +53,10 @@ async def lifespan_pool(app: FastAPI, database_url: str) -> AsyncIterator[None]:
 async def get_db(request: Request) -> AsyncIterator[asyncpg.Connection]:
     """FastAPI dependency: check out a connection for this request.
 
-    TODO(pool-timeout): pool.acquire() blocks indefinitely when the pool is
-    exhausted. Before going to production with real concurrency, wrap with an
-    acquisition timeout and map asyncio.TimeoutError to HTTP 503 in errors.py.
+    Wraps pool.acquire() with an acquisition timeout sourced from settings.
+    asyncio.TimeoutError surfaces as 503 via the global exception handler.
     """
     pool: asyncpg.Pool = request.app.state.pool
-    async with pool.acquire() as conn:
+    settings = request.app.state.settings
+    async with pool.acquire(timeout=settings.DB_ACQUIRE_TIMEOUT_S) as conn:
         yield conn

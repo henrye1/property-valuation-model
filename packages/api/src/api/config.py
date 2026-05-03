@@ -29,6 +29,10 @@ class Settings(BaseSettings):
     LOG_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = "INFO"
     ENV: Literal["dev", "ci", "prod"] = "dev"
 
+    # Per-request asyncpg pool acquisition timeout (seconds). Bounds the wait when
+    # the pool is exhausted; raises asyncio.TimeoutError → 503.
+    DB_ACQUIRE_TIMEOUT_S: float = 10.0
+
     @field_validator("ALLOWED_ORIGINS")
     @classmethod
     def _origins_no_internal_whitespace(cls, v: str) -> str:

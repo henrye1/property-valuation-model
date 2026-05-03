@@ -63,6 +63,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @asynccontextmanager
     async def lifespan(app: FastAPI) -> AsyncIterator[None]:
+        # Expose settings on app.state so request-scoped dependencies (e.g.
+        # get_db) can read tunables like DB_ACQUIRE_TIMEOUT_S without re-reading
+        # env or going through the dependency-injection plumbing.
+        app.state.settings = settings
         # Initialise the JWKS client when no static HS256 secret is configured.
         # PyJWKClient.__init__ is non-blocking — the actual JWKS document is
         # fetched lazily on the first verify_jwt() call and cached for 1h.

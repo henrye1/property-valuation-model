@@ -3,6 +3,7 @@
 """
 from __future__ import annotations
 
+import asyncio
 import logging
 from typing import Any
 
@@ -116,6 +117,17 @@ def install_exception_handlers(app: FastAPI) -> None:
     @app.exception_handler(HTTPException)
     async def _fastapi_http_exception(request: Request, exc: HTTPException) -> JSONResponse:
         return await _http_exception(request, exc)
+
+    @app.exception_handler(asyncio.TimeoutError)
+    async def _async_timeout(_request: Request, _exc: asyncio.TimeoutError) -> JSONResponse:
+        return JSONResponse(
+            status_code=503,
+            content=_envelope(
+                "service_unavailable",
+                "Database connection unavailable; please retry shortly.",
+                {},
+            ),
+        )
 
     @app.exception_handler(Exception)
     async def _unhandled(_request: Request, exc: Exception) -> JSONResponse:
