@@ -39,6 +39,8 @@ dev = [
     "types-pyjwt",
     # Used by integration tests to craft minimal valid .xlsx bytes for /imports.
     "openpyxl>=3.1",
+    # Used by pdf-mark visual tests to inspect PDF structure without rendering.
+    "pikepdf>=8.0",
 ]
 
 [tool.uv.sources]
@@ -81,4 +83,5 @@ addopts = "-ra --strict-markers"
 asyncio_mode = "auto"
 markers = [
     "integration: requires a running Supabase CLI stack (slow)",
+    "pdf: WeasyPrint-rendering PDF visual checks (requires apt deps)",
 ]
