@@ -135,22 +135,33 @@ async def viewer(make_user: Any) -> tuple[UUID, dict[str, str]]:
 # Plan-3 task code uses the names valuer_client / viewer_client / valuer_user /
 # db_pool. These wrap the existing client / valuer / viewer / pool fixtures so
 # the plan-3 tests can stay verbatim from the spec.
+#
+# Each role-client gets its OWN httpx.AsyncClient instance so tests that depend
+# on both fixtures (e.g. test_patch_viewer_forbidden, which uses valuer_client
+# to seed and viewer_client to assert) don't clobber each other's
+# Authorization header.
 @pytest_asyncio.fixture()
 async def valuer_client(
-    client: httpx.AsyncClient, valuer: tuple[UUID, dict[str, str]]
-) -> httpx.AsyncClient:
+    app: Any, valuer: tuple[UUID, dict[str, str]]
+) -> AsyncIterator[httpx.AsyncClient]:
     """httpx.AsyncClient with the valuer Authorization header set."""
-    client.headers.update(valuer[1])
-    return client
+    transport = httpx.ASGITransport(app=app)
+    async with httpx.AsyncClient(
+        transport=transport, base_url="http://test", headers=valuer[1],
+    ) as c:
+        yield c
 
 
 @pytest_asyncio.fixture()
 async def viewer_client(
-    client: httpx.AsyncClient, viewer: tuple[UUID, dict[str, str]]
-) -> httpx.AsyncClient:
+    app: Any, viewer: tuple[UUID, dict[str, str]]
+) -> AsyncIterator[httpx.AsyncClient]:
     """httpx.AsyncClient with the viewer Authorization header set."""
-    client.headers.update(viewer[1])
-    return client
+    transport = httpx.ASGITransport(app=app)
+    async with httpx.AsyncClient(
+        transport=transport, base_url="http://test", headers=viewer[1],
+    ) as c:
+        yield c
 
 
 @pytest_asyncio.fixture()
