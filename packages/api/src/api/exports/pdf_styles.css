@@ -1,0 +1,22 @@
+@page { size: A4; margin: 18mm 16mm; }
+body { font-family: "Liberation Sans", sans-serif; font-size: 10pt; color: #222; }
+h1 { font-size: 18pt; margin: 6mm 0 4mm; }
+h2 { font-size: 12pt; margin: 5mm 0 2mm; border-bottom: 1px solid #ccc; padding-bottom: 1mm; }
+.firm-header { display: flex; justify-content: space-between; align-items: flex-start;
+               border-bottom: 1px solid #888; padding-bottom: 3mm; }
+.firm-logo { max-height: 18mm; }
+.firm-name-large { font-size: 16pt; font-weight: bold; }
+.firm-meta { text-align: right; font-size: 9pt; color: #555; }
+.firm-name { font-weight: bold; }
+.title-block { display: flex; justify-content: space-between; align-items: flex-start;
+               margin: 4mm 0 6mm; }
+.market-value-big { font-size: 24pt; font-weight: bold; color: #003366; }
+.property-meta, .valuation-meta { font-size: 10pt; }
+table { width: 100%; border-collapse: collapse; page-break-inside: avoid; }
+th, td { padding: 1.5mm 2mm; border-bottom: 1px solid #eee; text-align: left; }
+.num { font-family: "Liberation Mono", monospace; text-align: right; }
+table.totals tr td:first-child { width: 60%; }
+ul.warnings { padding-left: 4mm; }
+.no-warnings { color: #888; font-size: 9pt; }
+.provenance { margin-top: 8mm; padding-top: 2mm; border-top: 1px solid #ccc;
+              font-size: 8pt; color: #666; text-align: center; }

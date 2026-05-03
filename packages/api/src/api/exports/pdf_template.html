@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Property Valuation Report</title>
+  <link rel="stylesheet" href="pdf_styles.css">
+</head>
+<body>
+  <header class="firm-header">
+    {% if branding.firm_logo_path %}
+      <img src="{{ branding.firm_logo_path }}" class="firm-logo" alt="">
+    {% else %}
+      <div class="firm-name-large">{{ branding.firm_name }}</div>
+    {% endif %}
+    <div class="firm-meta">
+      <div class="firm-name">{{ branding.firm_name }}</div>
+      {% for line in branding.firm_address_lines %}<div>{{ line }}</div>{% endfor %}
+      {% for line in branding.firm_contact_lines %}<div>{{ line }}</div>{% endfor %}
+    </div>
+  </header>
+
+  <h1>Property Valuation Report</h1>
+
+  <section class="title-block">
+    <div class="market-value-big">{{ snapshot.market_value_formatted }}</div>
+    <div class="property-meta">
+      <div><strong>{{ entity.name }}</strong></div>
+      <div>{{ property.name }}</div>
+      <div>{{ property.address }}</div>
+    </div>
+    <div class="valuation-meta">
+      <div><strong>Valuation date:</strong> {{ snapshot.valuation_date }}</div>
+      <div><strong>Prepared by:</strong> {{ snapshot.created_by }}</div>
+    </div>
+  </section>
+
+  {% if tenants_resolved %}
+  <h2>Tenants</h2>
+  <table class="tenants">
+    <thead>
+      <tr>
+        <th>Description</th><th>Cycles</th><th>Area (m²)</th>
+        <th>R/m²/pm</th><th>Monthly rent</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for t in tenants_resolved %}
+      <tr>
+        <td>{{ t.description }}</td>
+        <td>{{ t.escalation_cycles_applied }}</td>
+        <td class="num">{{ t.rentable_area_m2 }}</td>
+        <td class="num">{{ t.effective_rent_per_m2_pm }}</td>
+        <td class="num">{{ t.monthly_rent }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+
+  {% if parking %}
+  <h2>Parking</h2>
+  <table class="parking">
+    <thead><tr><th>Type</th><th>Bays</th><th>R/bay/pm</th><th>Monthly rent</th></tr></thead>
+    <tbody>
+      {% for p in parking %}
+      <tr><td>{{ p.bay_type }}</td><td class="num">{{ p.bays }}</td>
+          <td class="num">{{ p.rate_per_bay_pm }}</td>
+          <td class="num">{{ p.monthly_rent }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+
+  <h2>Income &amp; expenses</h2>
+  <table class="totals">
+    <tr><td>Gross monthly income</td><td class="num">{{ totals.gross_monthly_income }}</td></tr>
+    <tr><td>Gross annual income</td><td class="num">{{ totals.gross_annual_income }}</td></tr>
+    <tr><td>Annual operating expenses</td><td class="num">{{ totals.annual_operating_expenses }}
+        ({{ totals.opex_per_m2_pm }} R/m²/pm; {{ totals.opex_pct_of_gai }} of GAI)</td></tr>
+    <tr><td>Vacancy allowance ({{ totals.vacancy_pct }})</td>
+        <td class="num">({{ totals.vacancy_allowance_amount }})</td></tr>
+    <tr><td><strong>Annual net income</strong></td>
+        <td class="num"><strong>{{ totals.annual_net_income }}</strong></td></tr>
+    <tr><td>Capitalisation rate</td><td class="num">{{ totals.cap_rate_pct }}</td></tr>
+    <tr><td>Capitalised value</td><td class="num">{{ totals.capitalised_value }}</td></tr>
+    <tr><td><strong>Open market assessment</strong></td>
+        <td class="num"><strong>{{ totals.market_value }}</strong></td></tr>
+  </table>
+
+  <h2>Notes &amp; warnings</h2>
+  {% if warnings %}
+    <ul class="warnings">
+      {% for w in warnings %}<li>⚠ <strong>{{ w.code }}</strong>: {{ w.message }}</li>{% endfor %}
+    </ul>
+  {% else %}
+    <p class="no-warnings"><em>No warnings raised by the engine.</em></p>
+  {% endif %}
+
+  <footer class="provenance">
+    Snapshot ID: {{ snapshot.id }} · Engine version: {{ snapshot.engine_version }}
+    · Generated at: {{ snapshot.generated_at }} · Source: {{ snapshot.source }}
+  </footer>
+</body>
+</html>

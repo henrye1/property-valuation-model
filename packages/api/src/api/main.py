@@ -18,6 +18,7 @@ from api.logging import configure_logging
 from api.routers import audit as audit_router
 from api.routers import calculate as calculate_router
 from api.routers import entities as entities_router
+from api.routers import exports as exports_router
 from api.routers import health as health_router
 from api.routers import imports as imports_router
 from api.routers import me as me_router
@@ -25,6 +26,7 @@ from api.routers import portfolio as portfolio_router
 from api.routers import properties as properties_router
 from api.routers import snapshots as snapshots_router
 from api.routers import users as users_router
+from api.services import branding as branding_module
 from api.services import storage as storage_module
 
 # Routes that should NOT show the lock icon in Swagger UI (no auth required).
@@ -72,6 +74,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         # Initialise the Supabase Storage client (single shared instance).
         # Used by /imports* endpoints and parse_worker / commit_worker.
         app.state.storage = storage_module.build_client(settings)
+        # Load firm branding once. Consumed by routers/exports.py when
+        # rendering PDF reports (passed as request.app.state.branding).
+        app.state.branding = branding_module.load(settings)
         # Initialise the JWKS client when no static HS256 secret is configured.
         # PyJWKClient.__init__ is non-blocking — the actual JWKS document is
         # fetched lazily on the first verify_jwt() call and cached for 1h.
@@ -113,6 +118,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(users_router.router)
     app.include_router(audit_router.router)
     app.include_router(imports_router.router)
+    app.include_router(exports_router.router)
     return app
 
 
