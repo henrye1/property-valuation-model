@@ -1,7 +1,8 @@
 """GET /audit — paginated audit log."""
 from __future__ import annotations
 
-from typing import Annotated
+import json
+from typing import Annotated, Any
 from uuid import UUID
 
 import asyncpg
@@ -14,6 +15,18 @@ from api.schemas.audit import AuditEntry, AuditPage, AuditTargetTable
 from api.schemas.user import AppUser
 
 router = APIRouter(prefix="/audit", tags=["audit"])
+
+
+def _row_to_entry(row: asyncpg.Record) -> AuditEntry:
+    """Same defensive jsonb pattern as routers/snapshots._row_to_schema:
+    asyncpg's jsonb codec doesn't reliably decode table-sourced columns,
+    so fall back to json.loads on str values."""
+    d: dict[str, Any] = dict(row)
+    for k in ("before_json", "after_json"):
+        val = d.get(k)
+        if isinstance(val, str):
+            d[k] = json.loads(val)
+    return AuditEntry.model_validate(d)
 
 
 @router.get("", response_model=AuditPage)
@@ -30,6 +43,6 @@ async def list_audit(
         target_table=target_table, actor_id=actor_id,
     )
     return AuditPage(
-        items=[AuditEntry.model_validate(dict(r)) for r in rows],
+        items=[_row_to_entry(r) for r in rows],
         total=total, limit=limit, offset=offset,
     )
