@@ -39,6 +39,36 @@ async def get_snapshot(
     )
 
 
+async def get_with_property(
+    conn: asyncpg.Connection, snapshot_id: UUID,
+) -> asyncpg.Record | None:
+    """Snapshot row joined with property + entity for the export endpoints.
+
+    Returns columns: all _COLS from valuation_snapshot, plus property_name,
+    property_address, entity_id, entity_name. Returns None if the snapshot
+    or its parent property is missing/soft-deleted.
+    """
+    # _COLS is unqualified; inline an s.-prefixed list here to avoid ambiguity
+    # against the joined property/entity tables (notably the `id` column).
+    return await conn.fetchrow(
+        """
+        select s.id, s.property_id, s.valuation_date, s.created_by,
+               s.created_at, s.status, s.inputs_json, s.result_json,
+               s.market_value, s.cap_rate, s.engine_version,
+               s.source, s.source_file,
+               p.name    as property_name,
+               p.address as property_address,
+               p.entity_id,
+               e.name    as entity_name
+          from public.valuation_snapshot s
+          join public.property p on p.id = s.property_id
+          join public.entity   e on e.id = p.entity_id
+         where s.id = $1
+        """,
+        snapshot_id,
+    )
+
+
 async def supersede_active(
     tx: asyncpg.Connection, property_id: UUID
 ) -> int:
