@@ -20,6 +20,7 @@ from fastapi import (
     Request,
     UploadFile,
 )
+from pydantic import BaseModel
 
 from api.audit import audit
 from api.auth import current_user, require_valuer
@@ -352,3 +353,41 @@ async def patch_import_item(
     )
 
     return await _row_to_item(conn, updated)
+
+
+class _BatchStatusResponse(BaseModel):
+    id: UUID
+    status: str
+
+
+@router.post("/{batch_id}/cancel", response_model=_BatchStatusResponse)
+async def cancel_import(
+    batch_id: UUID,
+    request: Request,
+    user: Annotated[AppUser, Depends(require_valuer)],
+    conn: Annotated[asyncpg.Connection, Depends(get_db)],
+) -> _BatchStatusResponse:
+    batch = await q_batch.get_by_id(conn, batch_id)
+    if batch is None:
+        raise APIError(status_code=404, code="not_found",
+                       message="Import batch not found.")
+    if batch["status"] not in ("parsing", "review"):
+        raise APIError(status_code=409, code="batch_not_cancellable",
+                       message=f"Batch status is {batch['status']!r}; "
+                               f"only 'parsing' or 'review' batches can be cancelled.")
+
+    n = await q_batch.set_status(conn, batch_id, "cancelled")
+    if n != 1:
+        raise APIError(status_code=409, code="batch_state_changed",
+                       message="Batch state changed during cancel; please retry.")
+
+    storage = request.app.state.storage
+    storage.delete_prefix(batch_id)
+
+    await audit(
+        conn, actor_id=user.id, actor_email=user.email,
+        action="cancel", target_table="import_batch", target_id=batch_id,
+        before={"status": batch["status"]},
+        after={"status": "cancelled"},
+    )
+    return _BatchStatusResponse(id=batch_id, status="cancelled")
