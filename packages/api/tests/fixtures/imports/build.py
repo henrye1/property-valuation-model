@@ -14,7 +14,6 @@ from decimal import Decimal
 from pathlib import Path
 
 from openpyxl import load_workbook
-
 from valuation_engine import calculate
 from valuation_engine.excel import render_workbook
 from valuation_engine.models import ParkingLine, TenantLine, ValuationInput
