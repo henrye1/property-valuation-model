@@ -40,6 +40,14 @@ class Settings(BaseSettings):
     # TTL for signed URLs minted by services/storage.py for original-workbook downloads.
     STORAGE_SIGNED_URL_TTL_S: int = 300
 
+    # Branding values consumed by services/branding.py at app startup and embedded
+    # in PDF reports. Address/contact lines are pipe-separated to keep render.yaml simple.
+    # Missing logo file gracefully degrades to firm-name-only header (see services/branding.py).
+    BRANDING_FIRM_NAME: str = "Anchor Point Risk (Pty) Ltd"
+    BRANDING_FIRM_ADDRESS_LINES: str = ""        # pipe-separated
+    BRANDING_FIRM_CONTACT_LINES: str = ""        # pipe-separated
+    BRANDING_FIRM_LOGO_PATH: str = "branding/anchorpoint_logo.png"
+
     @field_validator("ALLOWED_ORIGINS")
     @classmethod
     def _origins_no_internal_whitespace(cls, v: str) -> str:
