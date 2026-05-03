@@ -8,6 +8,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential curl ca-certificates \
  && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+        libpango-1.0-0 libpangoft2-1.0-0 libharfbuzz0b \
+        libcairo2 libgdk-pixbuf-2.0-0 fonts-liberation \
+ && rm -rf /var/lib/apt/lists/*
+
 RUN pip install --no-cache-dir uv==0.4.*
 
 WORKDIR /app
