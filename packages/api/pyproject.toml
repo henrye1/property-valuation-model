@@ -22,6 +22,7 @@ dependencies = [
     # requires updating api/logging.py to match before bumping this cap.
     "python-json-logger>=2.0,<3",
     "valuation-engine>=0.1,<0.2",
+    "supabase>=2.4",
 ]
 
 [project.optional-dependencies]

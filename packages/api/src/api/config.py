@@ -33,6 +33,9 @@ class Settings(BaseSettings):
     # the pool is exhausted; raises asyncio.TimeoutError → 503.
     DB_ACQUIRE_TIMEOUT_S: float = 10.0
 
+    # TTL for signed URLs minted by services/storage.py for original-workbook downloads.
+    STORAGE_SIGNED_URL_TTL_S: int = 300
+
     @field_validator("ALLOWED_ORIGINS")
     @classmethod
     def _origins_no_internal_whitespace(cls, v: str) -> str:
