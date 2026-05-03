@@ -20,6 +20,7 @@ from fastapi import (
     Request,
     UploadFile,
 )
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 
 from api.audit import audit
@@ -431,3 +432,29 @@ async def commit_import(
                   for f in summary.failures],
         batch_status=summary.batch_status,
     )
+
+
+@router.get("/{batch_id}/items/{item_id}/source")
+async def get_import_item_source(
+    batch_id: UUID,
+    item_id: UUID,
+    request: Request,
+    _user: Annotated[AppUser, Depends(current_user)],
+    conn: Annotated[asyncpg.Connection, Depends(get_db)],
+) -> RedirectResponse:
+    item = await q_item.get_by_id(conn, item_id)
+    if item is None or item["batch_id"] != batch_id:
+        raise APIError(status_code=404, code="not_found",
+                       message="Import item not found.")
+
+    storage = request.app.state.storage
+    try:
+        url = storage.signed_url(item["storage_path"])
+    except Exception as exc:  # noqa: BLE001 — Storage SDK error surface is broad
+        # Any storage failure on a signed-url mint when the path should exist
+        # falls into 'gone' territory in our model: the original is no longer
+        # downloadable. Differentiating "actually deleted" from "transient" is
+        # out of scope for v1.
+        raise APIError(status_code=410, code="source_unavailable",
+                       message=f"Source workbook is no longer available: {exc!s}") from exc
+    return RedirectResponse(url=url, status_code=307)
