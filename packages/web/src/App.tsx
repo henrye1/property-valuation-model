@@ -13,6 +13,8 @@ import PropertyFormPage from '@/pages/PropertyFormPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 import SnapshotViewerPage from '@/pages/SnapshotViewerPage'
 import ValuationEditorPage from '@/pages/ValuationEditorPage'
+import ImportsPage from '@/pages/ImportsPage'
+import ImportNewPage from '@/pages/ImportNewPage'
 
 export default function App() {
   return (
@@ -26,6 +28,8 @@ export default function App() {
           <Route path="/properties" element={<PropertiesPage />} />
           <Route path="/properties/:id" element={<PropertyDetailPage />} />
           <Route path="/properties/:id/valuations/:sid" element={<SnapshotViewerPage />} />
+          {/* Imports list — readable by all authenticated users */}
+          <Route path="/imports" element={<ImportsPage />} />
           {/* Valuer-only create/edit routes */}
           <Route element={<RequireValuer />}>
             <Route path="/entities/new" element={<EntityFormPage />} />
@@ -33,8 +37,10 @@ export default function App() {
             <Route path="/properties/new" element={<PropertyFormPage />} />
             <Route path="/properties/:id/edit" element={<PropertyFormPage />} />
             <Route path="/properties/:id/valuations/new" element={<ValuationEditorPage />} />
+            {/* Static /imports/new must be declared before the future /imports/:id param route */}
+            <Route path="/imports/new" element={<ImportNewPage />} />
           </Route>
-          {/* Later slices add /imports, /audit, /settings/users */}
+          {/* Later slices add /imports/:id detail, /audit, /settings/users */}
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>
