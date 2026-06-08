@@ -50,8 +50,8 @@ export function useCalculate(
   const { data, isFetching, error } = useQuery({
     queryKey: ['calculate', debouncedSerialised],
     queryFn: async (): Promise<ValuationResult> => {
-      if (!parsed.success) throw new Error('Invalid input — should not reach queryFn')
-      return ValuationResultSchema.parse(await api.post('/calculate', parsed.data))
+      const parsed = ValuationInputSchema.parse(JSON.parse(debouncedSerialised as string))
+      return ValuationResultSchema.parse(await api.post('/calculate', parsed))
     },
     enabled: isEnabled,
     // No stale caching for preview — always re-fetch when the key changes
