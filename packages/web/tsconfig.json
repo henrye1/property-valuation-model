@@ -28,6 +28,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
+    // Retained to allow baseUrl/paths under TS 6.0 (deprecated but still functional)
     "ignoreDeprecations": "6.0"
   },
   "include": ["src", "vite.config.ts"]
