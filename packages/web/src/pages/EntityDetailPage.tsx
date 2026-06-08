@@ -20,9 +20,8 @@ import { formatDate } from '@/lib/format'
 export default function EntityDetailPage() {
   const { id = '' } = useParams()
   const { isPending, error, data: entity } = useEntity(id)
-  const { isPending: propsPending, error: propsError, data: allProperties } = useProperties()
-
-  const entityProperties = allProperties?.filter((p) => p.entity_id === id) ?? []
+  // API supports GET /properties?entity_id= — pass id to filter server-side.
+  const { isPending: propsPending, error: propsError, data: entityProperties } = useProperties(id)
 
   return (
     <div className="space-y-8">
@@ -64,7 +63,7 @@ export default function EntityDetailPage() {
             <section>
               <h2 className="mb-3 text-lg font-semibold">Properties</h2>
               <DataState isPending={propsPending} error={propsError}>
-                {entityProperties.length === 0 ? (
+                {(entityProperties ?? []).length === 0 ? (
                   <EmptyState title="No properties for this entity." />
                 ) : (
                   <Table>
@@ -75,7 +74,7 @@ export default function EntityDetailPage() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {entityProperties.map((prop) => (
+                      {(entityProperties ?? []).map((prop) => (
                         <TableRow key={prop.id}>
                           <TableCell>
                             <Link

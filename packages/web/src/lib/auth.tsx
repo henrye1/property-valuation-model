@@ -30,7 +30,13 @@ export const useAuth = () => {
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null)
   const [user, setUser] = useState<AppUser | null>(null)
+  // loading stays true until BOTH the session check AND (if a session exists)
+  // the /me fetch have settled — prevents RequireValuer from seeing a transient
+  // loading=false, role=null window on hard refresh of valuer-only routes.
   const [loading, setLoading] = useState(true)
+  // Track whether the initial getSession() call has completed so we know
+  // whether subsequent session changes come from onAuthStateChange.
+  const [sessionChecked, setSessionChecked] = useState(false)
 
   const api = useMemo(
     () =>
@@ -48,18 +54,36 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session)
-      setLoading(false)
+      setSessionChecked(true)
+      // If there is no session we can mark loading done immediately; if there
+      // is a session, we must wait for the /me effect below to settle first.
+      if (!data.session) setLoading(false)
     })
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setSession(s))
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => {
+      setSession(s)
+      // When signing out the session becomes null; we know role immediately.
+      if (!s) {
+        setUser(null)
+        setLoading(false)
+      }
+    })
     return () => sub.subscription.unsubscribe()
   }, [])
 
   useEffect(() => {
+    // Only run once sessionChecked is true (i.e. after getSession() resolved).
+    // This avoids kicking off a /me fetch with the initial null session before
+    // we know the real session state.
+    if (!sessionChecked) return
+
     const p = session
-      ? api.get('/me').then((d) => setUser(AppUserSchema.parse(d)))
+      ? api
+          .get('/me')
+          .then((d) => setUser(AppUserSchema.parse(d)))
+          .catch(() => setUser(null))
       : Promise.resolve().then(() => setUser(null))
-    p.catch(() => setUser(null))
-  }, [session, api])
+    p.finally(() => setLoading(false))
+  }, [session, api, sessionChecked])
 
   const value: AuthState = {
     session,

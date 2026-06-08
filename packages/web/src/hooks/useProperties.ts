@@ -3,11 +3,13 @@ import { z } from 'zod'
 import { useAuth } from '@/lib/auth'
 import { PropertySchema } from '@/schemas/property'
 
-export function useProperties() {
+export function useProperties(entityId?: string) {
   const { api } = useAuth()
+  const path = entityId ? `/properties?entity_id=${entityId}` : '/properties'
+  const queryKey = entityId ? ['properties', { entityId }] : ['properties']
   return useQuery({
-    queryKey: ['properties'],
-    queryFn: async () => z.array(PropertySchema).parse(await api.get('/properties')),
+    queryKey,
+    queryFn: async () => z.array(PropertySchema).parse(await api.get(path)),
   })
 }
 

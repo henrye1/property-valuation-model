@@ -24,6 +24,84 @@ function emptyToNull(val: string | undefined): string | null {
   return val === '' || val === undefined ? null : val
 }
 
+// ---------------------------------------------------------------------------
+// EntityFormFields — module-top-level component so React never remounts inputs
+// on parent re-renders (e.g. isSubmitting toggle). Pattern mirrors ValuationEditorPage.
+// ---------------------------------------------------------------------------
+
+interface EntityFormFieldsProps {
+  register: ReturnType<typeof useForm<FormValues>>['register']
+  errors: ReturnType<typeof useForm<FormValues>>['formState']['errors']
+  handleSubmit: ReturnType<typeof useForm<FormValues>>['handleSubmit']
+  isSubmitting: boolean
+  isEdit: boolean
+  id: string | undefined
+  onSubmit: (values: FormValues) => Promise<void>
+}
+
+function EntityFormFields({
+  register,
+  errors,
+  handleSubmit,
+  isSubmitting,
+  isEdit,
+  id,
+  onSubmit,
+}: EntityFormFieldsProps) {
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <Card>
+        <CardContent className="space-y-4 pt-4">
+          <FormField label="Name" htmlFor="entity-name" error={errors.name?.message} required>
+            <Input
+              id="entity-name"
+              {...register('name')}
+              aria-invalid={!!errors.name}
+              placeholder="Entity name"
+            />
+          </FormField>
+
+          <FormField
+            label="Registration number"
+            htmlFor="entity-reg"
+            error={errors.registration_number?.message}
+          >
+            <Input
+              id="entity-reg"
+              {...register('registration_number')}
+              aria-invalid={!!errors.registration_number}
+              placeholder="e.g. 2021/012345/07"
+            />
+          </FormField>
+
+          <FormField label="Notes" htmlFor="entity-notes" error={errors.notes?.message}>
+            <textarea
+              id="entity-notes"
+              {...register('notes')}
+              aria-invalid={!!errors.notes}
+              placeholder="Optional notes"
+              rows={3}
+              className="w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30"
+            />
+          </FormField>
+        </CardContent>
+
+        <CardFooter className="gap-2">
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'Saving…' : isEdit ? 'Save changes' : 'Create entity'}
+          </Button>
+          <Button
+            variant="outline"
+            render={<Link to={isEdit ? `/entities/${id}` : '/entities'} />}
+          >
+            Cancel
+          </Button>
+        </CardFooter>
+      </Card>
+    </form>
+  )
+}
+
 export default function EntityFormPage() {
   const { id } = useParams()
   const isEdit = !!id
@@ -85,6 +163,16 @@ export default function EntityFormPage() {
     }
   }
 
+  const formProps: EntityFormFieldsProps = {
+    register,
+    errors,
+    handleSubmit,
+    isSubmitting,
+    isEdit,
+    id,
+    onSubmit,
+  }
+
   return (
     <div className="space-y-6">
       <PageHeader
@@ -98,66 +186,11 @@ export default function EntityFormPage() {
 
       {isEdit ? (
         <DataState isPending={isPending} error={error}>
-          {entity && <EntityForm />}
+          {entity && <EntityFormFields {...formProps} />}
         </DataState>
       ) : (
-        <EntityForm />
+        <EntityFormFields {...formProps} />
       )}
     </div>
   )
-
-  function EntityForm() {
-    return (
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        <Card>
-          <CardContent className="space-y-4 pt-4">
-            <FormField label="Name" htmlFor="entity-name" error={errors.name?.message} required>
-              <Input
-                id="entity-name"
-                {...register('name')}
-                aria-invalid={!!errors.name}
-                placeholder="Entity name"
-              />
-            </FormField>
-
-            <FormField
-              label="Registration number"
-              htmlFor="entity-reg"
-              error={errors.registration_number?.message}
-            >
-              <Input
-                id="entity-reg"
-                {...register('registration_number')}
-                aria-invalid={!!errors.registration_number}
-                placeholder="e.g. 2021/012345/07"
-              />
-            </FormField>
-
-            <FormField label="Notes" htmlFor="entity-notes" error={errors.notes?.message}>
-              <textarea
-                id="entity-notes"
-                {...register('notes')}
-                aria-invalid={!!errors.notes}
-                placeholder="Optional notes"
-                rows={3}
-                className="w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30"
-              />
-            </FormField>
-          </CardContent>
-
-          <CardFooter className="gap-2">
-            <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? 'Saving…' : isEdit ? 'Save changes' : 'Create entity'}
-            </Button>
-            <Button
-              variant="outline"
-              render={<Link to={isEdit ? `/entities/${id}` : '/entities'} />}
-            >
-              Cancel
-            </Button>
-          </CardFooter>
-        </Card>
-      </form>
-    )
-  }
 }

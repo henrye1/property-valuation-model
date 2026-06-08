@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useNavigate, useParams, useSearchParams, Link } from 'react-router-dom'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm, Controller, type Control, type UseFormRegister, type UseFormHandleSubmit } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { PageHeader } from '@/components/layout/PageHeader'
@@ -21,6 +21,7 @@ import { useEntities } from '@/hooks/useEntities'
 import { useCreateProperty, useUpdateProperty } from '@/hooks/usePropertyMutations'
 import { PropertyTypeSchema } from '@/schemas/property'
 import type { PropertyType } from '@/schemas/property'
+import type { Entity } from '@/schemas/entity'
 
 const PROPERTY_TYPE_LABELS: Record<PropertyType, string> = {
   office: 'Office',
@@ -45,6 +46,138 @@ type FormValues = z.infer<typeof schema>
 
 function emptyToNull(val: string | undefined): string | null {
   return val === '' || val === undefined ? null : val
+}
+
+// ---------------------------------------------------------------------------
+// PropertyFormFields — module-top-level component so React never remounts inputs
+// on parent re-renders (e.g. isSubmitting toggle, Controller-driven Select change).
+// Pattern mirrors ValuationEditorPage.
+// ---------------------------------------------------------------------------
+
+interface PropertyFormFieldsProps {
+  register: UseFormRegister<FormValues>
+  control: Control<FormValues>
+  errors: ReturnType<typeof useForm<FormValues>>['formState']['errors']
+  handleSubmit: UseFormHandleSubmit<FormValues>
+  isSubmitting: boolean
+  isEdit: boolean
+  id: string | undefined
+  entities: Entity[] | undefined
+  onSubmit: (values: FormValues) => Promise<void>
+}
+
+function PropertyFormFields({
+  register,
+  control,
+  errors,
+  handleSubmit,
+  isSubmitting,
+  isEdit,
+  id,
+  entities,
+  onSubmit,
+}: PropertyFormFieldsProps) {
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <Card>
+        <CardContent className="space-y-4 pt-4">
+          {/* Entity select */}
+          <FormField label="Entity" htmlFor="prop-entity" error={errors.entity_id?.message} required>
+            <Controller
+              name="entity_id"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  value={field.value}
+                  onValueChange={(val) => field.onChange(val)}
+                >
+                  <SelectTrigger id="prop-entity" className="w-full" aria-invalid={!!errors.entity_id}>
+                    <SelectValue placeholder="Select entity…" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {(entities ?? []).map((e) => (
+                      <SelectItem key={e.id} value={e.id}>
+                        {e.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            />
+          </FormField>
+
+          {/* Name */}
+          <FormField label="Name" htmlFor="prop-name" error={errors.name?.message} required>
+            <Input
+              id="prop-name"
+              {...register('name')}
+              aria-invalid={!!errors.name}
+              placeholder="Property name"
+            />
+          </FormField>
+
+          {/* Property type select */}
+          <FormField label="Property type" htmlFor="prop-type" error={errors.property_type?.message} required>
+            <Controller
+              name="property_type"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  value={field.value}
+                  onValueChange={(val) => field.onChange(val as PropertyType)}
+                >
+                  <SelectTrigger id="prop-type" className="w-full" aria-invalid={!!errors.property_type}>
+                    <SelectValue placeholder="Select type…" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {PROPERTY_TYPES.map((pt) => (
+                      <SelectItem key={pt} value={pt}>
+                        {PROPERTY_TYPE_LABELS[pt]}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            />
+          </FormField>
+
+          {/* Address */}
+          <FormField label="Address" htmlFor="prop-address" error={errors.address?.message}>
+            <Input
+              id="prop-address"
+              {...register('address')}
+              aria-invalid={!!errors.address}
+              placeholder="Street address"
+            />
+          </FormField>
+
+          {/* Notes */}
+          <FormField label="Notes" htmlFor="prop-notes" error={errors.notes?.message}>
+            <textarea
+              id="prop-notes"
+              {...register('notes')}
+              aria-invalid={!!errors.notes}
+              placeholder="Optional notes"
+              rows={3}
+              className="w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30"
+            />
+          </FormField>
+        </CardContent>
+
+        <CardFooter className="gap-2">
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'Saving…' : isEdit ? 'Save changes' : 'Create property'}
+          </Button>
+          <Button
+            variant="outline"
+            render={<Link to={isEdit ? `/properties/${id}` : '/properties'} />}
+          >
+            Cancel
+          </Button>
+        </CardFooter>
+      </Card>
+    </form>
+  )
 }
 
 export default function PropertyFormPage() {
@@ -129,6 +262,18 @@ export default function PropertyFormPage() {
     }
   }
 
+  const formProps: PropertyFormFieldsProps = {
+    register,
+    control,
+    errors,
+    handleSubmit,
+    isSubmitting,
+    isEdit,
+    id,
+    entities,
+    onSubmit,
+  }
+
   return (
     <div className="space-y-6">
       <PageHeader
@@ -142,115 +287,11 @@ export default function PropertyFormPage() {
 
       {isEdit ? (
         <DataState isPending={isPending} error={error}>
-          {property && <PropertyForm />}
+          {property && <PropertyFormFields {...formProps} />}
         </DataState>
       ) : (
-        <PropertyForm />
+        <PropertyFormFields {...formProps} />
       )}
     </div>
   )
-
-  function PropertyForm() {
-    return (
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        <Card>
-          <CardContent className="space-y-4 pt-4">
-            {/* Entity select */}
-            <FormField label="Entity" htmlFor="prop-entity" error={errors.entity_id?.message} required>
-              <Controller
-                name="entity_id"
-                control={control}
-                render={({ field }) => (
-                  <Select
-                    value={field.value}
-                    onValueChange={(val) => field.onChange(val)}
-                  >
-                    <SelectTrigger id="prop-entity" className="w-full" aria-invalid={!!errors.entity_id}>
-                      <SelectValue placeholder="Select entity…" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {(entities ?? []).map((e) => (
-                        <SelectItem key={e.id} value={e.id}>
-                          {e.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                )}
-              />
-            </FormField>
-
-            {/* Name */}
-            <FormField label="Name" htmlFor="prop-name" error={errors.name?.message} required>
-              <Input
-                id="prop-name"
-                {...register('name')}
-                aria-invalid={!!errors.name}
-                placeholder="Property name"
-              />
-            </FormField>
-
-            {/* Property type select */}
-            <FormField label="Property type" htmlFor="prop-type" error={errors.property_type?.message} required>
-              <Controller
-                name="property_type"
-                control={control}
-                render={({ field }) => (
-                  <Select
-                    value={field.value}
-                    onValueChange={(val) => field.onChange(val as PropertyType)}
-                  >
-                    <SelectTrigger id="prop-type" className="w-full" aria-invalid={!!errors.property_type}>
-                      <SelectValue placeholder="Select type…" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {PROPERTY_TYPES.map((pt) => (
-                        <SelectItem key={pt} value={pt}>
-                          {PROPERTY_TYPE_LABELS[pt]}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                )}
-              />
-            </FormField>
-
-            {/* Address */}
-            <FormField label="Address" htmlFor="prop-address" error={errors.address?.message}>
-              <Input
-                id="prop-address"
-                {...register('address')}
-                aria-invalid={!!errors.address}
-                placeholder="Street address"
-              />
-            </FormField>
-
-            {/* Notes */}
-            <FormField label="Notes" htmlFor="prop-notes" error={errors.notes?.message}>
-              <textarea
-                id="prop-notes"
-                {...register('notes')}
-                aria-invalid={!!errors.notes}
-                placeholder="Optional notes"
-                rows={3}
-                className="w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30"
-              />
-            </FormField>
-          </CardContent>
-
-          <CardFooter className="gap-2">
-            <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? 'Saving…' : isEdit ? 'Save changes' : 'Create property'}
-            </Button>
-            <Button
-              variant="outline"
-              render={<Link to={isEdit ? `/properties/${id}` : '/properties'} />}
-            >
-              Cancel
-            </Button>
-          </CardFooter>
-        </Card>
-      </form>
-    )
-  }
 }
