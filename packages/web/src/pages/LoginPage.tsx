@@ -4,8 +4,9 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 export default function LoginPage() {
-  const { session, signInWith } = useAuth()
+  const { session, loading, signInWith } = useAuth()
 
+  if (loading) return <div className="p-8 text-muted-foreground">Loading…</div>
   if (session) return <Navigate to="/" replace />
 
   return (
