@@ -39,3 +39,24 @@ export function formatDate(value: string | null | undefined): string {
   // en-GB may produce "01 Jun 2025" already; strip any commas just in case.
   return formatted.replace(/,/g, '')
 }
+
+/**
+ * Format an ISO 8601 datetime string (with or without time component) as
+ * "01 Jun 2025, 10:30" in UTC.  Falls back to "—" for null/undefined.
+ */
+export function formatDateTime(value: string | null | undefined): string {
+  if (value == null) return '—'
+  const date = new Date(value)
+  if (isNaN(date.getTime())) return '—'
+  return new Intl.DateTimeFormat('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: 'UTC',
+    hour12: false,
+  })
+    .format(date)
+    .replace(/,/g, '')
+}

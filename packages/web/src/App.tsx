@@ -16,6 +16,8 @@ import ValuationEditorPage from '@/pages/ValuationEditorPage'
 import ImportsPage from '@/pages/ImportsPage'
 import ImportNewPage from '@/pages/ImportNewPage'
 import ImportReviewPage from '@/pages/ImportReviewPage'
+import AuditPage from '@/pages/AuditPage'
+import UsersPage from '@/pages/UsersPage'
 
 export default function App() {
   return (
@@ -31,6 +33,9 @@ export default function App() {
           <Route path="/properties/:id/valuations/:sid" element={<SnapshotViewerPage />} />
           {/* Imports list — readable by all authenticated users */}
           <Route path="/imports" element={<ImportsPage />} />
+          {/* Audit log + users — readable by all authenticated users */}
+          <Route path="/audit" element={<AuditPage />} />
+          <Route path="/settings/users" element={<UsersPage />} />
           {/* Valuer-only create/edit routes */}
           <Route element={<RequireValuer />}>
             <Route path="/entities/new" element={<EntityFormPage />} />
@@ -42,7 +47,6 @@ export default function App() {
             <Route path="/imports/new" element={<ImportNewPage />} />
             <Route path="/imports/:id" element={<ImportReviewPage />} />
           </Route>
-          {/* Later slices add /imports/:id detail, /audit, /settings/users */}
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>
