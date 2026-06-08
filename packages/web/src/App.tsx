@@ -3,6 +3,10 @@ import { RequireAuth } from '@/components/layout/RequireAuth'
 import { AppShell } from '@/components/layout/AppShell'
 import LoginPage from '@/pages/LoginPage'
 import DashboardPage from '@/pages/DashboardPage'
+import EntitiesPage from '@/pages/EntitiesPage'
+import EntityDetailPage from '@/pages/EntityDetailPage'
+import PropertiesPage from '@/pages/PropertiesPage'
+import PropertyDetailPage from '@/pages/PropertyDetailPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 
 export default function App() {
@@ -12,7 +16,11 @@ export default function App() {
       <Route element={<RequireAuth />}>
         <Route element={<AppShell />}>
           <Route path="/" element={<DashboardPage />} />
-          {/* Later slices add /entities, /properties, /imports, /audit, /settings/users */}
+          <Route path="/entities" element={<EntitiesPage />} />
+          <Route path="/entities/:id" element={<EntityDetailPage />} />
+          <Route path="/properties" element={<PropertiesPage />} />
+          <Route path="/properties/:id" element={<PropertyDetailPage />} />
+          {/* Later slices add /imports, /audit, /settings/users */}
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>
