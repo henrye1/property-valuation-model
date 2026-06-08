@@ -135,11 +135,13 @@ export default function ValuationEditorPage() {
   // Live preview: watch form values → build ValuationInput → pass to useCalculate
   const watchedValues = useWatch({ control })
 
-  // Build the live input from watched values (may be partial during typing)
-  const liveInput = formToValuationInput(watchedValues as ValuationFormValues)
+  // Build the live input from watched values (may be partial during typing).
+  // Reused for both the calculate preview and the save-disabled guard — single transform.
+  const previewInput = formToValuationInput(watchedValues as ValuationFormValues)
+  const isValid = ValuationInputSchema.safeParse(previewInput).success
 
   const { result, isCalculating } = useCalculate(
-    liveInput as Partial<ValuationInput>,
+    previewInput as Partial<ValuationInput>,
   )
 
   // All warnings from the live result (for inline mapping and ResultPanel)
@@ -166,7 +168,7 @@ export default function ValuationEditorPage() {
     }
   }
 
-  const isSaveDisabled = isSubmitting || createSnapshot.isPending
+  const isSaveDisabled = isSubmitting || createSnapshot.isPending || !isValid
 
   return (
     <div className="space-y-6">

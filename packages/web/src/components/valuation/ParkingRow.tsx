@@ -95,7 +95,10 @@ export function ParkingRow({ index, register, control, errors, remove }: Parking
         >
           <Input
             id={`${prefix}-bays`}
+            type="number"
             inputMode="numeric"
+            min={0}
+            step={1}
             placeholder="e.g. 10"
             {...register(`${prefix}.bays`, { valueAsNumber: true })}
             aria-invalid={!!parkingErrors?.bays}
