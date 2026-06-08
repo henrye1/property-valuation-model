@@ -23,7 +23,7 @@ Income-capitalisation property valuation engine + web application.
 | 1 | `valuation_engine` package + golden + excel parse/render | ✅ Merged to `main` |
 | 2 | API core: auth, entities, properties, snapshots, `/calculate`, portfolio, users, audit, tests, CI, Render artifacts | ✅ Complete + live-verified on branch `plan-2-api-core` (46 commits, awaiting merge). End-to-end test against hosted Supabase passed; see [`plan-2 file`](docs/superpowers/plans/2026-04-24-plan-2-api-core.md) "Post-plan-completion log" for the 4 follow-up commits. |
 | 3 | Import batches (xlsx upload/review/commit) + PDF export + XLSX export endpoints | ✅ Complete on branch `plan-3-imports-exports` |
-| 4 | React web UI | ⏳ Not started |
+| 4 | React web UI (Vite + React 19 + TS + Tailwind v4) | 🔨 Built on branch `plan-4-web-ui` — not merged; live end-to-end verification deferred to Phase 0 backend go-live |
 
 ## Top-level design
 
@@ -46,3 +46,18 @@ See [`docs/superpowers/specs/2026-04-23-property-valuations-model-design.md`](do
 - Apply six new migrations: `supabase db push --db-url <prod-url>`. They are: pg_trgm + GIN index, import_batch, import_item, imports RLS, storage_bucket, audit enum extensions.
 - **Deployment model:** Render uses the **Docker build path** (`env: docker` in `render.yaml`, building from `packages/api/Dockerfile`). The Dockerfile installs WeasyPrint native deps (libpango, libcairo, libharfbuzz, libgdk-pixbuf, libpangoft2, fonts-liberation). The Dockerfile is the production build, not a "future fallback" as some commit messages on this branch suggest.
 - Rollback: Render one-click previous deploy. Migrations are additive — safe to leave applied during rollback. The `imports` Storage bucket and any `import_batch`/`import_item` rows are orphaned but harmless.
+
+## Plan-4 handoff notes
+
+- Branch: `plan-4-web-ui`. Unit tests pass (`cd packages/web && pnpm install && pnpm test` → 10 test files, 43 tests passed). ESLint + `tsc --noEmit` clean.
+- Local dev: `pnpm dev` (from `packages/web`). Requires a `.env` file at `packages/web/.env` with:
+
+  ```dotenv
+  VITE_API_BASE_URL=http://localhost:8000
+  VITE_SUPABASE_URL=<your-supabase-url>
+  VITE_SUPABASE_ANON_KEY=<your-supabase-anon-key>
+  ```
+
+- Live OAuth and imports/exports end-to-end verification are deferred to Phase 0 backend go-live (Plan 2 + Plan 3 branches must be merged and the Render API deployed first). No live end-to-end testing has been performed against a production backend.
+- Deploy: `packages/web/render.yaml` describes a Render **Static Site** (`env: static`). Set `VITE_API_BASE_URL`, `VITE_SUPABASE_URL`, and `VITE_SUPABASE_ANON_KEY` in the Render dashboard before the first deploy. After deploy, add the Render origin to `ALLOWED_ORIGINS` (API service) and to Supabase Auth redirect URLs.
+- CI: `.github/workflows/web.yml` runs lint + typecheck + test on every push/PR touching `packages/web/**`.
