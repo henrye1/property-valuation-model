@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { DataState } from '@/components/layout/DataState'
 import { EmptyState } from '@/components/layout/EmptyState'
+import { RoleGate } from '@/components/layout/RoleGate'
 import {
   Table,
   TableHeader,
@@ -11,6 +12,7 @@ import {
   TableCell,
 } from '@/components/ui/table'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { useProperty } from '@/hooks/useProperties'
 import { usePropertySnapshots } from '@/hooks/useSnapshots'
 import { formatZar, formatPct, formatDate } from '@/lib/format'
@@ -34,7 +36,21 @@ export default function PropertyDetailPage() {
 
   return (
     <div className="space-y-8">
-      <PageHeader title={property?.name ?? 'Property'} />
+      <PageHeader
+        title={property?.name ?? 'Property'}
+        action={
+          <RoleGate>
+            <div className="flex items-center gap-2">
+              <Button variant="outline" size="sm" render={<Link to={`/properties/${id}/edit`} />}>
+                Edit
+              </Button>
+              <Button size="sm" render={<Link to={`/properties/${id}/valuations/new`} />}>
+                New valuation
+              </Button>
+            </div>
+          </RoleGate>
+        }
+      />
 
       <DataState isPending={isPending} error={error}>
         {property && (

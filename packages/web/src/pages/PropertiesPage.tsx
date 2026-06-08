@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { DataState } from '@/components/layout/DataState'
 import { EmptyState } from '@/components/layout/EmptyState'
+import { RoleGate } from '@/components/layout/RoleGate'
 import {
   Table,
   TableHeader,
@@ -12,6 +13,7 @@ import {
   TableCell,
 } from '@/components/ui/table'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useProperties } from '@/hooks/useProperties'
 import { useEntities } from '@/hooks/useEntities'
@@ -37,7 +39,14 @@ export default function PropertiesPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Properties" />
+      <PageHeader
+        title="Properties"
+        action={
+          <RoleGate>
+            <Button render={<Link to="/properties/new" />}>New property</Button>
+          </RoleGate>
+        }
+      />
 
       <DataState isPending={isPending} error={error}>
         {properties && properties.length === 0 ? (

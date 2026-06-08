@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { DataState } from '@/components/layout/DataState'
 import { EmptyState } from '@/components/layout/EmptyState'
+import { RoleGate } from '@/components/layout/RoleGate'
 import {
   Table,
   TableHeader,
@@ -11,6 +12,7 @@ import {
   TableCell,
 } from '@/components/ui/table'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { useEntity } from '@/hooks/useEntities'
 import { useProperties } from '@/hooks/useProperties'
 import { formatDate } from '@/lib/format'
@@ -24,7 +26,16 @@ export default function EntityDetailPage() {
 
   return (
     <div className="space-y-8">
-      <PageHeader title={entity?.name ?? 'Entity'} />
+      <PageHeader
+        title={entity?.name ?? 'Entity'}
+        action={
+          <RoleGate>
+            <Button variant="outline" size="sm" render={<Link to={`/entities/${id}/edit`} />}>
+              Edit
+            </Button>
+          </RoleGate>
+        }
+      />
 
       <DataState isPending={isPending} error={error}>
         {entity && (

@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { DataState } from '@/components/layout/DataState'
+import { RoleGate } from '@/components/layout/RoleGate'
 import { ResultPanel } from '@/components/valuation/ResultPanel'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -46,18 +47,20 @@ export default function SnapshotViewerPage() {
                   >
                     Export XLSX
                   </Button>
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    render={
-                      <Link
-                        to={`/properties/${id}/valuations/new`}
-                        state={{ prefill: snapshot.inputs_json }}
-                      />
-                    }
-                  >
-                    New valuation from this
-                  </Button>
+                  <RoleGate>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      render={
+                        <Link
+                          to={`/properties/${id}/valuations/new`}
+                          state={{ prefill: snapshot.inputs_json }}
+                        />
+                      }
+                    >
+                      New valuation from this
+                    </Button>
+                  </RoleGate>
                 </div>
               }
             />

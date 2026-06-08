@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { DataState } from '@/components/layout/DataState'
 import { EmptyState } from '@/components/layout/EmptyState'
+import { RoleGate } from '@/components/layout/RoleGate'
 import {
   Table,
   TableHeader,
@@ -10,6 +11,7 @@ import {
   TableHead,
   TableCell,
 } from '@/components/ui/table'
+import { Button } from '@/components/ui/button'
 import { useEntities } from '@/hooks/useEntities'
 
 export default function EntitiesPage() {
@@ -17,7 +19,14 @@ export default function EntitiesPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Entities" />
+      <PageHeader
+        title="Entities"
+        action={
+          <RoleGate>
+            <Button render={<Link to="/entities/new" />}>New entity</Button>
+          </RoleGate>
+        }
+      />
       <DataState isPending={isPending} error={error}>
         {entities && entities.length === 0 ? (
           <EmptyState title="No entities yet" />
