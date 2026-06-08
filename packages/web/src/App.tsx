@@ -15,6 +15,7 @@ import SnapshotViewerPage from '@/pages/SnapshotViewerPage'
 import ValuationEditorPage from '@/pages/ValuationEditorPage'
 import ImportsPage from '@/pages/ImportsPage'
 import ImportNewPage from '@/pages/ImportNewPage'
+import ImportReviewPage from '@/pages/ImportReviewPage'
 
 export default function App() {
   return (
@@ -37,8 +38,9 @@ export default function App() {
             <Route path="/properties/new" element={<PropertyFormPage />} />
             <Route path="/properties/:id/edit" element={<PropertyFormPage />} />
             <Route path="/properties/:id/valuations/new" element={<ValuationEditorPage />} />
-            {/* Static /imports/new must be declared before the future /imports/:id param route */}
+            {/* Static /imports/new must be declared before the /imports/:id param route */}
             <Route path="/imports/new" element={<ImportNewPage />} />
+            <Route path="/imports/:id" element={<ImportReviewPage />} />
           </Route>
           {/* Later slices add /imports/:id detail, /audit, /settings/users */}
           <Route path="*" element={<NotFoundPage />} />
