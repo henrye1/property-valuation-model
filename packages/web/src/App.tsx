@@ -12,6 +12,7 @@ import PropertyDetailPage from '@/pages/PropertyDetailPage'
 import PropertyFormPage from '@/pages/PropertyFormPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 import SnapshotViewerPage from '@/pages/SnapshotViewerPage'
+import ValuationEditorPage from '@/pages/ValuationEditorPage'
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
             <Route path="/entities/:id/edit" element={<EntityFormPage />} />
             <Route path="/properties/new" element={<PropertyFormPage />} />
             <Route path="/properties/:id/edit" element={<PropertyFormPage />} />
+            <Route path="/properties/:id/valuations/new" element={<ValuationEditorPage />} />
           </Route>
           {/* Later slices add /imports, /audit, /settings/users */}
           <Route path="*" element={<NotFoundPage />} />
