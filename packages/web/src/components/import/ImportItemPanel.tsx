@@ -1,4 +1,5 @@
 import { Fragment, useState } from 'react'
+import { toast } from 'sonner'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -16,7 +17,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useAuth } from '@/lib/auth'
-import { downloadFromApi } from '@/lib/download'
+import { downloadOrToast } from '@/lib/download'
 import { usePatchImportItem } from '@/hooks/useImports'
 import { useProperties } from '@/hooks/useProperties'
 import type { ImportItem } from '@/schemas/imports'
@@ -129,7 +130,9 @@ export function ImportItemPanel({ item, batchId, onClose }: ImportItemPanelProps
   }
 
   function handleDownload() {
-    void downloadFromApi(api, `/imports/${batchId}/items/${item.id}/source`)
+    void downloadOrToast(api, `/imports/${batchId}/items/${item.id}/source`, (msg) =>
+      toast.error(msg),
+    )
   }
 
   const isResolved = item.resolution !== 'pending'

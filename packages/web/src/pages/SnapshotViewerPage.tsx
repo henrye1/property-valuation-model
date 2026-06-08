@@ -1,4 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
+import { toast } from 'sonner'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { DataState } from '@/components/layout/DataState'
 import { RoleGate } from '@/components/layout/RoleGate'
@@ -16,7 +17,7 @@ import {
 } from '@/components/ui/table'
 import { useSnapshot } from '@/hooks/useSnapshots'
 import { useAuth } from '@/lib/auth'
-import { downloadFromApi } from '@/lib/download'
+import { downloadOrToast } from '@/lib/download'
 import { formatZar, formatPct, formatDate } from '@/lib/format'
 
 export default function SnapshotViewerPage() {
@@ -36,14 +37,22 @@ export default function SnapshotViewerPage() {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => void downloadFromApi(api, `/snapshots/${sid}/export.pdf`)}
+                    onClick={() =>
+                      void downloadOrToast(api, `/snapshots/${sid}/export.pdf`, (msg) =>
+                        toast.error(msg),
+                      )
+                    }
                   >
                     Export PDF
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => void downloadFromApi(api, `/snapshots/${sid}/export.xlsx`)}
+                    onClick={() =>
+                      void downloadOrToast(api, `/snapshots/${sid}/export.xlsx`, (msg) =>
+                        toast.error(msg),
+                      )
+                    }
                   >
                     Export XLSX
                   </Button>
