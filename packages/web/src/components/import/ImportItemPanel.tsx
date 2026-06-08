@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -58,14 +58,14 @@ function ParsedInputsSummary({ inputs }: ParsedInputsSummaryProps) {
   return (
     <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-xs">
       {Object.entries(inputs).map(([k, v]) => (
-        <>
-          <dt key={`k-${k}`} className="font-medium text-muted-foreground truncate">
+        <Fragment key={k}>
+          <dt className="font-medium text-muted-foreground truncate">
             {k}
           </dt>
-          <dd key={`v-${k}`} className="truncate">
+          <dd className="truncate">
             {v == null ? '—' : String(v)}
           </dd>
-        </>
+        </Fragment>
       ))}
     </dl>
   )
