@@ -5,6 +5,10 @@ describe('format', () => {
   it('handles null', () => expect(formatZar(null)).toBe('—'))
   it('formats a fraction as percent', () => expect(formatPct('0.115')).toBe('11.50%'))
   it('formats an ISO date', () => expect(formatDate('2025-06-01')).toBe('01 Jun 2025'))
+  it('formatDate: handles a full ISO datetime without throwing', () =>
+    expect(formatDate('2026-06-08T18:41:55.646202Z')).toBe('08 Jun 2026'))
+  it('formatDate: returns — for an unparseable value', () =>
+    expect(formatDate('not-a-date')).toBe('—'))
   it('formatDateTime: formats a valid ISO datetime in UTC', () =>
     expect(formatDateTime('2025-06-01T10:30:00.000Z')).toBe('01 Jun 2025 10:30'))
   it('formatDateTime: returns — for null', () => expect(formatDateTime(null)).toBe('—'))

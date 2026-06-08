@@ -1,10 +1,12 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from '@/lib/auth'
 import { Button } from '@/components/ui/button'
 import { Sidebar } from './Sidebar'
+import { ErrorBoundary } from './ErrorBoundary'
 
 export function AppShell() {
   const { user, signOut } = useAuth()
+  const location = useLocation()
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -24,7 +26,9 @@ export function AppShell() {
           </div>
         </header>
         <main className="flex-1 overflow-auto p-6">
-          <Outlet />
+          <ErrorBoundary key={location.pathname}>
+            <Outlet />
+          </ErrorBoundary>
         </main>
       </div>
     </div>

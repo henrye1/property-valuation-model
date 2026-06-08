@@ -28,8 +28,11 @@ export function formatPct(value: string | null | undefined): string {
 
 export function formatDate(value: string | null | undefined): string {
   if (value == null) return '—'
-  const [y, m, d] = value.split('-').map(Number)
-  const date = new Date(Date.UTC(y, m - 1, d))
+  // Accept both date-only ("2025-06-01") and full ISO datetimes
+  // ("2026-06-08T18:41:55Z"). ISO date-only strings parse as UTC midnight,
+  // and we format in UTC, so there's no timezone rollover either way.
+  const date = new Date(value)
+  if (isNaN(date.getTime())) return '—'
   const formatted = new Intl.DateTimeFormat('en-GB', {
     day: '2-digit',
     month: 'short',
