@@ -1,13 +1,25 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { BrowserRouter } from 'react-router-dom'
+import { Toaster } from '@/components/ui/sonner'
+import { AuthProvider } from '@/lib/auth'
+import { queryClient } from '@/lib/queryClient'
+import App from './App'
 import './index.css'
-import App from './App.tsx'
 
-const root = document.getElementById('app')
-if (!root) throw new Error('Root element #app not found')
+const rootEl = document.getElementById('app')
+if (!rootEl) throw new Error('Root element #app not found')
 
-createRoot(root).render(
+createRoot(rootEl).render(
   <StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <AuthProvider>
+          <App />
+          <Toaster />
+        </AuthProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
   </StrictMode>,
 )
